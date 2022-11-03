@@ -51,6 +51,3 @@ build-prod:
     - docker push $ECR_REGISTRY/NGINX_IMAGE_NAME:latest
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
-
-ecs-deploy:
-  stage: deploy
