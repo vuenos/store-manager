@@ -58,6 +58,8 @@ deploy-stage:
   script:
 #    - aws ecs register-task-definition --region $AWS_DEFAULT_REGION --cli-input-json $CI_AWS_ECS_TASK_DEFINITION_FILE
     - aws ecs update-service --region $AWS_DEFAULT_REGION --cluster $AWS_ECS_CLUSTER_SHC_STAGE --service $AWS_ECS_SERVICE_SHC_STAGE_FRONT --force-new-deployment
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
 
 #deploy-prod:
 #  stage: deploy
