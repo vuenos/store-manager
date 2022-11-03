@@ -74,6 +74,3 @@ build-image2:
   script:
     - docker build . --file ./docker/nginx/Dockerfile --tag $ECR_REGISTRY/NEXT_IMAGE_NAME:latest
     - docker push $ECR_REGISTRY/NEXT_IMAGE_NAME:latest
-
-ecs-deploy:
-  stage: deploy
