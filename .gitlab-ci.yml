@@ -1,5 +1,6 @@
 stages:
   - build
+  - deploy
 
 variables:
   ECR_REGISTRY: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
