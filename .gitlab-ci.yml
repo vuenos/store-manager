@@ -1,2 +1,7 @@
-before_script:
-  - docker info
+stages:
+  - build
+
+test:
+  stage: build
+  before_script:
+    - docker info
