@@ -5,3 +5,5 @@ test:
   stage: build
   before_script:
     - docker info
+  script:
+    - echo "test End"
