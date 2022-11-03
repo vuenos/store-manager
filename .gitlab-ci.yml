@@ -34,9 +34,13 @@ stages:
   - build
   - deploy
 
+variables:
+  ECR_REGISTRY: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+
 build-image:
   stage: build
-  image: docker:latest
+  image:
+    name: docker:latest
   services:
     - docker:dind
   variables:
@@ -54,7 +58,8 @@ build-image:
 
 build-image2:
   stage: build
-  image: docker:latest
+  image:
+    name: docker:latest
   services:
     - docker:dind
   variables:
