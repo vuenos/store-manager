@@ -20,6 +20,6 @@ nextjs-build:
     - aws configure set region $AWS_REGION
     - aws ecr get-login-password | docker login -u AWS --password-stdin $ECR_REGISTRY
   script:
-    - docker build . --file /docker/nextjs/Dockerfile --tag $ECR_REGISTRY/$IMAGE_NAME:latest
+    - docker build . --file ./docker/nextjs/Dockerfile --tag $ECR_REGISTRY/$IMAGE_NAME:latest
     - docker push $ECR_REGISTRY/$IMAGE_NAME:latest
 
