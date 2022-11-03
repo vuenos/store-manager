@@ -2,6 +2,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+```bash
+git remote add origin https://gitlab.com/latelykorea/shc-front.git
+git branch -M main
+git push -uf origin main
+```
+
+
 First, run the development server:
 
 ```bash
