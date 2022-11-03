@@ -1,9 +1,21 @@
 stages:
   - build
 
-test:
+variables:
+  ECR_REGISTRY: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+
+nextjs-build:
   stage: build
+  image:
+    name: docker:latest
+  variables:
+    IMAGE_NAME: sh-connect-front-nextjs
+  services:
+    - docker:19-dind
   before_script:
-    - docker info
+    - apk add --no-cache curl jq python3 py3-pip
+    - pip install awscli
+    - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
   script:
-    - echo "test End"
+    - docker build . --file /docker/nextjs/Dockerfile --tag $ECR_REGISTRY/$IMAGE_NAME:latest
+    - docker push $ECR_REGISTRY/$IMAGE_NAME:latest
