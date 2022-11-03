@@ -22,4 +22,3 @@ nextjs-build:
   script:
     - docker build . --file /docker/nextjs/Dockerfile --tag $ECR_REGISTRY/$IMAGE_NAME:latest
     - docker push $ECR_REGISTRY/$IMAGE_NAME:latest
-
