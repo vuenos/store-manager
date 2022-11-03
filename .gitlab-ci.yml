@@ -10,7 +10,7 @@ build-stage:
     name: docker:latest
   variables:
     NEXT_IMAGE_NAME: shc-front-stage-nextjs
-    NGINX_IMAGE_NAME: shc-front-stage-nginx
+#    NGINX_IMAGE_NAME: shc-front-stage-nginx
   services:
     - docker:dind
   before_script:
@@ -23,8 +23,8 @@ build-stage:
   script:
     - docker build . --file ./docker/nextjs/Dockerfile --tag $ECR_REGISTRY/$NEXT_IMAGE_NAME:latest
     - docker push $ECR_REGISTRY/$NEXT_IMAGE_NAME:latest
-    - docker build . --file ./docker/nginx/Dockerfile --tag $ECR_REGISTRY/$NGINX_IMAGE_NAME:latest
-    - docker push $ECR_REGISTRY/$NGINX_IMAGE_NAME:latest
+#    - docker build . --file ./docker/nginx/Dockerfile --tag $ECR_REGISTRY/$NGINX_IMAGE_NAME:latest
+#    - docker push $ECR_REGISTRY/$NGINX_IMAGE_NAME:latest
   rules:
     - if: $CI_COMMIT_BRANCH == "develop"
 
@@ -34,7 +34,7 @@ build-prod:
     name: docker:latest
   variables:
     NEXT_IMAGE_NAME: shc-front-nextjs
-    NGINX_IMAGE_NAME: shc-front-nginx
+#    NGINX_IMAGE_NAME: shc-front-nginx
   services:
     - docker:dind
   before_script:
@@ -47,7 +47,7 @@ build-prod:
   script:
     - docker build . --file ./docker/nextjs/Dockerfile --tag $ECR_REGISTRY/$NEXT_IMAGE_NAME:latest
     - docker push $ECR_REGISTRY/$NEXT_IMAGE_NAME:latest
-    - docker build . --file ./docker/nginx/Dockerfile --tag $ECR_REGISTRY/$NGINX_IMAGE_NAME:latest
-    - docker push $ECR_REGISTRY/$NGINX_IMAGE_NAME:latest
+#    - docker build . --file ./docker/nginx/Dockerfile --tag $ECR_REGISTRY/$NGINX_IMAGE_NAME:latest
+#    - docker push $ECR_REGISTRY/$NGINX_IMAGE_NAME:latest
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
