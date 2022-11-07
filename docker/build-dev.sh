@@ -1,6 +1,3 @@
-# git Checkout
-git pull
-
 # build
 sudo docker build . --file ./docker/nextjs/Dockerfile --tag 902705914798.dkr.ecr.ap-northeast-2.amazonaws.com/shc-front-stage-nextjs:latest
 
