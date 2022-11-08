@@ -6,7 +6,7 @@ const sass = require('gulp-sass')(require('sass'));
 gulp.task('sass', function () {
   return gulp.src('./styles/sass/*.scss')  // 입력 경로
     .pipe(sass.sync({outputStyle: 'compressed'}).on('error', sass.logError))
-    .pipe(gulp.dest('./styles/'));  // 출력 경로
+    .pipe(gulp.dest('./public/assets/css/'));  // 출력 경로
 });
 
 // Images Task
