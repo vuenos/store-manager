@@ -1,10 +1,9 @@
 import React from 'react';
+import AppRoutes from "./routes";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Welcome to SHConnect</h1>
-    </div>
+    <AppRoutes />
   );
 }
 

@@ -1,0 +1,12 @@
+{
+  "common": {
+    "bi": "SHConnect",
+    "copy": "2022 © Sellerhub SHC"
+  },
+  "pageTitle": {
+    "dashboard": "Dashboard"
+  },
+  "pageDesc": {
+    "dashboard": "You can check order and product related information and sales statistics at a glance."
+  }
+}

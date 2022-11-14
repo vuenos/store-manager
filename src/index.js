@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import reportWebVitals from './reportWebVitals';
 import {RecoilRoot} from "recoil";
+import './i18n';
 
 const queryClient = new QueryClient();
 
