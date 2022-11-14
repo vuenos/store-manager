@@ -1,0 +1,13 @@
+{
+  "common": {
+    "bi": "SHConnect",
+    "projectName": "셀러허브 커넥트 CBT",
+    "copy": "2022 © Sellerhub SHC"
+  },
+  "pageTitle": {
+    "dashboard": "대시보드"
+  },
+  "pageDesc": {
+    "dashboard": "주문 및 상품 관련 정보와 매출통계를 한눈에 확인할 수 있어요"
+  }
+}
