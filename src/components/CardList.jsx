@@ -5,7 +5,7 @@ const CardList = () => {
     return(        
         <Card className="my-5">
 
-            <Card.Header className="card-header p-0 border-bottom-0">
+            <Card.Header className="p-0 border-bottom-0">
                                                     
                 <div className="row p-7">
                     <h4 className="mb-0 d-flex">
@@ -45,7 +45,7 @@ const CardList = () => {
                 </div>
             </Card.Header>
             
-            <Card.Body className="card-body p-0">
+            <Card.Body className="p-0">
                 <div className="table-responsive h-400px scroll-y border-top">
                     <table className="table table align-middle table-row-bordered fs-6 gy-2 dataTable text-start min-w-1900 ls-065em table-layout-fixed table-hover" id="dataTable" width="100%">
 
@@ -113,7 +113,7 @@ const CardList = () => {
                 </div>
             </Card.Body>
 
-            <Card.Footer className="card-footer p-4">
+            <Card.Footer className="p-4">
                 <div className="ml-auto p-1">
                     <nav>
                         <ul className="pagination">                
