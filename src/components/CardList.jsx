@@ -1,14 +1,16 @@
 import React from "react";
+import { Card } from "react-bootstrap";
+import { Button } from "bootstrap";
 
 const CardList = () => {
     return(        
-        <div className="card my-5">
+        <Card className="my-5">
 
-            <div className="card-header p-0 border-bottom-0">
+            <Card.Header className="card-header p-0 border-bottom-0">
                                                     
                 <div className="row p-7">
                     <h4 className="mb-0 d-flex">
-                        상품 목록															
+                        상품 목록
                     </h4>
                 </div>
 
@@ -18,9 +20,9 @@ const CardList = () => {
 
                     <div className="col-xl-7">										
                         
-                        <button id="" className="btn btn-white btn-sm me-2 h-40px">버튼1</button>
+                        <Button id="" className="btn btn-white btn-sm me-2 h-40px">버튼1</Button>
 
-                        <button id="" className="btn btn-white btn-sm me-2 h-40px">버튼2</button>											
+                        <Button id="" className="btn btn-white btn-sm me-2 h-40px">버튼2</Button>											
 
                     </div>
 
@@ -42,9 +44,9 @@ const CardList = () => {
                     </div>
 
                 </div>
-            </div>
+            </Card.Header>
             
-            <div className="card-body p-0">
+            <Card.Body className="card-body p-0">
                 <div className="table-responsive h-400px scroll-y border-top">
                     <table className="table table align-middle table-row-bordered fs-6 gy-2 dataTable text-start min-w-1900 ls-065em table-layout-fixed table-hover" id="dataTable" width="100%">
 
@@ -110,9 +112,9 @@ const CardList = () => {
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </Card.Body>
 
-            <div className="card-footer p-4">
+            <Card.Footer className="card-footer p-4">
                 <div className="ml-auto p-1">
                     <nav>
                         <ul className="pagination">                
@@ -140,9 +142,9 @@ const CardList = () => {
                         </ul>
                     </nav>
                 </div>
-            </div>
+            </Card.Footer>
 
-        </div>
+        </Card>
     )
 };
 
