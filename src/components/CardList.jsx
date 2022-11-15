@@ -1,6 +1,5 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import { Button } from "bootstrap";
 
 const CardList = () => {
     return(        
@@ -20,9 +19,9 @@ const CardList = () => {
 
                     <div className="col-xl-7">										
                         
-                        <Button id="" className="btn btn-white btn-sm me-2 h-40px">버튼1</Button>
+                        <button id="" className="btn btn-white btn-sm me-2 h-40px">버튼1</button>
 
-                        <Button id="" className="btn btn-white btn-sm me-2 h-40px">버튼2</Button>											
+                        <button id="" className="btn btn-white btn-sm me-2 h-40px">버튼2</button>											
 
                     </div>
 
