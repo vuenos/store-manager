@@ -1,6 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import {Button} from "react-bootstrap";
+import {useAuthState} from "../atoms";
+import { useNavigate } from "react-router-dom";
 
 const Gnb = () => {
+  const navigate = useNavigate();
+  const [authState, setAuthState] = useAuthState();
+
+  const logoutHandler = () => {
+    sessionStorage.removeItem("access_token");
+    setAuthState({loggedIn: false, id: "", pwd: ""});
+    navigate('/login');
+  }
+
+  useEffect(() => {
+    if(!authState.loggedIn) {
+      navigate('/login')
+    }
+    console.log('LOGGEDIN', authState.loggedIn)
+  }, [authState.loggedIn])
+
   return (
     <div className="docs-header align-items-stretch position-sticky top-0 bg-white z-index-3">
       <div className="container mw-sm-100 p-0">
@@ -62,11 +81,14 @@ const Gnb = () => {
                 className="btn btn-icon btn-icon-custom-color btn-active-color-primary w-auto px-0"
                 data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
                 data-kt-menu-placement="bottom-start"
-                data-kt-menu-overflow="true">
+                data-kt-menu-overflow="true"
+              >
                 <span className="svg-icon svg-icon-1 me-n1">
                   <img src="/assets/media/icons/icon_profile.svg" width="40" alt="나의 메뉴 보기"/>
                 </span>
               </button>
+
+              <Button variant="white" className="ms-4" onClick={logoutHandler}>Log out</Button>
 
             </div>
 
