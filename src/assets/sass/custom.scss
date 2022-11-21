@@ -550,3 +550,32 @@
 .drawer .card-body .table tr:last-child th {
     border-bottom:0 !important;
 }
+
+.tooltip-inner {background: #000; color: #fff;}
+.bs-tooltip-bottom .tooltip-arrow:before {
+    background: #fff; border-bottom-color: #000;
+}
+
+/* 상태 */
+.badge {height:26px; font-weight:700;}
+.badge.on {background: #E6EEFF; color: #3355FF;}
+.badge.off {background: #EBECF0; color: #2E384D;}
+.badge.none {background: #D7FAEE; color: #00997F;}
+.badge.updt {background: #FAE6EA; color: #E52E4D;}
+
+/* 테이블 고정 */
+th.fixHeader,
+td.fixHeader {position: sticky; background: #fdfdfc; z-index: 10;}
+th.fixHeader.checkBox,
+td.fixHeader.checkBox {width: 60px; left: 0;}
+th.fixHeader.goodsImg,
+td.fixHeader.goodsImg {width: 80px; left: 60px;}
+th.fixHeader.mall,
+td.fixHeader.mall {width: 120px; left: 140px;}
+th.fixHeader.goodsName,
+td.fixHeader.goodsName {width: 200px; left: 260px;}
+th.fixHeader.goodsNum,
+td.fixHeader.goodsNum {width: 120px; left: 460px;}
+td.fixHeader {z-index: 8;}
+th.fixHeader.goodsNum:after,
+td.fixHeader.goodsNum:after {content: ''; display: block; position: absolute; top: 0; right: 0; width: 8px; height: 100%; background: linear-gradient(90deg, #211F1C 0%, rgba(33, 31, 28, 0) 100%); opacity: 0.04;}
