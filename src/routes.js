@@ -27,8 +27,7 @@ const AppRoutes = () => {
         { path: "/product/manage/goods", element: <ManageGoods /> },
         { path: "/product/manage/goods/keyword=:keyword&page=:pageNumber", element: <ManageGoods /> },
         { path: "/product/manage/goods/keyword=:keyword", element: <ManageGoods /> },
-        { path: "/product/manage/goods/page=:pageNumber", element: <ManageGoods /> },
-        { path: "/product/manage/goods/page=:pageNumber", element: <ManageGoods /> },
+        // { path: "/product/manage/goods/page=:pageNumber", element: <ManageGoods /> },
         { path: "/order/list", element: <OrderList /> },
         { path: "*", element: <Notfound /> }
       ]
