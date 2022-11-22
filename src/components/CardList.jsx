@@ -3,17 +3,13 @@ import { Card } from "react-bootstrap";
 
 const CardList = () => {
 
-    const goTest = () => {
-        alert('23');
-    }
-
     return(        
         <Card className="my-5">
 
             <Card.Header className="p-0 border-bottom-0">
                                                     
                 <div className="row p-7">
-                    <h4 className="mb-0 d-flex" onClick={goTest}>
+                    <h4 className="mb-0 d-flex">
                         목록
                     </h4>
                 </div>
@@ -97,7 +93,7 @@ const CardList = () => {
                                     </div>
                                 </td>
                                 <td className="fixHeader goodsName text-dark fw-bolder text-start text-truncate py-4">
-                                    <span className="d-inline-block w-100 text-truncate" data-bs-toggle="tooltip" data-bs-custom-className="tooltip-dark" data-bs-placement="top" title="" data-bs-original-title="ㅅㄷㄴㅅ">ㅅㄷㄴㅅ</span>
+                                    <span className="d-inline-block w-100 text-truncate" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-dark" data-bs-placement="top" title="" data-bs-original-title="ㅅㄷㄴㅅ">ㅅㄷㄴㅅ</span>
                                 </td>
                                 <td className="fixHeader goodsNum">
                                     1227
