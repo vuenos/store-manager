@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Pagination } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { useLocation } from "react-router-dom";
 import PropTypes from 'prop-types';
 
-const Paginate = ({pages, page, keyword = ""}) => {
-  const location = useLocation();
+const Paginate = ({pages, page, keyword = "", path}) => {
 
   Paginate.propTypes = {
     pages: PropTypes.number,
@@ -13,12 +11,8 @@ const Paginate = ({pages, page, keyword = ""}) => {
     current: PropTypes.number,
     keyword: PropTypes.any,
     onChangePage: PropTypes.any,
+    path: PropTypes.any // Paginate 를 호출하는 부모 컴포넌트의 'path' 속성의 값을 받아옴.
   }
-
-  useEffect(() => {
-    console.log(location)
-  }, [location]);
-
 
   return (
     pages > 1 && (
@@ -28,8 +22,8 @@ const Paginate = ({pages, page, keyword = ""}) => {
           <LinkContainer
             to={
               keyword
-                ? `/product/manage/goods/keyword=${keyword}&page=${page - 1}`
-                : `/product/manage/goods/page=${page - 1}`
+                ? `${path}/keyword=${keyword}&page=${page - 1}`
+                : `${path}/page=${page - 1}`
             }
           >
             <Pagination.Prev />
@@ -40,8 +34,8 @@ const Paginate = ({pages, page, keyword = ""}) => {
             key={x + 1}
             to={
               keyword
-                ? `/product/manage/goods/keyword=${keyword}&page=${x + 1}`
-                : `/product/manage/goods/page=${x + 1}`
+                ? `${path}/keyword=${keyword}&page=${x + 1}`
+                : `${path}/page=${x + 1}`
             }
           >
             <Pagination.Item active={x + 1 === page}>
@@ -53,8 +47,8 @@ const Paginate = ({pages, page, keyword = ""}) => {
           <LinkContainer
             to={
               keyword
-                ? `/product/manage/goods/keyword=${keyword}&page=${page + 1}`
-                : `/product/manage/goods/page=${page + 1}`
+                ? `${path}/keyword=${keyword}&page=${page + 1}`
+                : `${path}/page=${page + 1}`
             }
           >
             <Pagination.Next />

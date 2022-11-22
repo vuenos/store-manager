@@ -4,8 +4,10 @@ import {Table, Button, Card, Row, Col, Form, Badge, OverlayTrigger, Tooltip } fr
 import noImage from '../../assets/images/none-image.svg';
 import Paginate from "../../components/Paginate";
 import {useParams} from "react-router-dom";
+import PropTypes from 'prop-types';
 
-const ManageGoods = () => {
+const ManageGoods = (props) => {
+
   const [goods, setGoods] = useState([]);
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState();
@@ -15,6 +17,10 @@ const ManageGoods = () => {
   const keyword = params.keyword;
   // const pageNumber = searchParams.get('page');
   // const keyword = searchParams.get('keyword');
+
+  ManageGoods.propTypes = {
+    pathname: PropTypes.string, // routes.js 'pathname' props ref
+  }
 
   const handleImgError = (e) => {
     e.target.src = noImage;
@@ -43,7 +49,7 @@ const ManageGoods = () => {
       <Card.Header className="p-0 border-bottom-0">
         <Row className="p-7">
           <Card.Title as="h4" className="mb-0 d-flex">
-            상품 목록
+            상품 목록 {props.pathname}
             <OverlayTrigger
               placement="bottom"
               overlay = {
@@ -157,7 +163,7 @@ const ManageGoods = () => {
         </div>
       </Card.Body>
       <Card.Footer>
-        <Paginate pages={pages} page={page} />
+        <Paginate pages={pages} page={page} path={props.pathname} />
       </Card.Footer>
     </Card>
   )

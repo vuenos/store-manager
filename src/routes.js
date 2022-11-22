@@ -12,7 +12,6 @@ import {
 } from './pages/product'
 import { OrderList } from './pages/order'
 import Layout from "./Layout";
-// import SearchOptions from "./components/SearchOptions";
 
 
 const AppRoutes = () => {
@@ -25,11 +24,10 @@ const AppRoutes = () => {
         { path: "/login", element: <Login /> },
         { path: "/mypage", element: <MyPage /> },
         { path: "/product/register", element: <Register /> },
-        // { path: "/product/manage/goods", element: <SearchOptions /> },
-        { path: "/product/manage/goods", element: <ManageGoods /> },
+        { path: "/product/manage/goods", element: <ManageGoods pathname="/product/manage/goods" /> },
         { path: "/product/manage/goods/keyword=:keyword&page=:pageNumber", element: <ManageGoods /> },
         { path: "/product/manage/goods/keyword=:keyword", element: <ManageGoods /> },
-        { path: "/product/manage/goods/page=:pageNumber", element: <ManageGoods /> },
+        { path: "/product/manage/goods/page=:pageNumber", element: <ManageGoods pathname="/product/manage/goods" /> },
         { path: "/order/list", element: <OrderList /> },
         { path: "*", element: <Notfound /> }
       ]
