@@ -2,6 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 
 const CardList = () => {
+
     return(        
         <Card className="my-5">
 
@@ -9,7 +10,7 @@ const CardList = () => {
                                                     
                 <div className="row p-7">
                     <h4 className="mb-0 d-flex">
-                        상품 목록
+                        목록
                     </h4>
                 </div>
 
@@ -20,7 +21,6 @@ const CardList = () => {
                     <div className="col-xl-7">										
                         
                         <button id="" className="btn btn-white btn-sm me-2 h-40px">버튼1</button>
-
                         <button id="" className="btn btn-white btn-sm me-2 h-40px">버튼2</button>											
 
                     </div>
@@ -36,9 +36,7 @@ const CardList = () => {
                                 <option value="10" data-select2-id="select2-data-8-obow">10</option>
                                 <option value="30">30</option>
                             </select>
-                        </div>
-
-                        
+                        </div>                        
 
                     </div>
 
@@ -46,12 +44,19 @@ const CardList = () => {
             </Card.Header>
             
             <Card.Body className="p-0">
+
                 <div className="table-responsive h-400px scroll-y border-top">
+
                     <table className="table table align-middle table-row-bordered fs-6 gy-2 dataTable text-start min-w-1900 ls-065em table-layout-fixed table-hover" id="dataTable" width="100%">
 
                         <thead>
+
                             <tr className="text-gray-400 fw-boldest fs-6 h-50px align-middle text-uppercase gs-0 tr-sticky">
-                                <th className="ps-6 fixHeader checkBox"><div className="form-check form-check-custom form-check-solid form-check-sm"><input type="checkbox" id="allChk" data-taget="goodsno" className="form-check-input" /></div></th>
+                                <th className="ps-6 fixHeader checkBox">
+                                    <div className="form-check form-check-custom form-check-solid form-check-sm">
+                                        <input type="checkbox" id="allChk" data-taget="goodsno" className="form-check-input" />
+                                    </div>
+                                </th>
                                 <th className="fixHeader goodsImg">이미지</th>
                                 <th className="fixHeader mall">쇼핑몰</th>
                                 <th className="fixHeader goodsName">상품명
@@ -67,9 +72,11 @@ const CardList = () => {
                                 <th>모델명</th>
                                 <th>제조사</th>
                             </tr>
+
                         </thead>
 
                         <tbody>
+
                             <tr className="h-60px">
                                 <td scope="row" className="ps-6 fixHeader checkBox">
                                     <div className="form-check form-check-custom form-check-solid form-check-sm">
@@ -86,7 +93,7 @@ const CardList = () => {
                                     </div>
                                 </td>
                                 <td className="fixHeader goodsName text-dark fw-bolder text-start text-truncate py-4">
-                                    <span className="d-inline-block w-100 text-truncate" data-bs-toggle="tooltip" data-bs-custom-className="tooltip-dark" data-bs-placement="top" title="" data-bs-original-title="ㅅㄷㄴㅅ">ㅅㄷㄴㅅ</span>
+                                    <span className="d-inline-block w-100 text-truncate" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-dark" data-bs-placement="top" title="" data-bs-original-title="ㅅㄷㄴㅅ">ㅅㄷㄴㅅ</span>
                                 </td>
                                 <td className="fixHeader goodsNum">
                                     1227
@@ -105,17 +112,22 @@ const CardList = () => {
                                 <td>브랜드</td>
                                 <td>모델명</td>
                                 <td>제조사</td>
-
                             </tr>
 
                         </tbody>
+
                     </table>
+
                 </div>
+
             </Card.Body>
 
             <Card.Footer className="p-4">
+
                 <div className="ml-auto p-1">
+
                     <nav>
+
                         <ul className="pagination">                
                             <li className="page-item disabled" aria-disabled="true" aria-label="« 이전">
                                 <span className="page-link" aria-hidden="true">‹</span>
@@ -139,8 +151,11 @@ const CardList = () => {
                                 <a className="page-link" href="#" rel="next" aria-label="다음 »">›</a>
                             </li>
                         </ul>
+
                     </nav>
+
                 </div>
+
             </Card.Footer>
 
         </Card>
