@@ -2,6 +2,17 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Getting Started
+
+```bash
+git clone https://gitlab.com/latelykorea/shc-front.git
+
+git init
+git remote add origin https://gitlab.com/latelykorea/shc-front.git
+git pull origin develop
+git branch -M feature/your-branch
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
