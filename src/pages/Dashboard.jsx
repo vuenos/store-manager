@@ -11,7 +11,7 @@ const Dashboard = (props) => {
   return (
     <div>
       <div>
-        Contents
+        {props.title}
       </div>
     </div>
   )

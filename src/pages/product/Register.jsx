@@ -21,27 +21,17 @@ const Register = () => {
           <div className="fs-4 fw-boldest text-gray-500 mt-4 step-text">개별설정</div>
         </div>
       </div>
-      <div className="navbar nav-pills py-4 position-sticky top-75px bg-white z-index-3 btn-prod-tab-group"
-           id="prod-tab">
+      <div className="navbar nav-pills py-4 position-sticky top-75px bg-white z-index-3 btn-prod-tab-group" id="prod-tab">
         <div className="nav nav-pills">
-          <a href="#prod1" className="btn btn-prod-tab menu-link nav-link fw-boldest me-2" data-kt-scroll-toggle="ture">쇼핑몰
-            연동</a>
-          <a href="#prod2" className="btn btn-prod-tab menu-link nav-link fw-boldest me-2"
-             data-kt-scroll-toggle="ture">카테고리</a>
-          <a href="#prod3" className="btn btn-prod-tab menu-link nav-link fw-boldest me-2"
-             data-kt-scroll-toggle="ture">기본정보</a>
-          <a href="#prod4" className="btn btn-prod-tab menu-link nav-link fw-boldest me-2"
-             data-kt-scroll-toggle="ture">옵션설정</a>
-          <a href="#prod5" className="btn btn-prod-tab menu-link nav-link fw-boldest me-2"
-             data-kt-scroll-toggle="ture">재고수량</a>
-          <a href="#prod6" className="btn btn-prod-tab menu-link nav-link fw-boldest me-2" data-kt-scroll-toggle="ture">판매가
-            할인설정</a>
-          <a href="#prod7" className="btn btn-prod-tab menu-link nav-link fw-boldest me-2" data-kt-scroll-toggle="ture">상품정보
-            고시</a>
-          <a href="#prod8" className="btn btn-prod-tab menu-link nav-link fw-boldest me-2"
-             data-kt-scroll-toggle="ture">원산지</a>
-          <a href="#prod9" className="btn btn-prod-tab menu-link nav-link fw-boldest"
-             data-kt-scroll-toggle="ture">기타정보</a>
+          <a href="#prod1" className="btn btn-prod-tab menu-link nav-link fw-boldest me-2">쇼핑몰 연동</a>
+          <a href="#prod2" className="btn btn-prod-tab menu-link nav-link fw-boldest me-2">카테고리</a>
+          <a href="#prod3" className="btn btn-prod-tab menu-link nav-link fw-boldest me-2">기본정보</a>
+          <a href="#prod4" className="btn btn-prod-tab menu-link nav-link fw-boldest me-2">옵션설정</a>
+          <a href="#prod5" className="btn btn-prod-tab menu-link nav-link fw-boldest me-2">재고수량</a>
+          <a href="#prod6" className="btn btn-prod-tab menu-link nav-link fw-boldest me-2">판매가 할인설정</a>
+          <a href="#prod7" className="btn btn-prod-tab menu-link nav-link fw-boldest me-2">상품정보 고시</a>
+          <a href="#prod8" className="btn btn-prod-tab menu-link nav-link fw-boldest me-2">원산지</a>
+          <a href="#prod9" className="btn btn-prod-tab menu-link nav-link fw-boldest">기타정보</a>
         </div>
       </div>
 

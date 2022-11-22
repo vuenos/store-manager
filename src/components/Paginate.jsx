@@ -41,7 +41,7 @@ const Paginate = ({pages, page, keyword = ""}) => {
             to={
               keyword
                 ? `/product/manage/goods/keyword=${keyword}&page=${x + 1}`
-                : `${location}/page=${x + 1}`
+                : `/product/manage/goods/page=${x + 1}`
             }
           >
             <Pagination.Item active={x + 1 === page}>
