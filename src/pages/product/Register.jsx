@@ -1,25 +1,42 @@
-import React from 'react';
+import React, {useState} from 'react';
 // import {Card} from "react-bootstrap";
+import Tab from 'components/Product/Tab'
 
 const Register = () => {
+  const [selectedTab,setSelectedTab] = useState("1");
+
+  const tab =[
+    {
+      icon:"1",
+      title:"기초 상품정보",
+      subject:"based_product_info"
+    },
+    {
+      icon:"2",
+      title:"추가정보",
+      subject:"additional_info"
+    },
+    {
+      icon:"3",
+      title:"개별설정",
+      subject:"each_option"
+    }
+  ];
+
+  console.log(tab);
   return (
     <>
       <div className="bg-gray-200 d-flex align-items-center step-wrap border-gray-400 border-bottom">
-        <div className="step-box text-center min-w-125px me-2  active ">
-          <span
-            className="d-inline-flex align-items-center justify-content-center rounded-circle w-25px h-25px text-white bg-gray-500 fw-boldest step-number">1</span>
-          <div className="fs-4 fw-boldest text-gray-500 mt-4 step-text">기초 상품정보</div>
-        </div>
-        <div className="step-box text-center min-w-125px me-2 ">
-          <span
-            className="d-inline-flex align-items-center justify-content-center rounded-circle w-25px h-25px text-white bg-gray-500 fw-boldest step-number">2</span>
-          <div className="fs-4 fw-boldest text-gray-500 mt-4 step-text">추가정보</div>
-        </div>
-        <div className="step-box text-center min-w-125px ">
-          <span
-            className="d-inline-flex align-items-center justify-content-center rounded-circle w-25px h-25px text-white bg-gray-500 fw-boldest step-number">3</span>
-          <div className="fs-4 fw-boldest text-gray-500 mt-4 step-text">개별설정</div>
-        </div>
+        {tab.map((v,i) => (
+            <Tab
+              key={i}
+              icon={v.icon}
+              title={v.title}
+              subject={v.subject}
+              selected={selectedTab}
+            />
+          )
+        )}
       </div>
       <div className="navbar nav-pills py-4 position-sticky top-75px bg-white z-index-3 btn-prod-tab-group" id="prod-tab">
         <div className="nav nav-pills">
