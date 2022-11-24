@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import TabChild from "./Tab/TabChild";
 
 const Tabs2 = (children) => {
 
+    const [selectedIndex, setSelectedIndex] = useState(1);
+    
     const {data} = children;
 
     const selecteButton = (props) => {
-        console.log(props)
+
+        // 여기서 selected 값을 넣어준다.
+        setSelectedIndex(props);
+
+        console.log("props: ",props);
     }
 
     return (
@@ -14,6 +20,8 @@ const Tabs2 = (children) => {
             {data.map((value,i) => (
 
                 <TabChild 
+                    index={value.index}
+                    selected={selectedIndex}
                     key={i}
                     icon={value.icon}
                     title={value.title}
@@ -25,6 +33,7 @@ const Tabs2 = (children) => {
             ))}
         </div>
     )
+    
 };
 
 export default Tabs2;
