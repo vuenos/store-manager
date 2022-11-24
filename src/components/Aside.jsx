@@ -3,7 +3,6 @@ import {useTranslation} from "react-i18next";
 import SidebarMenu from 'react-bootstrap-sidebar-menu';
 import PropTypes from 'prop-types';
 import {menuItems} from "./menuItems";
-
 /**
  * 서브메뉴 Item element
  * @param title : 메뉴제목
