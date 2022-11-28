@@ -1,16 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Button} from "react-bootstrap";
 import {useAuthState} from "../atoms";
 import { useNavigate } from "react-router-dom";
+import { pageHeadMap } from "./pageHeadMap";
+import PropTypes from "prop-types";
+import { useLocation } from "react-router-dom";
 
 const Gnb = () => {
   const navigate = useNavigate();
   const [authState, setAuthState] = useAuthState();
+  const [pageTitle, setPageTitle] = useState("Page title");
+  const [pageDesc, setPageDesc] = useState("Page description");
+  let curLocation = useLocation();
 
   const logoutHandler = () => {
     sessionStorage.removeItem("access_token");
     setAuthState({loggedIn: false, id: "", pwd: ""});
     navigate('/login');
+  }
+
+  Gnb.propTypes = {
+    title: PropTypes.string,
+    path: PropTypes.string,
   }
 
   useEffect(() => {
@@ -20,6 +31,17 @@ const Gnb = () => {
     console.log('LOGGEDIN', authState.loggedIn)
   }, [authState.loggedIn])
 
+  useEffect(() => {
+    const curTitle = pageHeadMap.find(item => item.path === curLocation.pathname);
+    const curDesc = pageHeadMap.find(item => item.path === curLocation.pathname);
+    if(curTitle && curTitle.title || curDesc && curDesc.desc) {
+      setPageTitle(curTitle.title);
+      setPageDesc(curTitle.desc);
+      document.title = curTitle.title;
+    }
+  }, [curLocation]);
+
+
   return (
     <div className="docs-header align-items-stretch position-sticky top-0 bg-white z-index-3">
       <div className="container mw-sm-100 p-0">
@@ -28,16 +50,15 @@ const Gnb = () => {
           <div className="d-flex align-items-center" id="kt_docs_header_title">
             <div
               className="docs-page-title py-5 mb-lg-0"
-              data-kt-swapper="true"
-              data-kt-swapper-mode="prepend"
-              data-kt-swapper-parent="{default: '#kt_docs_content_container', 'lg': '#kt_docs_header_title'}"
             >
               <h1 className="d-flex align-items-center text-dark my-1 fs-4">
-                Page title
+                {pageTitle}
               </h1>
 
               <ul className="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-0 pt-1">
-                <li className="breadcrumb-item text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry</li>
+                <li className="breadcrumb-item text-muted">
+                  {pageDesc}
+                </li>
               </ul>
 
             </div>
@@ -65,8 +86,7 @@ const Gnb = () => {
 
             <a href="https://sellerhub.notion.site/f6595c4121774d60a28890aac11fb715"
                className="btn btn-white btn-active-white h-40px w-40px border fw-bolder me-3 p-1 use-guide"
-               target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="tooltip-dark"
-               title="" data-bs-html="true" data-bs-original-title="{{ config('tooltips.nav.guide') }}"
+               target="_blank"
                rel="noreferrer"
             >
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -79,9 +99,6 @@ const Gnb = () => {
             <div className="ms-5 me-5">
               <button
                 className="btn btn-icon btn-icon-custom-color btn-active-color-primary w-auto px-0"
-                data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
-                data-kt-menu-placement="bottom-start"
-                data-kt-menu-overflow="true"
               >
                 <span className="svg-icon svg-icon-1 me-n1">
                   <img src="/assets/media/icons/icon_profile.svg" width="40" alt="나의 메뉴 보기"/>

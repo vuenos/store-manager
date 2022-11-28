@@ -2,6 +2,7 @@ const menuItems = [
   {
     title: "대시보드",
     path: "/dashboard",
+    desc: "주문 및 상품 관련 정보와 매출통계를 한눈에 확인할 수 있어요"
   },
   {
     title: "상품",
@@ -17,7 +18,8 @@ const menuItems = [
       },
       {
         title: "상품 관리",
-        path: "/product/manage/goods"
+        path: "/product/manage/goods",
+        desc: "상품별, 쇼핑몰별로 상품을 조회하고 관리할 수 있어요"
       },
       {
         title: "템플릿 등록",
