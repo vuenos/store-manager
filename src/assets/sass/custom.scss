@@ -491,6 +491,7 @@
 .mall-wrap .btn {background-color:#f5f5f5 !important;}
 .mall-wrap .btn.btn-active-secondary.active,
 .mall-wrap .btn.btn-active-secondary:hover:not(.btn-active){background-color:#fff !important}
+
 /* 탭메뉴 이미지 변경 */
 .bg-tab-image{ width: 32px;height: 32px; display: inline-block;background-repeat: no-repeat;background-position-x: 50%;}
 .bg-tab-image.all-product {background-image: url(/assets/media/icons/icon_product_status_all_inactive.png);}
@@ -508,11 +509,11 @@
 .bg-tab-image.active.status-on {background-image: url(/assets/media/icons/icon_product_status_sale_active.png);}
 .bg-tab-image.active.status-updt {background-image: url(/assets/media/icons/icon_product_status_edit_active.png);}
 .bg-tab-image.active.status-off {background-image: url(/assets/media/icons/icon_product_status_stop_active.png);}
-.active.order-pay {background-image: url(/assets/media/icons/icon_order_pay_active.png);}
-.active.order-ready {background-image: url(/assets/media/icons/icon_order_ready_active.png);}
-.active.order-truck {background-image: url(/assets/media/icons/icon_order_truck_active.png);}
-.active.order-delivery {background-image: url(/assets/media/icons/icon_order_delivery_active.png);}
-.active.order-confirm {background-image: url(/assets/media/icons/icon_order_confirm_active.png);}
+.step-box.active .order-pay {background-image: url(/assets/media/icons/icon_order_pay_active.png);}
+.step-box.active .order-ready {background-image: url(/assets/media/icons/icon_order_ready_active.png);}
+.step-box.active .order-truck {background-image: url(/assets/media/icons/icon_order_truck_active.png);}
+.step-box.active .order-delivery {background-image: url(/assets/media/icons/icon_order_delivery_active.png);}
+.step-box.active .order-confirm {background-image: url(/assets/media/icons/icon_order_confirm_active.png);}
 /* 탭메뉴 이미지 변경 */
 
 /* 작업목록 토스트팝업 */
@@ -550,3 +551,32 @@
 .drawer .card-body .table tr:last-child th {
     border-bottom:0 !important;
 }
+
+.tooltip-inner {background: #000; color: #fff;}
+.bs-tooltip-bottom .tooltip-arrow:before {
+    background: #fff; border-bottom-color: #000;
+}
+
+/* 상태 */
+.badge {height:26px; font-weight:700;}
+.badge.on {background: #E6EEFF; color: #3355FF;}
+.badge.off {background: #EBECF0; color: #2E384D;}
+.badge.none {background: #D7FAEE; color: #00997F;}
+.badge.updt {background: #FAE6EA; color: #E52E4D;}
+
+/* 테이블 고정 */
+th.fixHeader,
+td.fixHeader {position: sticky; background: #fdfdfc; z-index: 10;}
+th.fixHeader.checkBox,
+td.fixHeader.checkBox {width: 60px; left: 0;}
+th.fixHeader.goodsImg,
+td.fixHeader.goodsImg {width: 80px; left: 60px;}
+th.fixHeader.mall,
+td.fixHeader.mall {width: 120px; left: 140px;}
+th.fixHeader.goodsName,
+td.fixHeader.goodsName {width: 200px; left: 260px;}
+th.fixHeader.goodsNum,
+td.fixHeader.goodsNum {width: 120px; left: 460px;}
+td.fixHeader {z-index: 8;}
+th.fixHeader.goodsNum:after,
+td.fixHeader.goodsNum:after {content: ''; display: block; position: absolute; top: 0; right: 0; width: 8px; height: 100%; background: linear-gradient(90deg, #211F1C 0%, rgba(33, 31, 28, 0) 100%); opacity: 0.04;}

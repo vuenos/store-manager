@@ -11,11 +11,9 @@ const Dashboard = (props) => {
   return (
     <div>
       <div>
-        <h1>{props.title}</h1>
-        <div>Contents</div>
+        {props.title}
       </div>
     </div>
   )
 }
-
 export default Dashboard;
