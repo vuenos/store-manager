@@ -1,12 +1,16 @@
 const menuItems = [
   {
     title: "대시보드",
+    isAdmin: "true",
+    isSubAdmin: "true",
     path: "/dashboard",
     desc: "주문 및 상품 관련 정보와 매출통계를 한눈에 확인할 수 있어요"
   },
   {
     title: "상품",
     id: 1,
+    isAdmin: "true",
+    isSubAdmin: "true",
     subMenu: [
       {
         title: "상품 등록",
@@ -34,6 +38,8 @@ const menuItems = [
   {
     title: "주문",
     id: 1,
+    isAdmin: "false",
+    isSubAdmin: "true",
     subMenu: [
       {
         title: "주문 관리",
@@ -51,6 +57,8 @@ const menuItems = [
   },
   {
     title: "CS",
+    isAdmin: "true",
+    isSubAdmin: "true",
     path: "/cs/qnaList"
   }
 ]

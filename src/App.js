@@ -7,7 +7,7 @@ const App = () => {
   const [authState, setAuthState] = useAuthState();
 
   useEffect(() => {
-    const data = sessionStorage.getItem("access_token");
+    const data = localStorage.getItem("access_token");
     if (data) {
       setAuthState({loggedIn: true, ...data})
     }

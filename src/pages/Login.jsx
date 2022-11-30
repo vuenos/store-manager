@@ -10,26 +10,30 @@ const Login = () => {
   const [authError, setAuthError] = useState(false);
   const [unknownError, setUnknownError] = useState(false);
 
-  const [id, setId] = useState("");
-  const [pwd, setPwd] = useState("");
+  // const [id, setId] = useState("");
+  // const [pwd, setPwd] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const loginHandler = async (e) => {
     e.preventDefault();
 
     // 사용자입력값
     const userInput = {
-      id,
-      pwd
+      // id,
+      // pwd,
+      email,
+      password
     }
 
     // 네트워킹
     try {
-      const { data, status } = await apiClient.post("/test/auth", userInput)
+      const { data, status } = await apiClient.post("/users/login", userInput)
 
       // data token 로컬스토리지(브라우저) 저장
       if (status === 200) {
         setAuthState({loggedIn: true, ...data})
-        sessionStorage.setItem("access_token", data.token)
+        localStorage.setItem("access_token", data.token)
         navigate("/dashboard");
         console.log('DATA', data);
       }
@@ -66,9 +70,9 @@ const Login = () => {
                     <Form.Control
                       type="text"
                       placeholder="Enter ID"
-                      value={id}
+                      value={email}
                       autoComplete="on"
-                      onChange={(e) => setId(e.target.value)}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </Form.Group>
                   <br/>
@@ -76,9 +80,9 @@ const Login = () => {
                     <Form.Control
                       type="password"
                       placeholder="Enter password"
-                      value={pwd}
+                      value={password}
                       autoComplete="current-password"
-                      onChange={(e) => setPwd(e.target.value)}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </Form.Group>
                   <br/>

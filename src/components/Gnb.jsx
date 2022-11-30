@@ -1,21 +1,54 @@
 import React, { useState, useEffect } from 'react';
 import {Button} from "react-bootstrap";
+import { useQuery } from "react-query";
 import {useAuthState} from "../atoms";
 import { useNavigate } from "react-router-dom";
 import { pageHeadMap } from "./pageHeadMap";
 import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
+// import apiClient from "../services/api";
+import { getUserInfo } from "../api/userApi";
 
 const Gnb = () => {
   const navigate = useNavigate();
   const [authState, setAuthState] = useAuthState();
+  // const [user, setUser] = useState("");
   const [pageTitle, setPageTitle] = useState("Page title");
   const [pageDesc, setPageDesc] = useState("Page description");
   let curLocation = useLocation();
 
+  // const token = localStorage.getItem("access_token");
+  //
+  // const config = {
+  //   headers: {
+  //     Authorization: "Bearer " + token
+  //   }
+  // }
+
+  const {
+    isLoading,
+    isError,
+    error,
+    data: user
+  } = useQuery('getUserInfo', getUserInfo, {
+    refetchOnWindowFocus: false,
+    onSuccess: data => {
+      console.log(data);
+    },
+    onError: e => {
+      // API 연결이 실패한 경우에 호출됨
+      console.log(e.message);
+    }
+  });
+
+  /**
+   * logout handler
+   * storage 인터페이스의 removeItem() method 에 key(access_token) name 을 파라마미터로 전달하면 storage 에서 해당 key 를 삭제.
+   * setAuthState 내의 loggedIn 상태를 false 로 변경.
+   */
   const logoutHandler = () => {
-    sessionStorage.removeItem("access_token");
-    setAuthState({loggedIn: false, id: "", pwd: ""});
+    localStorage.removeItem("access_token");
+    setAuthState({loggedIn: false, email: "", password: ""});
     navigate('/login');
   }
 
@@ -65,24 +98,30 @@ const Gnb = () => {
           </div>
 
           <div className="d-flex align-items-center">
-            <button
-              type="button"
-              className="btn getOrder btn-white btn-active-primary btn-flex h-40px border-0 fw-boldest px-4 px-lg-6 me-2 me-lg-3"
-              id="collectOrderBtn"
-              data-bs-toggle="modal"
-              data-bs-target="#collectOrderModal"
-            >
-              주문 가져오기
-            </button>
-            <button
-              type="button"
-              className="btn getOrder btn-white btn-active-primary btn-flex h-40px border-0 fw-boldest px-4 px-lg-6 me-5"
-              id="syncOrderBtn"
-              data-bs-toggle="modal"
-              data-bs-target="#syncOrderModal"
-            >
-              주문 동기화
-            </button>
+            {user && user.isAdmin === "true" ?
+              <>
+                <button
+                  type="button"
+                  className="btn getOrder btn-white btn-active-primary btn-flex h-40px border-0 fw-boldest px-4 px-lg-6 me-2 me-lg-3"
+                  id="collectOrderBtn"
+                  data-bs-toggle="modal"
+                  data-bs-target="#collectOrderModal"
+                >
+                  주문 가져오기
+                </button>
+                <button
+                  type="button"
+                  className="btn getOrder btn-white btn-active-primary btn-flex h-40px border-0 fw-boldest px-4 px-lg-6 me-5"
+                  id="syncOrderBtn"
+                  data-bs-toggle="modal"
+                  data-bs-target="#syncOrderModal"
+                >
+                  주문 동기화
+                </button>
+              </>
+              :
+              null
+            }
 
             <a href="https://sellerhub.notion.site/f6595c4121774d60a28890aac11fb715"
                className="btn btn-white btn-active-white h-40px w-40px border fw-bolder me-3 p-1 use-guide"
@@ -101,6 +140,9 @@ const Gnb = () => {
                 className="btn btn-icon btn-icon-custom-color btn-active-color-primary w-auto px-0"
               >
                 <span className="svg-icon svg-icon-1 me-n1">
+                  {isLoading && <span>Loading...</span>}
+                  {isError && error.message}
+                  {user && user.name}
                   <img src="/assets/media/icons/icon_profile.svg" width="40" alt="나의 메뉴 보기"/>
                 </span>
               </button>
