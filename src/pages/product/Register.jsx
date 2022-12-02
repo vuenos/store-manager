@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 // import {Card} from "react-bootstrap";
 import Tab from 'components/Product/Tab'
+import SelectShop from "./SelectShop";
 
 const Register = () => {
   const [selectedTab,setSelectedTab] = useState("1");
@@ -52,7 +53,7 @@ const Register = () => {
         </div>
       </div>
 
-
+      <SelectShop/>
       {/*<div className="card my-5 search-table ls-065em">*/}
       {/*  <div className="card-header px-7 py-5 min-h-auto border-bottom-0 flex-nowrap">*/}
       {/*    <div className="row align-items-center w-100">*/}
