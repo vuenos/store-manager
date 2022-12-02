@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Badge, Button, Card, Col, Form, OverlayTrigger, Row, Tooltip} from "react-bootstrap";
 
 const SelectShop = () => {
+  const [checkShops, setCheckShops] = useState([]);
+
   const shops = [
     {
       shopName: 'ncp_1nvgzv_01',
@@ -33,6 +35,38 @@ const SelectShop = () => {
     }
   ];
 
+// 체크박스 단일 선택
+  const handleSingleCheck = (checked, id) => {
+    // if (checked) {
+    //   // 단일 선택 시 체크된 아이템을 배열에 추가
+    //   setCheckShops(prev => [...prev, id]);
+    // } else {
+    //   // 단일 선택 해제 시 체크된 아이템을 제외한 배열 (필터)
+    //   setCheckShops(checkShops.filter((item) => item !== id));
+    // }
+    checked ? setCheckShops(shops) : setCheckShops(null) ;
+  };
+
+  // 체크박스 전체 선택
+  const handleAllCheck = (checked) => {
+    console.log(checked)
+    checked ? setCheckShops(()=> [...shops]) : "";
+    // console.log(checkShops)
+    // if(checked) {
+    //   // 전체 선택 클릭 시 데이터의 모든 아이템(id)를 담은 배열로 checkItems 상태 업데이트
+    //   const idArray = [];
+    //   shops.forEach((el) => idArray.push(el.id));
+    //   setCheckShops(idArray);
+    // }
+    // else {
+    //   // 전체 선택 해제 시 checkItems 를 빈 배열로 상태 업데이트
+    //   setCheckShops([]);
+    // }
+  }
+
+    useEffect(() => {
+      console.log(checkShops)
+    },[checkShops, shops])
 
   return (
     <Card>
@@ -91,17 +125,24 @@ const SelectShop = () => {
           </Col>
           <Col className="col-xl-10 navbar justify-content-start p-0">
             <div className="my-1 mx-2 p-0 form-check-inline form-check-solid">
-              <input type="checkbox" id="allChk" name="allChk" className="form-check-input d-none btn-check"/>
+              <input type="checkbox" id="allChk" name="allChk" className="form-check-input d-none btn-check"
+                     onChange={(e) => handleAllCheck(e.target.checked)}
+                // 데이터 개수와 체크된 아이템의 개수가 다를 경우 선택 해제 (하나라도 해제 시 선택 해제)
+                     checked={checkShops.length === shops.length}
+              />
                 <label htmlFor="allChk" className="btn btn-outline btn-outline-white fw-normal btn-active-secondary p-2 d-flex align-items-center h-40px">
                   <b>쇼핑몰 전체 선택</b>
                 </label>
             </div>
-            <div className="my-1 mx-2 p-0 form-check-inline form-check-solid">
-              <input type="checkbox" id="allChk" name="allChk" className="form-check-input d-none btn-check"/>
-                <label htmlFor="allChk" className="btn btn-outline btn-outline-white fw-normal btn-active-secondary p-2 d-flex align-items-center h-40px">
-                <img src={"/assets/media/icons/coupang.png"} alt={""}/>
-              </label>
-            </div>
+
+            {shops.map((shop,index)=> (
+              <div key={index} className="my-1 mx-2 p-0 form-check-inline form-check-solid">
+                <input type="checkbox" id={shop.icon} name={shop.shopName} className="form-check-input d-none btn-check" onChange={() => console.log("123")}/>
+                  <label htmlFor={shop.shopName} className="btn btn-outline btn-outline-white fw-normal btn-active-secondary p-2 d-flex align-items-center h-40px">
+                    <img src={`/assets/media/icons/${shop.icon}`} alt={""}/>&nbsp;{shop.shopName}
+                  </label>
+              </div>
+            ))}
           </Col>
         </Row>
       </Card.Body>
