@@ -1,5 +1,6 @@
 import React from 'react';
 import {Card} from "react-bootstrap";
+
 const SearchOptions = () => {
   return (
     <Card className="card-header px-7 py-5 min-h-auto border-bottom-0 flex-nowrap">

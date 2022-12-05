@@ -34,7 +34,7 @@ const Login = () => {
 
     // 네트워킹
     try {
-      const { data, status } = await apiClient.post("/auth/login", userInput)
+      const { data, status } = await apiClient.post("/sellers/login", userInput)
 
       // data token 로컬스토리지(브라우저) 저장
       if (status === 200) {
