@@ -6,30 +6,37 @@ const SelectShop = () => {
 
   const shops = [
     {
+      id: 1,
       shopName: 'ncp_1nvgzv_01',
       icon: 'smartstore.png',
     },
     {
+      id: 2,
       shopName: 'ncp_1nvgzv_01',
       icon: 'coupang.png',
     },
     {
+      id: 3,
       shopName: 'ncp_1nvgzv_01',
       icon: 'gmarket.png',
     },
     {
+      id: 4,
       shopName: 'ncp_1nvgzv_01',
       icon: 'auction.png',
     },
     {
+      id: 5,
       shopName: 'ncp_1nvgzv_01',
       icon: 'st11.png',
     },
     {
+      id: 6,
       shopName: 'ncp_1nvgzv_01',
       icon: 'talkstore.png',
     },
     {
+      id: 7,
       shopName: 'ncp_1nvgzv_01',
       icon: 'sho.png',
     }
@@ -37,20 +44,27 @@ const SelectShop = () => {
 
 // 체크박스 단일 선택
   const handleSingleCheck = (checked, id) => {
-    // if (checked) {
-    //   // 단일 선택 시 체크된 아이템을 배열에 추가
-    //   setCheckShops(prev => [...prev, id]);
-    // } else {
-    //   // 단일 선택 해제 시 체크된 아이템을 제외한 배열 (필터)
-    //   setCheckShops(checkShops.filter((item) => item !== id));
-    // }
-    checked ? setCheckShops(shops) : setCheckShops(null) ;
+    console.log(checked, id)
+
+    if (checked) {
+      // 단일 선택 시 체크된 아이템을 배열에 추가
+      setCheckShops(prev => [...prev, id]);
+    } else {
+      // 단일 선택 해제 시 체크된 아이템을 제외한 배열 (필터)
+      setCheckShops(checkShops.filter((item) => item !== id));
+    }
+    // checked ? setCheckShops(shops) : setCheckShops(null) ;
   };
+
+  const checkFunction = (value) => {
+    console.log(value);
+  }
+
 
   // 체크박스 전체 선택
   const handleAllCheck = (checked) => {
     console.log(checked)
-    checked ? setCheckShops(()=> [...shops]) : "";
+    checked ? setCheckShops(()=> [...shops]) : setCheckShops("");
     // console.log(checkShops)
     // if(checked) {
     //   // 전체 선택 클릭 시 데이터의 모든 아이템(id)를 담은 배열로 checkItems 상태 업데이트
@@ -135,14 +149,17 @@ const SelectShop = () => {
                 </label>
             </div>
 
-            {shops.map((shop,index)=> (
-              <div key={index} className="my-1 mx-2 p-0 form-check-inline form-check-solid">
-                <input type="checkbox" id={shop.icon} name={shop.shopName} className="form-check-input d-none btn-check" onChange={() => console.log("123")}/>
+            {shops ?
+              shops.map((shop)=> (
+              <div key={shop.id} className="my-1 mx-2 p-0 form-check-inline form-check-solid" onClick={()=> console.log(shop.id)}>
+                <input type="checkbox" name={shop.shopName} className="form-check-input d-none btn-check"/>
                   <label htmlFor={shop.shopName} className="btn btn-outline btn-outline-white fw-normal btn-active-secondary p-2 d-flex align-items-center h-40px">
                     <img src={`/assets/media/icons/${shop.icon}`} alt={""}/>&nbsp;{shop.shopName}
                   </label>
               </div>
-            ))}
+              ))
+            : null
+            }
           </Col>
         </Row>
       </Card.Body>
