@@ -557,6 +557,17 @@
     background: #fff; border-bottom-color: #000;
 }
 
+#searchTab {
+    display: block;
+    height:0;
+    overflow:hidden;
+    transition:all 0.5s ease;
+}
+
+#searchTab.active {
+    height:auto;
+}
+
 /* 상태 */
 .badge {height:26px; font-weight:700;}
 .badge.on {background: #E6EEFF; color: #3355FF;}
