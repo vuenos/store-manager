@@ -11,6 +11,7 @@ import {
   ManageGoods,
 } from './pages/product'
 import { OrderList } from './pages/order'
+import { ClaimList } from './pages/claim'
 import Layout from "./Layout";
 
 
@@ -29,6 +30,7 @@ const AppRoutes = () => {
         { path: "/product/manage/goods/keyword=:keyword", element: <ManageGoods /> },
         { path: "/product/manage/goods/page=:pageNumber", element: <ManageGoods pathname="/product/manage/goods" /> },
         { path: "/order/list", element: <OrderList /> },
+        { path: "/order/claim", element: <ClaimList /> },
         { path: "*", element: <Notfound /> }
       ]
     }
