@@ -1,6 +1,7 @@
 import React from 'react';
-import CardList from '../../components/CardList'
-import Tabs2 from '../../components/Tabs2';
+import CardList from 'components/CardList'
+import Tabs2 from 'components/Tabs2';
+import Search from 'components/Search/Search'
 
 const OrderList = () => {
 
@@ -10,7 +11,7 @@ const OrderList = () => {
           icon:"order-pay",
           title:"결제완료",
           count:12,
-          subject:"payed"
+          subject:"payed",         
       },
       {
           index: 2,
@@ -31,7 +32,7 @@ const OrderList = () => {
           icon:"order-delivery",
           title:"배송완료",
           count:6,
-          subject:"delivered"
+          subject:"delivered"          
       },        
       {
           index: 5,
@@ -41,18 +42,24 @@ const OrderList = () => {
           subject:"purchase_decided"
       }
   ];
-  
+
+
   return (
+  
     <div>
       <h1>OrderList</h1>
-      
+
       <Tabs2 
         data={data}
       />
 
+      <Search />
+
       <CardList />
+
     </div>
-  )
+
+    )
 }
 
 export default OrderList;
