@@ -4,7 +4,6 @@ import Tabs3 from "components/Tabs3";
 import Search from "components/Search/Search";
 import CardList from "components/CardList";
 
-
 const ClaimList = () => {
 
     const data =[
@@ -47,7 +46,7 @@ const ClaimList = () => {
             title: "취소철회",
             count: 0
         }
-      ];
+    ];
 
     return (
         <div>
@@ -57,7 +56,9 @@ const ClaimList = () => {
                 data={data}
             />
 
-            <Tabs3 data2={data2} />
+            <Tabs3 
+                data2={data2} 
+            />
 
             <Search />
 

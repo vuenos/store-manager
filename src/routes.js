@@ -10,8 +10,9 @@ import {
   Register,
   ManageGoods,
 } from './pages/product'
-import { OrderList } from './pages/order'
-import { ClaimList } from './pages/claim'
+import { OrderList } from './pages/order';
+import { ClaimList } from './pages/order/claim';
+import { AllList } from 'pages/order/all';
 import Layout from "./Layout";
 
 
@@ -31,6 +32,7 @@ const AppRoutes = () => {
         { path: "/product/manage/goods/page=:pageNumber", element: <ManageGoods pathname="/product/manage/goods" /> },
         { path: "/order/list", element: <OrderList /> },
         { path: "/order/claim", element: <ClaimList /> },
+        { path: "/order/all", element: <AllList /> },
         { path: "*", element: <Notfound /> }
       ]
     }
