@@ -10,25 +10,25 @@ const Login = () => {
   const [authError, setAuthError] = useState(false);
   const [unknownError, setUnknownError] = useState(false);
 
-  // const [id, setId] = useState("");
-  // const [pwd, setPwd] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [id, setId] = useState("");
+  const [pwd, setPwd] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
 
   const loginHandler = async (e) => {
     e.preventDefault();
 
     // 사용자입력값
     const userInput = {
-      // id,
-      // pwd,
-      email,
-      password
+      id,
+      pwd,
+      // email,
+      // password
     }
 
     // 네트워킹
     try {
-      const { data, status } = await apiClient.post("/users/login", userInput)
+      const { data, status } = await apiClient.post("/sellers/login", userInput)
 
       // data token 로컬스토리지(브라우저) 저장
       if (status === 200) {
@@ -70,9 +70,9 @@ const Login = () => {
                     <Form.Control
                       type="text"
                       placeholder="Enter ID"
-                      value={email}
+                      value={id}
                       autoComplete="on"
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={(e) => setId(e.target.value)}
                     />
                   </Form.Group>
                   <br/>
@@ -80,9 +80,9 @@ const Login = () => {
                     <Form.Control
                       type="password"
                       placeholder="Enter password"
-                      value={password}
+                      value={pwd}
                       autoComplete="current-password"
-                      onChange={(e) => setPassword(e.target.value)}
+                      onChange={(e) => setPwd(e.target.value)}
                     />
                   </Form.Group>
                   <br/>
