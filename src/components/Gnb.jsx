@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import {Button} from "react-bootstrap";
-import { useQuery } from "react-query";
-import {useAuthState} from "../atoms";
+import { useAuthState } from "../atoms";
+import { useUsersState } from "../atoms";
 import { useNavigate } from "react-router-dom";
 import { pageHeadMap } from "./pageHeadMap";
 import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
 // import apiClient from "../services/api";
-import { getUserInfo } from "../api/userApi";
+import { useUserActions } from "../api/userApi";
 
 const Gnb = () => {
   const navigate = useNavigate();
   const [authState, setAuthState] = useAuthState();
+  // const [userState, setUserSate] = useUsersState();
+  // const getUserData = getUserInfo();
   // const [user, setUser] = useState("");
   const [pageTitle, setPageTitle] = useState("Page title");
   const [pageDesc, setPageDesc] = useState("Page description");
   let curLocation = useLocation();
+  const userActions = useUserActions();
 
   // const token = localStorage.getItem("access_token");
   //
@@ -25,21 +28,21 @@ const Gnb = () => {
   //   }
   // }
 
-  const {
-    isLoading,
-    isError,
-    error,
-    data: user
-  } = useQuery('getUserInfo', getUserInfo, {
-    refetchOnWindowFocus: false,
-    onSuccess: data => {
-      console.log(data);
-    },
-    onError: e => {
-      // API 연결이 실패한 경우에 호출됨
-      console.log(e.message);
-    }
-  });
+  // const {
+  //   isLoading,
+  //   isError,
+  //   error,
+  //   data: user
+  // } = useQuery('getUserInfo', getUserInfo, {
+  //   refetchOnWindowFocus: false,
+  //   onSuccess: data => {
+  //     console.log(data.data);
+  //   },
+  //   onError: e => {
+  //     // API 연결이 실패한 경우에 호출됨
+  //     console.log(e.message);
+  //   }
+  // });
 
   /**
    * logout handler
@@ -48,7 +51,7 @@ const Gnb = () => {
    */
   const logoutHandler = () => {
     localStorage.removeItem("access_token");
-    setAuthState({loggedIn: false, email: "", password: ""});
+    setAuthState({loggedIn: false, id: "", pwd: ""});
     navigate('/login');
   }
 
@@ -62,7 +65,13 @@ const Gnb = () => {
       navigate('/login')
     }
     console.log('LOGGEDIN', authState.loggedIn)
-  }, [authState.loggedIn])
+  }, [authState.loggedIn]);
+
+  // useEffect(() => {
+  //   setUserSate(getUserData.data);
+  //   console.log('GNB_USERINFO', getUserData)
+  // }, [getUserData.data]);
+
 
   useEffect(() => {
     const curTitle = pageHeadMap.find(item => item.path === curLocation.pathname);
@@ -98,30 +107,24 @@ const Gnb = () => {
           </div>
 
           <div className="d-flex align-items-center">
-            {user && user.isAdmin === "true" ?
-              <>
-                <button
-                  type="button"
-                  className="btn getOrder btn-white btn-active-primary btn-flex h-40px border-0 fw-boldest px-4 px-lg-6 me-2 me-lg-3"
-                  id="collectOrderBtn"
-                  data-bs-toggle="modal"
-                  data-bs-target="#collectOrderModal"
-                >
-                  주문 가져오기
-                </button>
-                <button
-                  type="button"
-                  className="btn getOrder btn-white btn-active-primary btn-flex h-40px border-0 fw-boldest px-4 px-lg-6 me-5"
-                  id="syncOrderBtn"
-                  data-bs-toggle="modal"
-                  data-bs-target="#syncOrderModal"
-                >
-                  주문 동기화
-                </button>
-              </>
-              :
-              null
-            }
+            <button
+              type="button"
+              className="btn getOrder btn-white btn-active-primary btn-flex h-40px border-0 fw-boldest px-4 px-lg-6 me-2 me-lg-3"
+              id="collectOrderBtn"
+              data-bs-toggle="modal"
+              data-bs-target="#collectOrderModal"
+            >
+              주문 가져오기
+            </button>
+            <button
+              type="button"
+              className="btn getOrder btn-white btn-active-primary btn-flex h-40px border-0 fw-boldest px-4 px-lg-6 me-5"
+              id="syncOrderBtn"
+              data-bs-toggle="modal"
+              data-bs-target="#syncOrderModal"
+            >
+              주문 동기화
+            </button>
 
             <a href="https://sellerhub.notion.site/f6595c4121774d60a28890aac11fb715"
                className="btn btn-white btn-active-white h-40px w-40px border fw-bolder me-3 p-1 use-guide"
@@ -140,9 +143,9 @@ const Gnb = () => {
                 className="btn btn-icon btn-icon-custom-color btn-active-color-primary w-auto px-0"
               >
                 <span className="svg-icon svg-icon-1 me-n1">
-                  {isLoading && <span>Loading...</span>}
-                  {isError && error.message}
-                  {user && user.name}
+                  {/*{isLoading && <span>Loading...</span>}*/}
+                  {/*{isError && error.message}*/}
+                  <span></span>
                   <img src="/assets/media/icons/icon_profile.svg" width="40" alt="나의 메뉴 보기"/>
                 </span>
               </button>

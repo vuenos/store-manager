@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import AppRoutes from "./routes";
-import { useAuthState } from "./atoms";
+import { useAuthState } from "./atoms/auth";
 import Login from "./pages/Login"
 
 const App = () => {
@@ -11,7 +11,6 @@ const App = () => {
     if (data) {
       setAuthState({loggedIn: true, ...data})
     }
-    console.log('AUTH_STATE', authState);
   }, []);
 
   useEffect(() => {

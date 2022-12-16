@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import {Button, Container, Form, Row } from "react-bootstrap";
-import { useAuthState } from "../atoms";
+import { useAuthState } from "../atoms/auth";
+// import { useUsersState } from "../atoms/users";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../services/api";
+import { useUserActions } from "../api/userApi";
 
 const Login = () => {
   const navigate = useNavigate();
   const [authState, setAuthState] = useAuthState();
+  // const [userState, setUserState] = useUsersState();
   const [authError, setAuthError] = useState(false);
   const [unknownError, setUnknownError] = useState(false);
+  // const getUserData = getUserInfo();
+  const userActions = useUserActions();
 
   const [id, setId] = useState("");
   const [pwd, setPwd] = useState("");
@@ -26,26 +31,66 @@ const Login = () => {
       // password
     }
 
+    // apiClient.post('/sellers/login', userInput)
+    //   .then(({data}) => {
+    //     console.log('login success!');
+    //     console.log(data);
+    //     userActions.getUserInfo(data.data.access_token)
+    //       .then(userInfo => {
+    //         console.log('get User Info');
+    //         console.log(userInfo);
+    //         navigate('/dashboard');
+    //       }).catch(e => {
+    //         // todo : get user info failed
+    //     })
+    // }).catch(e => {
+    //   // todo: login failed.
+    // })
+
     // 네트워킹
     try {
-      const { data, status } = await apiClient.post("/sellers/login", userInput)
-
+      const {data} = await apiClient.post('/sellers/login', userInput);
       // data token 로컬스토리지(브라우저) 저장
-      if (status === 200) {
-        setAuthState({loggedIn: true, ...data})
-        localStorage.setItem("access_token", data.token)
-        navigate("/dashboard");
-        console.log('DATA', data);
-      }
-    } catch (error) {
-      if (error.response && error.response.status === 422) {
-        setAuthError(true);
-        console.log(error.message);
-      } else {
-        setUnknownError(true);
-        console.error(error);
-      }
+      setAuthState({loggedIn: true, ...data});
+      localStorage.setItem("access_token", data.data.access_token);
+    } catch (e) {
+      // todo: login 실패 에러 처리
     }
+
+    try {
+      const userInfo = await userActions.getUserInfo(localStorage.getItem('access_token'));
+      console.log(userInfo)
+      navigate("/dashboard");
+    } catch (e) {
+      // todo: get user info 실패 에러
+    }
+
+    // try {
+    //   const { data, status } = await apiClient.post("/sellers/login", userInput);
+    //
+    //
+    //   console.log('TOKEN_DATA', data);
+    //
+    //   await userActions.getUserInfo(data.data.access_token);
+    //   // todo : getUser;
+    //   navigate("/dashboard");
+    // } catch (error) {
+    //   switch (error.code) {
+    //     case '000':
+    //       alert('로그인 실패');
+    //       break;
+    //     case '001':
+    //       alsert('유저 정보 받기 실패');
+    //   }
+    //
+    //   if (error.response && error.response.status === 422) {
+    //     setAuthError(true);
+    //     console.log(error.message);
+    //   } else {
+    //     setUnknownError(true);
+    //     console.error(error);
+    //   }
+    // }
   }
 
   return (

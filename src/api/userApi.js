@@ -1,14 +1,32 @@
+import { useSetRecoilState } from 'recoil';
 import apiClient from "../services/api";
+import { usersAtom } from "../atoms";
 
-const token = localStorage.getItem("access_token");
-const config = {
-  headers: {
-    Authorization: "Bearer " + token
+export { useUserActions };
+function useUserActions () {
+  const setUsers = useSetRecoilState(usersAtom);
+  const token = localStorage.getItem("access_token");
+  const config = {
+    headers: {
+      Authorization: "Bearer " + token
+    }
   }
-}
 
-export const getUserInfo = async () => {
-    const { data } = await apiClient.get("/users/profile", config);
-    console.log('USER_DATA:::', data);
-    return data;
+  return {
+    getUserInfo
+  }
+
+  async function getUserInfo (token) {
+
+    if (!token) {
+      token = localStorage.getItem('access_token');
+    }
+
+    const { data, status } = await apiClient.get("/sellers/info", {headers: {
+        Authorization: "Bearer " + token
+      }});
+    localStorage.setItem("tmp_data", data.data.name);
+    setUsers(data.data);
+    return data.data;
+  }
 }
