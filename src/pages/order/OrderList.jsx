@@ -1,6 +1,7 @@
 import React from 'react';
 import CardList from '../../components/CardList'
 import Tabs2 from '../../components/Tabs2';
+import Search from '../../components/Search/Search'
 
 const OrderList = () => {
 
@@ -49,6 +50,8 @@ const OrderList = () => {
       <Tabs2 
         data={data}
       />
+
+      <Search />
 
       <CardList />
     </div>

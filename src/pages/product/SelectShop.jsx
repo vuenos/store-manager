@@ -83,7 +83,7 @@ const SelectShop = () => {
     },[checkShops, shops])
 
   return (
-    <Card>
+    <Card className="card card-flush mb-5">
       <Card.Header className="p-0 border-bottom-0">
         <Row className="p-7">
           <Card.Title as="h4" className="mb-0 d-flex">
@@ -151,9 +151,9 @@ const SelectShop = () => {
 
             {shops ?
               shops.map((shop)=> (
-              <div key={shop.id} className="my-1 mx-2 p-0 form-check-inline form-check-solid" onClick={()=> console.log(shop.id)}>
-                <input type="checkbox" name={shop.shopName} className="form-check-input d-none btn-check"/>
-                  <label htmlFor={shop.shopName} className="btn btn-outline btn-outline-white fw-normal btn-active-secondary p-2 d-flex align-items-center h-40px">
+              <div key={shop.id} className="my-1 mx-2 p-0 form-check-inline form-check-solid">
+                <input id={shop.id} type="checkbox" name={shop.shopName} className="form-check-input d-none btn-check"  onClick={()=> console.log(shop.id)}/>
+                  <label htmlFor={shop.id} className="btn btn-outline btn-outline-white fw-normal btn-active-secondary p-2 d-flex align-items-center h-40px">
                     <img src={`/assets/media/icons/${shop.icon}`} alt={""}/>&nbsp;{shop.shopName}
                   </label>
               </div>
