@@ -140,9 +140,9 @@ const SelectShop = () => {
           <Col className="col-xl-10 navbar justify-content-start p-0">
             <div className="my-1 mx-2 p-0 form-check-inline form-check-solid">
               <input type="checkbox" id="allChk" name="allChk" className="form-check-input d-none btn-check"
-                     onChange={(e) => handleAllCheck(e.target.checked)}
+                    onChange={(e) => handleAllCheck(e.target.checked)}
                 // 데이터 개수와 체크된 아이템의 개수가 다를 경우 선택 해제 (하나라도 해제 시 선택 해제)
-                     checked={checkShops.length === shops.length}
+                    checked={checkShops.length === shops.length}
               />
                 <label htmlFor="allChk" className="btn btn-outline btn-outline-white fw-normal btn-active-secondary p-2 d-flex align-items-center h-40px">
                   <b>쇼핑몰 전체 선택</b>
