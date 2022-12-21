@@ -598,3 +598,22 @@ td.fixHeader.goodsNum:after {content: ''; display: block; position: absolute; to
     min-height: 400px;
     margin-bottom: 20px;
 }
+
+
+//bootstrap collapse
+
+.accordion-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    width: 100%;
+    font-size: 1rem;
+    color: #211F1C;
+    text-align: left;
+    background-color: #ffffff;
+    border: 0;
+    border-radius: 0;
+    overflow-anchor: none;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-radius 0.15s ease;
+}
