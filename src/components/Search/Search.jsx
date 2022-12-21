@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-const Search = () => {
+const Search = (children) => {
 
     const [searchOptionToggle , setToggle] = useState(true);
 
@@ -14,6 +14,9 @@ const Search = () => {
     const changeToggle = () => {
         setToggle(!searchOptionToggle);
     }
+
+    const {search} = children;
+    console.log(search[0].title);
 
     return (
         <div>
@@ -58,7 +61,7 @@ const Search = () => {
 
                             <div className="row mb-5 align-items-center">
                                 <div className="col-xl-1">
-                                    <div className="fs-6 fw-boldest mt-3 mb-3">기간</div>
+                                    <div className="fs-6 fw-boldest mt-3 mb-3">{search[0].title}</div>
                                 </div>
 
                                 <div className="dateBtnBox d-flex btn-group col-xl-5 nav-group nav-group-fluid my-1" role="group" data-kt-buttons="true" data-kt-buttons-target="[data-kt-button]" aria-label="날짜 선택">
@@ -110,7 +113,7 @@ const Search = () => {
 
                             <div className="row mb-5 align-items-center">
                                 <div className="col-xl-1">
-                                    <div className="fs-6 fw-boldest mt-3 mb-3">메뉴1</div>
+                                    <div className="fs-6 fw-boldest mt-3 mb-3">{search[1].title}</div>
                                 </div>
 
                                 <div className="col-lg-3">
@@ -119,19 +122,7 @@ const Search = () => {
                                     </select>
                                 </div>
                             </div>
-
-                            <div className="row align-items-center">
-                                <div className="col-xl-1">
-                                    <div className="fs-6 fw-boldest mt-3 mb-3">메뉴2</div>
-                                </div>
-
-                                <div className="col-lg-3">
-                                    <select id="task_cls" name="task_cls" className="form-select form-select-sm select2-hidden-accessible" data-control="select2" data-placeholder="선택하세요" data-allow-clear="true" data-hide-search="true" data-select2-id="select2-data-task_cls" tabIndex="-1" aria-hidden="true">
-                                        <option value="ex">예시</option>
-                                    </select>
-                                </div>
-                            </div>
-
+                            
                         </div>
 
                 </div>
