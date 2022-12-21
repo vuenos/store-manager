@@ -83,11 +83,11 @@ const SelectShop = () => {
     },[checkShops, shops])
 
   return (
-    <Card className="card card-flush mb-5">
+    <Card className="card mb-5">
       <Card.Header className="p-0 border-bottom-0">
         <Row className="p-7">
-          <Card.Title as="h4" className="mb-0 d-flex">
-            쇼핑몰 선택
+          <Card.Title className="d-flex">
+            <h4 className="mb-0">쇼핑몰 선택</h4>
             <OverlayTrigger
               placement="bottom"
               overlay = {
@@ -104,7 +104,7 @@ const SelectShop = () => {
           </Card.Title>
         </Row>
 
-        <div className="border-gray-300 border-bottom border-bottom-solid w-100"></div>
+        <div className="border-gray-300 border-bottom border-bottom-solid w-100 mb-5"></div>
 
         {/*<Row className="w-100 p-7 pe-0">*/}
         {/*  <Col className="col-xl-7">*/}
@@ -130,7 +130,7 @@ const SelectShop = () => {
         {/*</Row>*/}
       </Card.Header>
       <Card.Body className="card-body px-7 pt-0">
-        <div className="border-gray-300 border-bottom border-bottom-solid mb-5"></div>
+        {/*<div className="border-gray-300 border-bottom border-bottom-solid mb-5"></div>*/}
         <Row className="row align-items-center">
           <Col className="col-xl-1 min-w-125px">
             <div className="fs-6 fw-boldest mt-3 mb-3">

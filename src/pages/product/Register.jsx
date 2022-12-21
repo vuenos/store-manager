@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 import Tab from 'components/Product/Tab'
 import SelectShop from "./SelectShop";
 import SelectCategory from "./SelectCategory";
+import DefaultInfo from "./DefaultInfo";
+import SelectOption from "./SelectOption";
 
 const Register = () => {
   const [selectedTab,setSelectedTab] = useState("1");
@@ -53,8 +55,10 @@ const Register = () => {
           <a href="#prod9" className="btn btn-prod-tab menu-link nav-link fw-boldest">기타정보</a>
         </div>
       </div>
-        <SelectShop/>
-        <SelectCategory/>
+      <SelectShop/>
+      <SelectCategory/>
+      <DefaultInfo/>
+      <SelectOption/>
     </>
   )
 }

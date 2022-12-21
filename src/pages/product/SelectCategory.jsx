@@ -4,15 +4,15 @@ import {Card, Col, OverlayTrigger, Row, Tooltip} from "react-bootstrap";
 const SelectCategory = () => {
   return (
     <div>
-      <Card className="card mb-5">
+      <Card className="card mb-5 card">
         <Card.Header className="p-0 border-bottom-0">
           <Row className="p-7">
-            <Card.Title as="h4" className="mb-0 d-flex">
-              카테고리
+            <Card.Title className="d-flex">
+              <h4 className="mb-0">카테고리</h4>
               <OverlayTrigger
                 placement="bottom"
                 overlay = {
-                  <Tooltip>
+                  <Tooltip className="cursor-pointer lh-sm ms-1 mt-n05">
                     표준 카테고리를 참고하여 상품에 해당하는 카테고리를 선택해 주세요
                   </Tooltip>
                 }
@@ -24,11 +24,11 @@ const SelectCategory = () => {
               {/*</Badge>*/}
             </Card.Title>
           </Row>
-          <div className="border-gray-300 border-bottom border-bottom-solid w-100"></div>
+          <div className="border-gray-300 border-bottom border-bottom-solid w-100 mb-5"></div>
 
         </Card.Header>
         <Card.Body className="card-body px-7 pt-0">
-          <div className="border-gray-300 border-bottom border-bottom-solid mb-5"></div>
+          {/*<div className="border-gray-300 border-bottom border-bottom-solid w-100 mb-5"></div>*/}
           <Row className="row align-items-center">
             <Col className="col-xl-1 min-w-125px">
               <div className="fs-6 fw-boldest mt-3 mb-3">
