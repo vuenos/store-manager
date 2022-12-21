@@ -6,6 +6,7 @@ import SelectCategory from "./SelectCategory";
 import DefaultInfo from "./DefaultInfo";
 import SelectOption from "./SelectOption";
 import SelectTotalStock from "./SelectTotalStock";
+import SelectDiscount from "./SelectDiscount";
 
 const Register = () => {
   const [selectedTab,setSelectedTab] = useState("1");
@@ -61,6 +62,7 @@ const Register = () => {
       <DefaultInfo/>
       <SelectOption/>
       <SelectTotalStock/>
+      <SelectDiscount/>
     </>
   )
 }
