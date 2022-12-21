@@ -43,6 +43,17 @@ const OrderList = () => {
       }
   ];
 
+  const search = [
+    {
+        index: 1,
+        title: '기간검색'
+    },
+    {
+        index: 2,
+        title: '연동몰/계정'
+    }
+  ]
+
 
   return (
   
@@ -53,7 +64,9 @@ const OrderList = () => {
         data={data}
       />
 
-      <Search />
+      <Search 
+        search={search}
+      />
 
       <CardList />
 

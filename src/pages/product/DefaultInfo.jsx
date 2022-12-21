@@ -6,7 +6,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 const DefaultInfo = () => {
   return (
     <div>
-      <Card className="card mb-5 card">
+      <Card className="mb-5">
         <Card.Header className="p-0 border-bottom-0">
           <Row className="p-7">
             <Card.Title className="d-flex">
