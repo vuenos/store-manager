@@ -24,6 +24,12 @@ const Login = () => {
 
   const loginHandler = async (e) => {
     e.preventDefault();
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    setValidated(true);
 
     // 사용자입력값
     const userInput = {
@@ -123,27 +129,37 @@ const Login = () => {
                 <h2 className="text-dark display-6 pt-10 mb-10 text-center fw-boldest">로그인</h2>
 
                 <Form noValidate validated={validated} onSubmit={loginHandler}>
-                  <Form.Group controlId={"id"}>
+                  <Form.Group controlId={`shc-${id}`}>
                     <Form.Control
                       type="text"
+                      name="shcID"
                       placeholder="Enter ID"
                       value={id}
                       autoComplete="on"
                       onChange={(e) => setId(e.target.value)}
+                      required
                     />
+                    <Form.Control.Feedback type="invalid">
+                      아이디를 입력해 주십시오.
+                    </Form.Control.Feedback>
                   </Form.Group>
                   <br/>
                   <Form.Group controlId={"password"}>
                     <Form.Control
                       type="password"
+                      name="shcPwd"
                       placeholder="Enter password"
                       value={pwd}
                       autoComplete="current-password"
                       onChange={(e) => setPwd(e.target.value)}
+                      required
                     />
+                    <Form.Control.Feedback type="invalid">
+                      비밀번호를 입력해 주십시오.
+                    </Form.Control.Feedback>
                   </Form.Group>
                   <br/>
-                  <Button type="submit" variant="primary" className="btn-block btn-login w-100 fw-boldest">Sign in</Button>
+                  <Button type="submit" id="formSubmit" variant="primary" disabled={submitDisabled} className="btn-block btn-login w-100 fw-boldest">Sign in</Button>
                 </Form>
                 {authError ? <Alert variant="danger" className="mt-6">인증되지 않은 계정입니다. 관리자에게 문의히여 주십시오.</Alert> : null}
                 {unknownError ? <Alert variant={'danger'} className="mt-6">계정정보를 다시 확인하여 주십시오.</Alert> : null}
