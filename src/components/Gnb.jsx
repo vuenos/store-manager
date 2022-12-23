@@ -1,16 +1,80 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Button} from "react-bootstrap";
-import {useAuthState} from "../atoms";
+import { useAuthState } from "../atoms";
+import { useUsersState } from "../atoms";
+import { usersAtom } from "../atoms/users";
 import { useNavigate } from "react-router-dom";
+import { pageHeadMap } from "./pageHeadMap";
+import PropTypes from "prop-types";
+import { useLocation } from "react-router-dom";
+// import apiClient from "../services/api";
+import { useUserActions } from "../api/userApi";
+import {useRecoilValue} from "recoil";
 
 const Gnb = () => {
   const navigate = useNavigate();
   const [authState, setAuthState] = useAuthState();
+  const userInfo = useRecoilValue(usersAtom);
+  const [userState, setUserSate] = useUsersState();
+  // const getUserData = getUserInfo();
+  // const [user, setUser] = useState("");
+  const [pageTitle, setPageTitle] = useState("Page title");
+  const [pageDesc, setPageDesc] = useState("Page description");
+  let curLocation = useLocation();
+  const userActions = useUserActions();
 
+  // const token = localStorage.getItem("access_token");
+  //
+  // const config = {
+  //   headers: {
+  //     Authorization: "Bearer " + token
+  //   }
+  // }
+
+  // const {
+  //   isLoading,
+  //   isError,
+  //   error,
+  //   data: user
+  // } = useQuery('getUserInfo', getUserInfo, {
+  //   refetchOnWindowFocus: false,
+  //   onSuccess: data => {
+  //     console.log(data.data);
+  //   },
+  //   onError: e => {
+  //     // API 연결이 실패한 경우에 호출됨
+  //     console.log(e.message);
+  //   }
+  // });
+
+  /**
+   * access_token 여부로 유저 정보 호출
+   * @returns {Promise<void>}
+   */
+  const getUserInfo = async () => {
+    try {
+      const userInfo = await userActions.getUserInfo();
+      setUserSate(userInfo);
+      // console.log(userInfo);
+    } catch (e) {
+      // todo: get user info 실패 에러
+    }
+  }
+
+  /**
+   * logout handler
+   * storage 인터페이스의 removeItem() method 에 key(access_token) name 을 파라마미터로 전달하면 storage 에서 해당 key 를 삭제.
+   * setAuthState 내의 loggedIn 상태를 false 로 변경.
+   */
   const logoutHandler = () => {
-    sessionStorage.removeItem("access_token");
+    localStorage.removeItem("access_token");
     setAuthState({loggedIn: false, id: "", pwd: ""});
     navigate('/login');
+  }
+
+  Gnb.propTypes = {
+    title: PropTypes.string,
+    path: PropTypes.string,
   }
 
   useEffect(() => {
@@ -18,7 +82,29 @@ const Gnb = () => {
       navigate('/login')
     }
     console.log('LOGGEDIN', authState.loggedIn)
-  }, [authState.loggedIn])
+  }, [authState.loggedIn]);
+
+  // useEffect(() => {
+  //   setUserSate(getUserData.data);
+  //   console.log('GNB_USERINFO', getUserData)
+  // }, [getUserData.data]);
+
+
+  useEffect(() => {
+    const curTitle = pageHeadMap.find(item => item.path === curLocation.pathname);
+    const curDesc = pageHeadMap.find(item => item.path === curLocation.pathname);
+    if(curTitle && curTitle.title || curDesc && curDesc.desc) {
+      setPageTitle(curTitle.title);
+      setPageDesc(curTitle.desc);
+      document.title = curTitle.title;
+    }
+  }, [curLocation]);
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
+
 
   return (
     <div className="docs-header align-items-stretch position-sticky top-0 bg-white z-index-3">
@@ -28,16 +114,15 @@ const Gnb = () => {
           <div className="d-flex align-items-center" id="kt_docs_header_title">
             <div
               className="docs-page-title py-5 mb-lg-0"
-              data-kt-swapper="true"
-              data-kt-swapper-mode="prepend"
-              data-kt-swapper-parent="{default: '#kt_docs_content_container', 'lg': '#kt_docs_header_title'}"
             >
               <h1 className="d-flex align-items-center text-dark my-1 fs-4">
-                Page title
+                {pageTitle}
               </h1>
 
               <ul className="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-0 pt-1">
-                <li className="breadcrumb-item text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry</li>
+                <li className="breadcrumb-item text-muted">
+                  {pageDesc}
+                </li>
               </ul>
 
             </div>
@@ -65,8 +150,7 @@ const Gnb = () => {
 
             <a href="https://sellerhub.notion.site/f6595c4121774d60a28890aac11fb715"
                className="btn btn-white btn-active-white h-40px w-40px border fw-bolder me-3 p-1 use-guide"
-               target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="tooltip-dark"
-               title="" data-bs-html="true" data-bs-original-title="{{ config('tooltips.nav.guide') }}"
+               target="_blank"
                rel="noreferrer"
             >
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -79,11 +163,11 @@ const Gnb = () => {
             <div className="ms-5 me-5">
               <button
                 className="btn btn-icon btn-icon-custom-color btn-active-color-primary w-auto px-0"
-                data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
-                data-kt-menu-placement="bottom-start"
-                data-kt-menu-overflow="true"
               >
                 <span className="svg-icon svg-icon-1 me-n1">
+                  {/*{isLoading && <span>Loading...</span>}*/}
+                  {/*{isError && error.message}*/}
+                  <span>{userState && userState.name}</span>
                   <img src="/assets/media/icons/icon_profile.svg" width="40" alt="나의 메뉴 보기"/>
                 </span>
               </button>
