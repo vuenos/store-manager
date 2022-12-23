@@ -31,10 +31,11 @@ const SubMenuItems = ({ title, path }) => {
  * @param path : 경로
  * @param subMenu : 서브메뉴
  * @param id : 서브메뉴아이디
+ * @param isAdmin : 메인계정
  * @returns {JSX.Element} : 단일메뉴 element or 서브메뉴 element 가 포함된 element block 반환
  * @constructor
  */
-const MenuItem = ({ title, path, subMenu, id }) => {
+const MenuItem = ({ title, path, subMenu, id, isAdmin }) => {
   if (subMenu) {
     return (
       <SidebarMenu.Sub id={`subMenu-${id}`}>
@@ -77,6 +78,7 @@ MenuItem.propTypes = {
   path: PropTypes.string,
   subMenu: PropTypes.any,
   id: PropTypes.any,
+  isAdmin: PropTypes.string,
 }
 
 /**
