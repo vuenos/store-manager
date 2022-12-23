@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import {Button, Container, Form, Row } from "react-bootstrap";
+import React, { useState, useEffect } from 'react';
+import {Button, Container, Form, Row, Alert } from "react-bootstrap";
 import { useAuthState } from "../atoms/auth";
 // import { useUsersState } from "../atoms/users";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../services/api";
-import { useUserActions } from "../api/userApi";
+// import { useUserActions } from "../api/userApi";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -13,8 +13,7 @@ const Login = () => {
   const [authError, setAuthError] = useState(false);
   const [unknownError, setUnknownError] = useState(false);
   // const getUserData = getUserInfo();
-  const userActions = useUserActions();
-
+  // const userActions = useUserActions();
   const [validated, setValidated] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(false)
 
@@ -22,7 +21,6 @@ const Login = () => {
   const [pwd, setPwd] = useState("");
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
-
 
   const loginHandler = async (e) => {
     e.preventDefault();

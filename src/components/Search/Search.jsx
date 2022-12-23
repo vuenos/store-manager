@@ -1,6 +1,4 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Search = () => {
 
@@ -18,7 +16,7 @@ const Search = () => {
     return (
         <div>
 
-            <div className="card mb-5 search-table ls-065em" id="serchTable">
+            <div className="card mb-5 search-table ls-065em" id="">
 
                 <div className="card-header px-7 py-5 min-h-auto border-bottom-0 flex-nowrap">
 
@@ -34,9 +32,9 @@ const Search = () => {
 
                     </div>
 
-                    <div 
-                        className={'collapsible cursor-pointer rotate '+ (searchOptionToggle? 'active' :'')} 
-                        onClick={() => changeToggle()}    
+                    <div
+                        className={'collapsible cursor-pointer rotate '+ (searchOptionToggle ? 'active' : '')}
+                        onClick={() => changeToggle()}
                     >
                         <div className="card-toolbar rotate-180">
                             <span className="svg-icon svg-icon-1">
@@ -49,7 +47,7 @@ const Search = () => {
 
                 </div>
 
-                
+
                 <div id="searchTab" className={'collapse ' + (searchOptionToggle ? 'active' : '')}>
 
                         <div className="card-body p-7 pt-0">
@@ -61,7 +59,11 @@ const Search = () => {
                                     <div className="fs-6 fw-boldest mt-3 mb-3">기간</div>
                                 </div>
 
-                                <div className="dateBtnBox d-flex btn-group col-xl-5 nav-group nav-group-fluid my-1" role="group" data-kt-buttons="true" data-kt-buttons-target="[data-kt-button]" aria-label="날짜 선택">
+                                <div
+                                  className="dateBtnBox d-flex btn-group col-xl-5 nav-group nav-group-fluid my-1"
+                                  role="group"
+                                  aria-label="날짜 선택"
+                                >
                                 <label data-kt-button="true" htmlFor="selRangeDay0">
                                     <input className="btn-check selDay" type="radio" name="selRangeDay" id="selRangeDay0" value="0" data-period="0" data-mode="day" />
                                     <span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">오늘</span>
@@ -85,7 +87,7 @@ const Search = () => {
                             </div>
 
                             <div className="d-flex position-relative align-items-center col-lg-2">
-                                <input type="text" name="sdate" id="sdate" className="form-control form-control-sm fs-7 ps-3 flatpickr-input btn-outline-secondary" value="" placeholder="From" readOnly="" />
+                                <input type="text" name="sdate" id="sdate" className="form-control form-control-sm fs-7 ps-3 flatpickr-input btn-outline-secondary" value="" placeholder="From" readOnly />
                                 <span className="svg-icon position-absolute ms-4 mb-1 svg-icon-2 right-20px">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                         <path opacity="0.3" d="M21 22H3C2.4 22 2 21.6 2 21V5C2 4.4 2.4 4 3 4H21C21.6 4 22 4.4 22 5V21C22 21.6 21.6 22 21 22Z" fill="currentColor"></path>
@@ -96,7 +98,7 @@ const Search = () => {
                             </div>
 
                             <div className="d-flex position-relative align-items-center col-lg-2 my-1">
-                                <input type="text" name="edate" id="edate" className="form-control form-control-sm fs-7 ps-3 flatpickr-input btn-outline-secondary" value="" placeholder="To" readOnly=""/>
+                                <input type="text" name="edate" id="edate" className="form-control form-control-sm fs-7 ps-3 flatpickr-input btn-outline-secondary" value="" placeholder="To" readOnly />
                                 <span className="svg-icon position-absolute ms-4 mb-1 svg-icon-2 right-20px">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                         <path opacity="0.3" d="M21 22H3C2.4 22 2 21.6 2 21V5C2 4.4 2.4 4 3 4H21C21.6 4 22 4.4 22 5V21C22 21.6 21.6 22 21 22Z" fill="currentColor"></path>
@@ -106,36 +108,40 @@ const Search = () => {
                                 </span>
                             </div>
 
-                            </div>
-
-                            <div className="row mb-5 align-items-center">
-                                <div className="col-xl-1">
-                                    <div className="fs-6 fw-boldest mt-3 mb-3">메뉴1</div>
-                                </div>
-
-                                <div className="col-lg-3">
-                                    <select id="status" name="status" className="form-select-sm form-select select2-hidden-accessible" data-control="select2" data-placeholder="선택하세요" data-allow-clear="true" data-hide-search="true" data-select2-id="select2-data-status" tabIndex="-1" aria-hidden="true">
-                                        <option value="ex">예시</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div className="row align-items-center">
-                                <div className="col-xl-1">
-                                    <div className="fs-6 fw-boldest mt-3 mb-3">메뉴2</div>
-                                </div>
-
-                                <div className="col-lg-3">
-                                    <select id="task_cls" name="task_cls" className="form-select form-select-sm select2-hidden-accessible" data-control="select2" data-placeholder="선택하세요" data-allow-clear="true" data-hide-search="true" data-select2-id="select2-data-task_cls" tabIndex="-1" aria-hidden="true">
-                                        <option value="ex">예시</option>
-                                    </select>
-                                </div>
-                            </div>
-
                         </div>
 
+                        <div className="row mb-5 align-items-center">
+                            <div className="col-xl-1">
+                                <div className="fs-6 fw-boldest mt-3 mb-3">메뉴1</div>
+                            </div>
+
+                            <div className="col-lg-3">
+                                <select id="status" name="status" className="form-select-sm form-select select2-hidden-accessible" data-control="select2" data-placeholder="선택하세요" data-allow-clear="true" data-hide-search="true" data-select2-id="select2-data-status" tabIndex="-1" aria-hidden="true">
+                                    <option value="ex">예시</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="row align-items-center">
+                            <div className="col-xl-1">
+                                <div className="fs-6 fw-boldest mt-3 mb-3">메뉴2</div>
+                            </div>
+
+                            <div className="col-lg-3">
+                                <select
+                                  id="task_cls"
+                                  name="task_cls"
+                                  className="form-select form-select-sm select2-hidden-accessible"
+                                >
+                                    <option value="ex">예시</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
-                
+
 
                 <div className="card-footer px-7 py-5 border-top-0 pt-0">
                     <div className="border-gray-300 border-bottom border-bottom-solid mb-5"></div>
