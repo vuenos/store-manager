@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {Button, Container, Form, Row } from "react-bootstrap";
+import React, { useState, useEffect } from 'react';
+import {Button, Container, Form, Row, Alert } from "react-bootstrap";
 import { useAuthState } from "../atoms/auth";
 // import { useUsersState } from "../atoms/users";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,9 @@ const Login = () => {
   const [unknownError, setUnknownError] = useState(false);
   // const getUserData = getUserInfo();
   // const userActions = useUserActions();
+  const [validated, setValidated] = useState(false);
+  const [submitDisabled, setSubmitDisabled] = useState(false)
+
   const [id, setId] = useState("");
   const [pwd, setPwd] = useState("");
   // const [email, setEmail] = useState("");
@@ -93,6 +96,15 @@ const Login = () => {
     // }
   }
 
+  useEffect(() => {
+    if (id && pwd) {
+      setSubmitDisabled(false)
+    } else {
+      setSubmitDisabled(true)
+    }
+  }, [id, pwd, submitDisabled]);
+
+
   return (
     <div>
       {authState.loggedIn
@@ -110,7 +122,7 @@ const Login = () => {
 
                 <h2 className="text-dark display-6 pt-10 mb-10 text-center fw-boldest">로그인</h2>
 
-                <Form onSubmit={loginHandler}>
+                <Form noValidate validated={validated} onSubmit={loginHandler}>
                   <Form.Group controlId={"id"}>
                     <Form.Control
                       type="text"
@@ -133,11 +145,11 @@ const Login = () => {
                   <br/>
                   <Button type="submit" variant="primary" className="btn-block btn-login w-100 fw-boldest">Sign in</Button>
                 </Form>
+                {authError ? <Alert variant="danger" className="mt-6">인증되지 않은 계정입니다. 관리자에게 문의히여 주십시오.</Alert> : null}
+                {unknownError ? <Alert variant={'danger'} className="mt-6">계정정보를 다시 확인하여 주십시오.</Alert> : null}
               </div>
             </Row>
           </Container>
-          {authError ? <div>Credentials not recognised. Please try again.</div> : null}
-          {unknownError ? <div>There was an error submitting your details.</div> : null}
         </>
       }
     </div>
