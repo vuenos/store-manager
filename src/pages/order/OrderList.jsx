@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import CardList from 'components/CardList'
 import Tabs2 from 'components/Tabs2';
 import Search from 'components/Search/Search'
-import { useEffect } from 'react';
 
 
 const OrderList = () => {

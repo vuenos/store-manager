@@ -1,6 +1,4 @@
-import { Alert } from 'bootstrap';
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React , { useEffect, useState } from 'react';
 import {Card, Col, Row} from "react-bootstrap";
 //import apiClient from '../../services/api';
 
@@ -42,7 +40,13 @@ const Search = (children) => {
                     </Col>
 
                     <Col className="col-lg-11 d-flex align-items-center position-relative my-1 ps-5">
-                        <input className="form-control form-control-sm w-lg-50 ps-3" type="text" id="searchWord" name="searchWord" placeholder="검색어 입력"/>
+                        <input 
+                            className="form-control form-control-sm w-lg-50 ps-3" 
+                            type="text" 
+                            id="searchWord" 
+                            name="searchWord" 
+                            placeholder="검색어 입력"
+                        />
                     </Col>
 
                 </Row>
