@@ -534,15 +534,15 @@
     background-image:url(/assets/media/icons/claim_change_inactive.png);
 }
 
-.active.claim-cancel {
+.active .claim-cancel {
     background-image:url(/assets/media/icons/claim_cancel_active.png);
 }
 
-.active.claim-return {
+.active .claim-return {
     background-image:url(/assets/media/icons/claim_return_active.png);
 }
 
-.active.claim-change {
+.active .claim-change {
     background-image:url(/assets/media/icons/claim_change_active.png);
 }
 
@@ -555,6 +555,17 @@
 .tooltip-inner {background: #000; color: #fff;}
 .bs-tooltip-bottom .tooltip-arrow:before {
     background: #fff; border-bottom-color: #000;
+}
+
+#searchTab {
+    display: block;
+    height:0;
+    overflow:hidden;
+    transition:all 0.5s ease;
+}
+
+#searchTab.active {
+    height:auto;
 }
 
 /* 상태 */
@@ -580,3 +591,10 @@ td.fixHeader.goodsNum {width: 120px; left: 460px;}
 td.fixHeader {z-index: 8;}
 th.fixHeader.goodsNum:after,
 td.fixHeader.goodsNum:after {content: ''; display: block; position: absolute; top: 0; right: 0; width: 8px; height: 100%; background: linear-gradient(90deg, #211F1C 0%, rgba(33, 31, 28, 0) 100%); opacity: 0.04;}
+
+
+//CKEditor
+.ck.ck-editor__editable{
+    min-height: 400px;
+    margin-bottom: 20px;
+}

@@ -18,7 +18,6 @@ const Tabs2 = (children) => {
     return (
         <div className="mb-5 bg-gray-200 d-flex align-items-center step-wrap border-gray-400 border-bottom">
             {data.map((value,i) => (
-
                 <TabChild 
                     index={value.index}
                     selected={selectedIndex}
@@ -29,7 +28,6 @@ const Tabs2 = (children) => {
                     subject={value.subject}
                     selecteButton={selecteButton}
                 />
-
             ))}
         </div>
     )
