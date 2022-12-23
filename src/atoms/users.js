@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import { atom, useRecoilState } from 'recoil';
 
 const usersAtom = atom({
   key: 'users',
@@ -6,3 +6,4 @@ const usersAtom = atom({
 });
 
 export { usersAtom };
+export const useUsersState = () => useRecoilState(usersAtom);

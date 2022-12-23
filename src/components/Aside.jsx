@@ -36,39 +36,37 @@ const SubMenuItems = ({ title, path }) => {
  * @constructor
  */
 const MenuItem = ({ title, path, subMenu, id, isAdmin }) => {
-  if(isAdmin === "true") {
-    if (subMenu) {
-      return (
-        <SidebarMenu.Sub id={`subMenu-${id}`}>
-          <SidebarMenu.Sub.Toggle>
-            <SidebarMenu.Nav.Icon />
-            <SidebarMenu.Nav.Title>
-              {title}
-            </SidebarMenu.Nav.Title>
-          </SidebarMenu.Sub.Toggle>
-
-          <SidebarMenu.Sub.Collapse>
-            {subMenu.map((item, index) => (
-              <SubMenuItems {...item} key={index} />
-            ))}
-          </SidebarMenu.Sub.Collapse>
-        </SidebarMenu.Sub>
-      )
-    }
-
+  if (subMenu) {
     return (
-      <SidebarMenu.Nav>
-        <SidebarMenu.Nav.Link href={path}>
-          <SidebarMenu.Nav.Icon>
-            {/* Menu item icon */}
-          </SidebarMenu.Nav.Icon>
+      <SidebarMenu.Sub id={`subMenu-${id}`}>
+        <SidebarMenu.Sub.Toggle>
+          <SidebarMenu.Nav.Icon />
           <SidebarMenu.Nav.Title>
             {title}
           </SidebarMenu.Nav.Title>
-        </SidebarMenu.Nav.Link>
-      </SidebarMenu.Nav>
+        </SidebarMenu.Sub.Toggle>
+
+        <SidebarMenu.Sub.Collapse>
+          {subMenu.map((item, index) => (
+            <SubMenuItems {...item} key={index} />
+          ))}
+        </SidebarMenu.Sub.Collapse>
+      </SidebarMenu.Sub>
     )
   }
+
+  return (
+    <SidebarMenu.Nav>
+      <SidebarMenu.Nav.Link href={path}>
+        <SidebarMenu.Nav.Icon>
+          {/* Menu item icon */}
+        </SidebarMenu.Nav.Icon>
+        <SidebarMenu.Nav.Title>
+          {title}
+        </SidebarMenu.Nav.Title>
+      </SidebarMenu.Nav.Link>
+    </SidebarMenu.Nav>
+  )
 }
 
 /**

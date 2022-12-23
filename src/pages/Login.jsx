@@ -53,17 +53,18 @@ const Login = () => {
       // data token 로컬스토리지(브라우저) 저장
       setAuthState({loggedIn: true, ...data});
       localStorage.setItem("access_token", data.data.access_token);
+      navigate("/dashboard");
     } catch (e) {
       // todo: login 실패 에러 처리
     }
 
-    try {
-      const userInfo = await userActions.getUserInfo(localStorage.getItem('access_token'));
-      console.log(userInfo)
-      navigate("/dashboard");
-    } catch (e) {
-      // todo: get user info 실패 에러
-    }
+    // try {
+    //   const userInfo = await userActions.getUserInfo(localStorage.getItem('access_token'));
+    //   console.log(userInfo);
+    //   navigate("/dashboard");
+    // } catch (e) {
+    //   // todo: get user info 실패 에러
+    // }
 
     // try {
     //   const { data, status } = await apiClient.post("/sellers/login", userInput);
@@ -80,7 +81,7 @@ const Login = () => {
     //       alert('로그인 실패');
     //       break;
     //     case '001':
-    //       alsert('유저 정보 받기 실패');
+    //       alert('유저 정보 받기 실패');
     //   }
     //
     //   if (error.response && error.response.status === 422) {

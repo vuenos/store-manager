@@ -2,17 +2,20 @@ import React, { useState, useEffect } from 'react';
 import {Button} from "react-bootstrap";
 import { useAuthState } from "../atoms";
 import { useUsersState } from "../atoms";
+import { usersAtom } from "../atoms/users";
 import { useNavigate } from "react-router-dom";
 import { pageHeadMap } from "./pageHeadMap";
 import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
 // import apiClient from "../services/api";
 import { useUserActions } from "../api/userApi";
+import {useRecoilValue} from "recoil";
 
 const Gnb = () => {
   const navigate = useNavigate();
   const [authState, setAuthState] = useAuthState();
-  // const [userState, setUserSate] = useUsersState();
+  const userInfo = useRecoilValue(usersAtom);
+  const [userState, setUserSate] = useUsersState();
   // const getUserData = getUserInfo();
   // const [user, setUser] = useState("");
   const [pageTitle, setPageTitle] = useState("Page title");
@@ -43,6 +46,20 @@ const Gnb = () => {
   //     console.log(e.message);
   //   }
   // });
+
+  /**
+   * access_token 여부로 유저 정보 호출
+   * @returns {Promise<void>}
+   */
+  const getUserInfo = async () => {
+    try {
+      const userInfo = await userActions.getUserInfo();
+      setUserSate(userInfo);
+      // console.log(userInfo);
+    } catch (e) {
+      // todo: get user info 실패 에러
+    }
+  }
 
   /**
    * logout handler
@@ -82,6 +99,11 @@ const Gnb = () => {
       document.title = curTitle.title;
     }
   }, [curLocation]);
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
 
 
   return (
@@ -145,7 +167,7 @@ const Gnb = () => {
                 <span className="svg-icon svg-icon-1 me-n1">
                   {/*{isLoading && <span>Loading...</span>}*/}
                   {/*{isError && error.message}*/}
-                  <span></span>
+                  <span>{userState && userState.name}</span>
                   <img src="/assets/media/icons/icon_profile.svg" width="40" alt="나의 메뉴 보기"/>
                 </span>
               </button>
