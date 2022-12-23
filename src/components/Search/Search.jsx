@@ -27,7 +27,7 @@ const Search = () => {
                         </div>
 
                         <div className="col-lg-11 d-flex align-items-center position-relative my-1 ps-5">
-                            <input className="form-control form-control-sm w-lg-50 ps-3" type="text" id="searchWord" name="searchWord" placeholder="검색어 입력" value=""/>
+                            <input className="form-control form-control-sm w-lg-50 ps-3" type="text" id="searchWord" name="searchWord" placeholder="검색어 입력" defaultValue=""/>
                         </div>
 
                     </div>
@@ -65,29 +65,29 @@ const Search = () => {
                                   aria-label="날짜 선택"
                                 >
                                 <label data-kt-button="true" htmlFor="selRangeDay0">
-                                    <input className="btn-check selDay" type="radio" name="selRangeDay" id="selRangeDay0" value="0" data-period="0" data-mode="day" />
+                                    <input className="btn-check selDay" type="radio" name="selRangeDay" id="selRangeDay0" defaultValue="0" data-period="0" data-mode="day" />
                                     <span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">오늘</span>
                                 </label>
                                 <label data-kt-button="true">
-                                    <input className="btn-check selDay" type="radio" name="selRangeDay" id="selRangeDay7" value="7" data-period="7" data-mode="day"/>
+                                    <input className="btn-check selDay" type="radio" name="selRangeDay" id="selRangeDay7" defaultValue="7" data-period="7" data-mode="day"/>
                                     <span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">7일</span>
                                 </label>
                                 <label data-kt-button="true">
-                                    <input className="btn-check selDay" type="radio" name="selRangeDay" id="selRangeDay15" value="15" data-period="15" data-mode="day"/>
+                                    <input className="btn-check selDay" type="radio" name="selRangeDay" id="selRangeDay15" defaultValue="15" data-period="15" data-mode="day"/>
                                     <span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">15일</span>
                                 </label>
                                 <label data-kt-button="true">
-                                    <input className="btn-check selDay" type="radio" name="selRangeDay" id="selRangeDay1m" value="1m" data-period="1" data-mode="month"/>
+                                    <input className="btn-check selDay" type="radio" name="selRangeDay" id="selRangeDay1m" defaultValue="1m" data-period="1" data-mode="month"/>
                                     <span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">1개월</span>
                                 </label>
                                 <label data-kt-button="true">
-                                    <input className="btn-check selDay" type="radio" name="selRangeDay" id="selRangeDayall" value="all" data-period="all" data-mode="all" checked="checked"/>
+                                    <input className="btn-check selDay" type="radio" name="selRangeDay" id="selRangeDayall" defaultValue="all" data-period="all" data-mode="all" defaultChecked={true} />
                                     <span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">전체</span>
                                 </label>
                             </div>
 
                             <div className="d-flex position-relative align-items-center col-lg-2">
-                                <input type="text" name="sdate" id="sdate" className="form-control form-control-sm fs-7 ps-3 flatpickr-input btn-outline-secondary" value="" placeholder="From" readOnly />
+                                <input type="text" name="sdate" id="sdate" className="form-control form-control-sm fs-7 ps-3 flatpickr-input btn-outline-secondary" defaultValue="" placeholder="From" readOnly />
                                 <span className="svg-icon position-absolute ms-4 mb-1 svg-icon-2 right-20px">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                         <path opacity="0.3" d="M21 22H3C2.4 22 2 21.6 2 21V5C2 4.4 2.4 4 3 4H21C21.6 4 22 4.4 22 5V21C22 21.6 21.6 22 21 22Z" fill="currentColor"></path>
@@ -98,7 +98,7 @@ const Search = () => {
                             </div>
 
                             <div className="d-flex position-relative align-items-center col-lg-2 my-1">
-                                <input type="text" name="edate" id="edate" className="form-control form-control-sm fs-7 ps-3 flatpickr-input btn-outline-secondary" value="" placeholder="To" readOnly />
+                                <input type="text" name="edate" id="edate" className="form-control form-control-sm fs-7 ps-3 flatpickr-input btn-outline-secondary" defaultValue="" placeholder="To" readOnly />
                                 <span className="svg-icon position-absolute ms-4 mb-1 svg-icon-2 right-20px">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                         <path opacity="0.3" d="M21 22H3C2.4 22 2 21.6 2 21V5C2 4.4 2.4 4 3 4H21C21.6 4 22 4.4 22 5V21C22 21.6 21.6 22 21 22Z" fill="currentColor"></path>
