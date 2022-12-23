@@ -7,6 +7,8 @@ import DefaultInfo from "./DefaultInfo";
 import SelectOption from "./SelectOption";
 import SelectTotalStock from "./SelectTotalStock";
 import SelectDiscount from "./SelectDiscount";
+import SelectClassifyGoods from "./SelectClassifyGoods";
+import SelectOrigin from "./SelectOrigin";
 
 const Register = () => {
   const [selectedTab,setSelectedTab] = useState("1");
@@ -63,6 +65,8 @@ const Register = () => {
       <SelectOption/>
       <SelectTotalStock/>
       <SelectDiscount/>
+      <SelectClassifyGoods/>
+      <SelectOrigin/>
     </>
   )
 }

@@ -3,7 +3,8 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 
 const Search = (children) => {
-
+    console.log(children);
+    const {search} = children;
     const [searchOptionToggle , setToggle] = useState(true);
 
     useEffect(() => {
@@ -15,8 +16,8 @@ const Search = (children) => {
         setToggle(!searchOptionToggle);
     }
 
-    const {search} = children;
-    console.log(search[0].title);
+
+    // console.log(search[0].title);
 
     return (
         <div>
