@@ -3,7 +3,7 @@ import apiClient from "../services/api";
 import { usersAtom } from "../atoms/users";
 
 const useUserActions = () => {
-  const setUsers = useSetRecoilState(usersAtom);
+  const setUserInfo = useSetRecoilState(usersAtom);
   // const token = localStorage.getItem("access_token");
   // const config = {
   //   headers: {
@@ -22,8 +22,8 @@ const useUserActions = () => {
         Authorization: "Bearer " + token
       }
     });
-    localStorage.setItem("tmp_data", data.data.name);
-    setUsers(data.data);
+    // localStorage.setItem("tmp_data", data.data.name);
+    setUserInfo(data.data);
     console.log('SET_USERS', data.data)
     return data.data;
   }

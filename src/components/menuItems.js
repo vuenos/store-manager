@@ -37,7 +37,7 @@ const menuItems = [
   },
   {
     title: "주문",
-    id: 1,
+    id: 2,
     isAdmin: "false",
     isSubAdmin: "true",
     subMenu: [
