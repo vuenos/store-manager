@@ -1,15 +1,14 @@
 import apiClient from "../services/api";
 
-export const getQnaList = async (token) => {
-  if (!token) {
-    token = localStorage.getItem('access_token');
+const token = localStorage.getItem("access_token");
+const config = {
+  headers: {
+    Authorization: "Bearer " + token
   }
+}
 
-  const { data } = await apiClient.get('sellers/products', {
-    headers: {
-      Authorization: "Bearer " + token
-    }
-  });
-  console.log(data)
-  return data;
+export const getQnaList = async (token) => {
+  const { data } = await apiClient.get("/sellers/products", config);
+  console.log('QNA_DATA:::', data.data);
+  return data.data;
 }

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Row, Col, Table } from "react-bootstrap";
+import { getQnaList } from "../../api";
 import apiClient from "../../services/api";
 import { useQuery } from "react-query";
-import {getQnaList} from "../../api";
 
 const QnaList = () => {
   // const [qnas, setQnas] = useState([]);
@@ -12,7 +12,7 @@ const QnaList = () => {
   //     token = localStorage.getItem('access_token');
   //   }
   //   try {
-  //     const { data } = await apiClient.get('sellers/products', {
+  //     const { data } = await apiClient.get('/sellers/products', {
   //       headers: {
   //         Authorization: "Bearer " + token
   //       }
@@ -35,7 +35,6 @@ const QnaList = () => {
     error,
     data: qnas
   } = useQuery('getQnaList', getQnaList,  {
-    refetchOnWindowFocus: false,
     onSuccess: data => {
       console.log(data);
     },
