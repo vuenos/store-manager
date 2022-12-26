@@ -9,11 +9,12 @@ import {
 import {
   Register,
   ManageGoods,
-} from './pages/product'
+} from './pages/product';
 import { OrderList } from './pages/order';
 import { ClaimList } from './pages/order/claim';
 import { AllList } from 'pages/order/all';
-import { CsList } from './pages/cs';
+import { QnaList } from './pages/qna';
+import { Schedule } from './pages/schedule'
 import Layout from "./Layout";
 
 
@@ -32,10 +33,11 @@ const AppRoutes = () => {
         { path: "/product/manage/goods/keyword=:keyword&page=:pageNumber", element: <ManageGoods pathname="/product/manage/goods" /> },
         { path: "/product/manage/goods/keyword=:keyword", element: <ManageGoods pathname="/product/manage/goods" /> },
         { path: "/product/manage/goods/page=:pageNumber", element: <ManageGoods pathname="/product/manage/goods" /> },
-        { path: "/order/list", element: <OrderList /> },
-        { path: "/order/claim", element: <ClaimList /> },
-        { path: "/order/all", element: <AllList /> },
-        { path: "/cs/qnaList", element: <CsList /> },
+        { path: "/order/list", element: <OrderList pathname="/order/list" /> },
+        { path: "/order/claim", element: <ClaimList pathname="/order/claim" /> },
+        { path: "/order/all", element: <AllList pathname="/order/all" /> },
+        { path: "/cs/qnaList", element: <QnaList pathname="/cs/qnaList" /> },
+        { path: "/schedule", element: <Schedule pathname="/schedule" /> },
         { path: "*", element: <Notfound /> }
       ],
     }

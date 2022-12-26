@@ -60,6 +60,12 @@ const menuItems = [
     isAdmin: "true",
     isSubAdmin: "true",
     path: "/cs/qnaList"
+  },
+  {
+    title: "작업관리",
+    isAdmin: "true",
+    isSubAdmin: "true",
+    path: "/schedule"
   }
 ]
 
