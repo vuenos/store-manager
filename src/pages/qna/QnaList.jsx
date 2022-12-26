@@ -1,5 +1,5 @@
-import React, { Suspense } from 'react';
-import { Card, Row, Col, Table, Spinner } from "react-bootstrap";
+import React, { useState } from 'react';
+import { Card, Row, Col, Table, Spinner, Button } from "react-bootstrap";
 import { getQnaList } from "../../api";
 // import apiClient from "../../services/api";
 import { useQuery } from "react-query";
@@ -29,13 +29,20 @@ const QnaList = () => {
   //   getQnaList();
   // }, []);
 
+  const [page, setPage] = useState(0);
+
   // getQnaList 호출하는 react-query 함수
   const {
     isLoading,
     isError,
     error,
-    data: qnas
-  } = useQuery('getQnaList', getQnaList,  {
+    data: qnas,
+    isFetching,
+    isPreviousData,
+  } = useQuery(  {
+    queryKey: ['getQnaList', page],
+    queryFn: () => getQnaList(page),
+    keepPreviousData : true,
     onSuccess: data => {
       console.log(data);
     },
@@ -81,7 +88,26 @@ const QnaList = () => {
         </div>
       </Card.Body>
       <Card.Footer>
-
+        <div>
+          <span>Current Page: {page + 1}</span>
+          <Button
+            onClick={() => setPage(old => Math.max(old - 1, 0))}
+            disabled={page === 0}
+          >
+            Prev
+          </Button>{' '}
+          <Button
+            onClick={() => {
+              if (!isPreviousData && qnas.hashMore) {
+                  setPage(old => old + 1)
+                }
+              }}
+            disabled={isPreviousData || !qnas?.hasMore}
+          >
+            Next
+          </Button>
+          {isFetching ? <Spinner animation="border" /> : null}{' '}
+        </div>
       </Card.Footer>
     </Card>
   )
