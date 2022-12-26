@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
 // import {Card} from "react-bootstrap";
-import Tab from 'components/Product/Tab'
-import SelectShop from "./SelectShop";
-import SelectCategory from "./SelectCategory";
-import DefaultInfo from "./DefaultInfo";
-import SelectOption from "./SelectOption";
-import SelectTotalStock from "./SelectTotalStock";
-import SelectDiscount from "./SelectDiscount";
-import SelectClassifyGoods from "./SelectClassifyGoods";
-import SelectOrigin from "./SelectOrigin";
-import SelectOtherInfo from "./SelectOtherInfo";
+import Tab from 'components/Product/Register/Tab'
+import SelectShop from "../../components/Product/Register/SelectShop";
+import SelectCategory from "../../components/Product/Register/SelectCategory";
+import DefaultInfo from "../../components/Product/Register/DefaultInfo";
+import SelectOption from "../../components/Product/Register/SelectOption";
+import SelectTotalStock from "../../components/Product/Register/SelectTotalStock";
+import SelectDiscount from "../../components/Product/Register/SelectDiscount";
+import SelectClassifyGoods from "../../components/Product/Register/SelectClassifyGoods";
+import SelectOrigin from "../../components/Product/Register/SelectOrigin";
+import SelectOtherInfo from "../../components/Product/Register/SelectOtherInfo";
+import {Col, OverlayTrigger, Row, Tooltip} from "react-bootstrap";
 
 const Register = () => {
   const [selectedTab,setSelectedTab] = useState("1");
@@ -69,6 +70,27 @@ const Register = () => {
       <SelectClassifyGoods/>
       <SelectOrigin/>
       <SelectOtherInfo/>
+
+      <Row>
+        <Col  className="wrap_button d-flex justify-content-between position-sticky bottom-0 py-3 bg-white border-top">
+          <button type="button" className="btn btn-white">
+            <span className="align-middle">임시저장</span>
+              <OverlayTrigger
+              placement="bottom"
+              overlay = {
+                <Tooltip className="cursor-pointer lh-sm ms-1 mt-n05">
+                  &quot;임시저장한 상품 정보는 다시 상품 등록 페이지에 들어왔을 때 마저 입력할 수 있어요&quot;
+                </Tooltip>
+              }
+            >
+              <span className="cursor-pointer lh-sm ms-1 mt-n05"><img src="/assets/media/icons/tooltip.svg" alt="툴팁" /></span>
+            </OverlayTrigger>
+          </button>
+          <button type="submit" className="btn btn-md btn-secondary">상품등록</button>
+        </Col>
+
+
+      </Row>
     </>
   )
 }

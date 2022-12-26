@@ -48,6 +48,17 @@ const ClaimList = () => {
         }
     ];
 
+    const search = [
+        {
+            index: 1,
+            title: '기간검색'
+        },
+        {
+            index: 2,
+            title: '연동몰/계정'
+        }
+    ];
+
     return (
         <div>
             <h1>ClaimList</h1>
@@ -60,7 +71,9 @@ const ClaimList = () => {
                 data2={data2} 
             />
 
-            <Search />
+            <Search 
+                search={search}
+            />
 
             <CardList />
 
