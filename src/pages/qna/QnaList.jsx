@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Card, Row, Col, Table } from "react-bootstrap";
+import React, { Suspense } from 'react';
+import { Card, Row, Col, Table, Spinner } from "react-bootstrap";
 import { getQnaList } from "../../api";
-import apiClient from "../../services/api";
+// import apiClient from "../../services/api";
 import { useQuery } from "react-query";
 
 const QnaList = () => {
@@ -29,6 +29,7 @@ const QnaList = () => {
   //   getQnaList();
   // }, []);
 
+  // getQnaList 호출하는 react-query 함수
   const {
     isLoading,
     isError,
@@ -65,7 +66,7 @@ const QnaList = () => {
               </tr>
             </thead>
             <tbody>
-            {isLoading && <tr><td colSpan="2">Loading...</td></tr>}
+            {isLoading && <tr><td colSpan="2"><Spinner animation="border" /></td></tr>}
             {isError && <tr><td colSpan="2">{error.message}</td></tr>}
 
             {qnas && qnas.map((qna) => (
