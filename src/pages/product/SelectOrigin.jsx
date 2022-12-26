@@ -34,7 +34,7 @@ const SelectOrigin = () => {
                 품목 분류 <span className="text-danger">*</span>
               </div>
             </Col>
-            <Col className="col-xl-5 text-end form-check form-check-custom form-check-solid form-check-sm">
+            <Col className="col-3 text-end form-check form-check-custom form-check-solid form-check-sm">
               <select id="origin_idx_1" name="origin[list][]" className="origin-select form-control form-select me-3">
                 <option value="">1차 설정</option>
                 <option value="00">국내산</option>
@@ -72,7 +72,34 @@ const SelectOrigin = () => {
                 </select>
             </Col>
 
+            <Col className="col-3">
+              <select id="origin_idx_3" name="origin[list][]" className="origin-select form-control form-select me-3">
+                <option value="">3차 설정</option>
+              </select>
+
+            </Col>
+            <div className="mt-4">
+                                    <span id="registerWithOtherOriginAreaDiv"
+                                          className="form-check form-check-custom form-check-solid form-check-sm">
+                                        <input type="checkbox" id="registerWithOtherOriginArea"
+                                               className="form-check-input me-3"
+                                               name="origin[registerWithOtherOriginArea]" value="Y"
+                                               />
+                                        <label htmlFor="registerWithOtherOriginArea" className="lab_16 text-muted fs-7">원산지가 다른 상품도 함께 등록할게요</label>
+                                    </span>
+            </div>
           </Row>
+          <Row className="row mb-5 align-items-center">
+            <div className="col-xl-1 min-w-125px fs-6 fw-boldest">수입사 정보</div>
+
+            <div className="col-xl-3">
+              <div className="mb-3" id="originImporterDiv">
+                <input type="text" id="origin_importer" name="origin[importer]" className="form-control mt-2"
+                       placeholder="수입사 정보를 입력해 주세요"/>
+              </div>
+            </div>
+          </Row>
+
 
         </Card.Body>
       </Card>
