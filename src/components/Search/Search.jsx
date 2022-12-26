@@ -193,6 +193,21 @@ const Search = (children) => {
 
 					</Row>
 
+					{search[2] 
+						? <Row className="row align-items-center">
+
+								<Col className="col-xl-1">
+									<div className="fs-6 fw-boldest mt-3 mb-3">{search[2].title}</div>
+								</Col>
+
+								<Col className="col-lg-3">
+									예시
+								</Col>
+
+							</Row> 
+						: '' 
+					}
+
 				</Card.Body>
 
 			</div>

@@ -61,7 +61,6 @@ const ClaimList = () => {
 
     return (
         <div>
-            <h1>ClaimList</h1>
 
             <Tabs2 
                 data={data}

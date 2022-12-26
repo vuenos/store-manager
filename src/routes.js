@@ -13,6 +13,7 @@ import {
 import { OrderList } from './pages/order';
 import { ClaimList } from './pages/order/claim';
 import { AllList } from 'pages/order/all';
+import { CsList } from './pages/cs';
 import Layout from "./Layout";
 
 
@@ -33,6 +34,7 @@ const AppRoutes = () => {
         { path: "/order/list", element: <OrderList /> },
         { path: "/order/claim", element: <ClaimList /> },
         { path: "/order/all", element: <AllList /> },
+        { path: "/cs/qnaList", element: <CsList /> },
         { path: "*", element: <Notfound /> }
       ],
     }
