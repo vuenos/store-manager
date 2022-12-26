@@ -22,6 +22,7 @@ const AppRoutes = () => {
       path: "/",
       element: <Layout />,
       children: [
+        { path: "/", element: <Dashboard /> },
         { path: "/dashboard", element: <Dashboard /> },
         { path: "/login", element: <Login /> },
         { path: "/mypage", element: <MyPage /> },
