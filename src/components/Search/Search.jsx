@@ -200,9 +200,52 @@ const Search = (children) => {
 									<div className="fs-6 fw-boldest mt-3 mb-3">{search[2].title}</div>
 								</Col>
 
-								<Col className="col-lg-3">
-									예시
-								</Col>
+								
+									<Col
+										className="d-flex btn-group col-xl-5 nav-group nav-group-fluid my-1"
+										role="group"										
+									>
+										<label data-kt-button="true" htmlFor="answered_all">
+											<input
+												className="btn-check"
+												type="radio"
+												name="answered"
+												id="answered_all"			
+												defaultChecked={true}									
+											/>
+											<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">전체</span>
+										</label>
+
+										<label data-kt-button="true" htmlFor="answered_0">
+											<input
+												className="btn-check"
+												type="radio"
+												name="answered"
+												id="answered_0"											
+											/>
+											<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">미답변</span>
+										</label>
+
+										<label data-kt-button="true" htmlFor="answered_1">
+											<input
+												className="btn-check"
+												type="radio"
+												name="answered"
+												id="answered_1"												
+											/>
+											<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">답변완료</span>
+										</label>
+
+										<label data-kt-button="true" htmlFor="answered_2">
+											<input
+												className="btn-check"
+												type="radio"
+												name="answered"
+												id="answered_2"														
+											/>
+											<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">전송완료</span>
+										</label>
+									</Col>								
 
 							</Row> 
 						: '' 
