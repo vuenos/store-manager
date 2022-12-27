@@ -181,14 +181,58 @@ const Search = (children) => {
 							<div className="fs-6 fw-boldest mt-3 mb-3">{search[1].title}</div>
 						</Col>
 
-						<Col className="col-lg-3">
-							<select
-								id="status"
-								name="status"
-								className="form-select-sm form-select"
-							>
-								<option value="ex">예시</option>
-							</select>
+						<Col className="col-lg-11 ps-1">
+							<div className="navbar justify-content-start p-0">
+								<div className="form-check-inline form-check-solid mb-2 me-2">
+										<input type="checkbox" className="btn-check" name="linkageKey[]" id="linkageKey38" value="38" />
+										<label htmlFor="linkageKey38" className="btn btn-outline fw-normal btn-outline-white btn-active-secondary p-2 d-flex align-items-center btn-sm h-34px">
+												<img src="/assets/media/icons/smartstore.png" alt="" className="" width="24" />
+												<span className="mx-2">ncp_1nvgzv_01</span>
+										</label>
+								</div>
+								<div className="form-check-inline form-check-solid mb-2 me-2">
+										<input type="checkbox" className="btn-check" name="linkageKey[]" id="linkageKey454" value="454" />
+										<label htmlFor="linkageKey454" className="btn btn-outline fw-normal btn-outline-white btn-active-secondary p-2 d-flex align-items-center btn-sm h-34px">
+												<img src="/assets/media/icons/coupang.png" alt="" className="" width="24" />
+												<span className="mx-2">sechannel</span>
+										</label>
+								</div>							
+								<div className="form-check-inline form-check-solid mb-2 me-2">
+										<input type="checkbox" className="btn-check" name="linkageKey[]" id="linkageKey737" value="737" />
+										<label htmlFor="linkageKey737" className="btn btn-outline fw-normal btn-outline-white btn-active-secondary p-2 d-flex align-items-center btn-sm h-34px">
+												<img src="/assets/media/icons/gmarket.png" alt="" className="" width="24" />
+												<span className="mx-2">tpffjgjqm6</span>
+										</label>
+								</div>
+								<div className="form-check-inline form-check-solid mb-2 me-2">
+										<input type="checkbox" className="btn-check" name="linkageKey[]" id="linkageKey735" value="735" />
+										<label htmlFor="linkageKey735" className="btn btn-outline fw-normal btn-outline-white btn-active-secondary p-2 d-flex align-items-center btn-sm h-34px">
+												<img src="/assets/media/icons/auction.png" alt="" className="" width="24" />
+												<span className="mx-2">sellerhub06</span>
+										</label>
+								</div>
+								<div className="form-check-inline form-check-solid mb-2 me-2">
+										<input type="checkbox" className="btn-check" name="linkageKey[]" id="linkageKey553" value="553" />
+										<label htmlFor="linkageKey553" className="btn btn-outline fw-normal btn-outline-white btn-active-secondary p-2 d-flex align-items-center btn-sm h-34px">
+												<img src="/assets/media/icons/st11.png" alt="" className="" width="24" />
+												<span className="mx-2">sechannel</span>
+										</label>
+								</div>
+								<div className="form-check-inline form-check-solid mb-2 me-2">
+										<input type="checkbox" className="btn-check" name="linkageKey[]" id="linkageKey8" value="8" />
+										<label htmlFor="linkageKey8" className="btn btn-outline fw-normal btn-outline-white btn-active-secondary p-2 d-flex align-items-center btn-sm h-34px">
+												<img src="/assets/media/icons/talkstore.png" alt="" className="" width="24" />
+												<span className="mx-2">test</span>
+										</label>
+								</div>							
+								<div className="form-check-inline form-check-solid mb-2 me-2">
+										<input type="checkbox" className="btn-check" name="linkageKey[]" id="linkageKey849" value="849" />
+										<label htmlFor="linkageKey849" className="btn btn-outline fw-normal btn-outline-white btn-active-secondary p-2 d-flex align-items-center btn-sm h-34px">
+												<img src="/assets/media/icons/sho.png" alt="" className="" width="24" />
+												<span className="mx-2">6666666666</span>
+										</label>
+								</div>
+							</div>
 						</Col>
 
 					</Row>
