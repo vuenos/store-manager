@@ -106,7 +106,7 @@ const Search = (children) => {
 						<div className="fs-6 fw-boldest mt-3 mb-3">검색어</div>
 					</Col>
 
-					<Col className="col-lg-11 d-flex align-items-center position-relative my-1 ps-5">
+					<Col className="col-lg-11 d-flex align-items-center position-relative my-1 ps-2">
 						<input
 							className="form-control form-control-sm w-lg-50 ps-3"
 							type="text"
