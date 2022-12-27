@@ -1,5 +1,6 @@
 import React , { useEffect, useState } from 'react';
 import {Card, Col, Row} from "react-bootstrap";
+import PropTypes from 'prop-types';
 //import apiClient from '../../services/api';
 
 const Search = (children) => {
@@ -10,20 +11,88 @@ const Search = (children) => {
 		console.log(searchOptionToggle);
 	},[searchOptionToggle]);
 
-
 	const changeToggle = () => {
 		setToggle(!searchOptionToggle);
 	}
 
 	const {search} = children;
 
-	// try{
-	//     // const { data, status } = apiClient.get("/sellers/mall-accounts");
-	//     const { data, status } = apiClient.post("/sellers/login", {id:"6666666666",pwd:"0000"})
-	//     console.log(data, status);
-	// }catch(error) {
-	//     console.log(error);
-	// }
+	const searchConfig = [
+		{
+			id: "selRangeDay0",
+			value: "1day",
+			label: "오늘"
+		},
+		{
+			id: "selRangeDay7",
+			value: "7",
+			label: "7일"
+		},
+		{
+			id: "selRangeDay15",
+			value: "15",
+			label: "15일"
+		},
+		{
+			id: "selRangeDay1m",
+			value: "1m",
+			label: "1개월"
+		},
+		{
+			id: "selRangeDayAll",
+			value: "all",
+			label: "전체"
+		}
+	]
+
+	const searchState = [
+		{
+			id: "answered_all",
+			value: "0",
+			label: "전체"
+		},{
+			id: "answered_0",
+			value: "1",
+			label: "미답변"
+		},{
+			id: "answered_1",
+			value: "2",
+			label: "답변완료"
+		},{
+			id: "answered_2",
+			value: "3",
+			label: "전송완료"
+		}
+	]
+
+	searchConfig.propTypes = {
+		id: PropTypes.string,
+		value: PropTypes.string,
+		checked: PropTypes.bool,
+	}
+
+	searchState.propTypes = {
+		id: PropTypes.string,
+		value: PropTypes.string,
+		checked: PropTypes.bool,
+	}
+
+	const [checkState, setCheckState] = useState('all');
+	const [processState, setProcessState] = useState("0");
+
+	function onSiteChanged (e) {
+		setCheckState({
+			checked: e.target.value,
+		});
+		console.log(e.target.value);
+	}
+
+	function processChanged (e) {
+		setProcessState({
+			checked: e.target.value,
+		});
+		console.log(e.target.value);
+	}
 
 	return (
 
@@ -81,61 +150,22 @@ const Search = (children) => {
 							role="group"
 							aria-label="날짜 선택"
 						>
-							<label data-kt-button="true" htmlFor="selRangeDay0">
-								<input
-									className="btn-check selDay"
-									type="radio"
-									name="selRangeDay"
-									id="selRangeDay0"
-									value="0"
-								/>
-								<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">오늘</span>
-							</label>
-
-							<label data-kt-button="true" htmlFor="selRangeDay7">
-								<input
-									className="btn-check selDay"
-									type="radio"
-									name="selRangeDay"
-									id="selRangeDay7"
-									value="7"
-								/>
-								<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">7일</span>
-							</label>
-
-							<label data-kt-button="true" htmlFor="selRangeDay15">
-								<input
-									className="btn-check selDay"
-									type="radio"
-									name="selRangeDay"
-									id="selRangeDay15"
-									value="15"
-								/>
-								<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">15일</span>
-							</label>
-
-							<label data-kt-button="true" htmlFor="selRangeDay1m">
-								<input
-									className="btn-check selDay"
-									type="radio"
-									name="selRangeDay"
-									id="selRangeDay1m"
-									value="1m"
-								/>
-								<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">1개월</span>
-							</label>
-
-							<label data-kt-button="true" htmlFor="selRangeDayall">
-								<input
-									className="btn-check selDay"
-									type="radio"
-									name="selRangeDay"
-									id="selRangeDayall"
-									value="all"
-									defaultChecked={true}
-								/>
-								<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">전체</span>
-							</label>
+							{searchConfig.map((conf, i) => (
+								<label key={i}>
+									<input
+										className="btn-check selDay"
+										type="radio"
+										name="selRangeDay"
+										id={conf.id}
+										value={conf.value}
+										checked={
+											conf.value == checkState ? true : checkState.checked === conf.value
+										}
+										onChange={onSiteChanged}
+									/>
+									<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">{conf.label}</span>
+								</label>
+							))}
 						</Col>
 
 						<Col className="d-flex position-relative align-items-center col-lg-2">
@@ -249,7 +279,24 @@ const Search = (children) => {
 										className="d-flex btn-group col-xl-5 nav-group nav-group-fluid my-1"
 										role="group"										
 									>
-										<label data-kt-button="true" htmlFor="answered_all">
+										{searchState.map((conf, i)=> (
+											<label key={i} htmlFor={conf.id}>
+												<input
+													className="btn-check"
+													type="radio"
+													name="answered"
+													id={conf.id}
+													value={conf.value}
+													checked={
+														conf.value == processState ? true : processState.checked === conf.value
+													}
+													onChange={processChanged}
+												/>
+												<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">{conf.label}</span>
+											</label>
+										))}
+
+										{/* <label data-kt-button="true" htmlFor="answered_all">
 											<input
 												className="btn-check"
 												type="radio"
@@ -288,7 +335,7 @@ const Search = (children) => {
 												id="answered_2"														
 											/>
 											<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">전송완료</span>
-										</label>
+										</label> */}
 									</Col>								
 
 							</Row> 
