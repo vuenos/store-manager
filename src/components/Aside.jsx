@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {useTranslation} from "react-i18next";
 import SidebarMenu from 'react-bootstrap-sidebar-menu';
 import PropTypes from 'prop-types';
 import {menuItems} from "./menuItems";
+import { useLocation } from "react-router-dom";
+
 /**
  * 서브메뉴 Item element
  * @param title : 메뉴제목
@@ -10,10 +12,11 @@ import {menuItems} from "./menuItems";
  * @returns {JSX.Element} : 반환되는 element
  * @constructor
  */
-const SubMenuItems = ({ title, path }) => {
+const SubMenuItems = ({ title, path , parentPath}) => {
+  let isLocation = useLocation();
   return (
     <SidebarMenu.Nav>
-      <SidebarMenu.Nav.Link href={path}>
+      <SidebarMenu.Nav.Link href={path} parent={parentPath} bsPrefix={(isLocation.pathname === path)  ? 'active' : null}>
         <SidebarMenu.Nav.Icon>
           {/* Submenu item icon */}
         </SidebarMenu.Nav.Icon>
@@ -29,13 +32,17 @@ const SubMenuItems = ({ title, path }) => {
  * 사이드메뉴를 구성하는 기본 Item, submenu 가 존재하면 서브메뉴 컴포넌트 SubMenuItem 가 포함된 element block 을 return 한다.
  * @param title : 메뉴제목
  * @param path : 경로
+ * @param parentPath : 부모경로
  * @param subMenu : 서브메뉴
  * @param id : 서브메뉴아이디
  * @param isAdmin : 메인계정
  * @returns {JSX.Element} : 단일메뉴 element or 서브메뉴 element 가 포함된 element block 반환
  * @constructor
  */
-const MenuItem = ({ title, path, subMenu, id, isAdmin }) => {
+const MenuItem = ({ title, path, parentPath, subMenu, id, isAdmin }) => {
+  let isLocation = useLocation();
+  const [parent, setParent] = useState('');
+  console.log(parentPath)
   if (subMenu) {
     return (
       <SidebarMenu.Sub id={`subMenu-${id}`}>
@@ -46,7 +53,7 @@ const MenuItem = ({ title, path, subMenu, id, isAdmin }) => {
           </SidebarMenu.Nav.Title>
         </SidebarMenu.Sub.Toggle>
 
-        <SidebarMenu.Sub.Collapse>
+        <SidebarMenu.Sub.Collapse parent={parentPath} bsPrefix={(isLocation.pathname.includes(parentPath)) ? 'show' : null}>
           {subMenu.map((item, index) => (
             <SubMenuItems {...item} key={index} />
           ))}
@@ -57,7 +64,7 @@ const MenuItem = ({ title, path, subMenu, id, isAdmin }) => {
 
   return (
     <SidebarMenu.Nav>
-      <SidebarMenu.Nav.Link href={path}>
+      <SidebarMenu.Nav.Link href={path} parent={parentPath} bsPrefix={(isLocation.pathname === path) ? 'active' : null}>
         <SidebarMenu.Nav.Icon>
           {/* Menu item icon */}
         </SidebarMenu.Nav.Icon>
@@ -76,6 +83,7 @@ const MenuItem = ({ title, path, subMenu, id, isAdmin }) => {
 MenuItem.propTypes = {
   title: PropTypes.string,
   path: PropTypes.string,
+  parentPath: PropTypes.string,
   subMenu: PropTypes.any,
   id: PropTypes.any,
   isAdmin: PropTypes.string,
@@ -88,6 +96,7 @@ MenuItem.propTypes = {
 SubMenuItems.propTypes = {
   title: PropTypes.string,
   path: PropTypes.string,
+  parentPath: PropTypes.string,
 }
 
 const Aside = () => {
