@@ -4,6 +4,7 @@ import SidebarMenu from 'react-bootstrap-sidebar-menu';
 import PropTypes from 'prop-types';
 import {menuItems} from "./menuItems";
 import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 /**
  * 서브메뉴 Item element
@@ -16,7 +17,7 @@ const SubMenuItems = ({ title, path , parentPath}) => {
   let isLocation = useLocation();
   return (
     <SidebarMenu.Nav>
-      <SidebarMenu.Nav.Link href={path} parent={parentPath} bsPrefix={(isLocation.pathname === path)  ? 'active' : null}>
+      <SidebarMenu.Nav.Link as={Link} to={path} parent={parentPath} bsPrefix={(isLocation.pathname === path)  ? 'active' : null}>
         <SidebarMenu.Nav.Icon>
           {/* Submenu item icon */}
         </SidebarMenu.Nav.Icon>
@@ -45,7 +46,7 @@ const MenuItem = ({ title, path, parentPath, subMenu, id, isAdmin }) => {
   console.log(parentPath)
   if (subMenu) {
     return (
-      <SidebarMenu.Sub id={`subMenu-${id}`}>
+      <SidebarMenu.Sub id={`hasSubMenu-${id}`}>
         <SidebarMenu.Sub.Toggle>
           <SidebarMenu.Nav.Icon />
           <SidebarMenu.Nav.Title>
@@ -53,7 +54,7 @@ const MenuItem = ({ title, path, parentPath, subMenu, id, isAdmin }) => {
           </SidebarMenu.Nav.Title>
         </SidebarMenu.Sub.Toggle>
 
-        <SidebarMenu.Sub.Collapse parent={parentPath} bsPrefix={(isLocation.pathname.includes(parentPath)) ? 'show' : null}>
+        <SidebarMenu.Sub.Collapse id={`subMenu-${id}`} bsPrefix="bg-gray-200">
           {subMenu.map((item, index) => (
             <SubMenuItems {...item} key={index} />
           ))}
@@ -64,7 +65,7 @@ const MenuItem = ({ title, path, parentPath, subMenu, id, isAdmin }) => {
 
   return (
     <SidebarMenu.Nav>
-      <SidebarMenu.Nav.Link href={path} parent={parentPath} bsPrefix={(isLocation.pathname === path) ? 'active' : null}>
+      <SidebarMenu.Nav.Link as={Link} to={path} parent={parentPath} bsPrefix={(isLocation.pathname === path) ? 'active' : null}>
         <SidebarMenu.Nav.Icon>
           {/* Menu item icon */}
         </SidebarMenu.Nav.Icon>
@@ -116,9 +117,9 @@ const Aside = () => {
       <div
         className="app-sidebar-logo d-none d-lg-flex flex-stack flex-shrink-0 mt-4 px-8 h-50px"
         id="kt_app_sidebar_logo">
-        <a href="/dashboard">
+        <Link to="/dashboard">
           <img alt="Logo" src="/assets/media/logos/bi-connect.svg" className="h-30px"/>
-        </a>
+        </Link>
       </div>
       <div className="text-center fs-12">{t('common.projectName')}</div>
 

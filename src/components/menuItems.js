@@ -8,41 +8,41 @@ const menuItems = [
   },
   {
     title: "상품",
-    id: 1,
+    id: "product",
     isAdmin: "true",
     isSubAdmin: "true",
     subMenu: [
       {
         title: "상품 등록",
-        parentPath: "/product/",
+        parentPath: "/product",
         path: "/product/register"
       },
       {
         title: "상품 가져오기",
-        parentPath: "/product/",
+        parentPath: "/product",
         path: "/product/import"
       },
       {
         title: "상품 관리",
-        parentPath: "",
+        parentPath: "/product",
         path: "/product/manage/goods",
         desc: "상품별, 쇼핑몰별로 상품을 조회하고 관리할 수 있어요"
       },
       {
         title: "템플릿 등록",
-        parentPath: "",
+        parentPath: "/product",
         path: "/product/template/register"
       },
       {
         title: "템플릿 관리",
-        parentPath: "",
+        parentPath: "/product",
         path: "/product/template/manage"
       },
     ]
   },
   {
     title: "주문",
-    id: 2,
+    id: "order",
     isAdmin: "false",
     isSubAdmin: "true",
     subMenu: [
@@ -53,7 +53,7 @@ const menuItems = [
       },
       {
         title: "클레임 관리",
-        parentPath: "order",
+        parentPath: "/order",
         path: "/order/claim"
       },
       {
