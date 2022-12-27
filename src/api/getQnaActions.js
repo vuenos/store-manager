@@ -8,7 +8,7 @@ const config = {
 }
 
 export const getQnaList = async (page = 0) => {
-  const { data } = await apiClient.get("/sellers/products?page=" + page, config);
+  const { data } = await apiClient.get(`/sellers/products?page=${page}`, config);
   console.log('QNA_DATA:::', data.data);
   return data.data;
 }
