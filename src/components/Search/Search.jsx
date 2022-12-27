@@ -1,6 +1,7 @@
 import React , { useEffect, useState } from 'react';
 import {Card, Col, Row} from "react-bootstrap";
 //import apiClient from '../../services/api';
+import PropTypes from 'prop-types';
 
 const Search = (children) => {
 
@@ -24,6 +25,49 @@ const Search = (children) => {
 	// }catch(error) {
 	//     console.log(error);
 	// }
+
+	const searchConfig = [
+		{
+			id: "selRangeDay0",
+			value: "1day",
+			label: "오늘"
+		},
+		{
+			id: "selRangeDay7",
+			value: "7",
+			label: "7일"
+		},
+		{
+			id: "selRangeDay15",
+			value: "15",
+			label: "15일"
+		},
+		{
+			id: "selRangeDay1m",
+			value: "1m",
+			label: "1개월"
+		},
+		{
+			id: "selRangeDayAll",
+			value: "all",
+			label: "전체"
+		}
+	]
+
+	searchConfig.propTypes = {
+		id: PropTypes.string,
+		value: PropTypes.string,
+		checked: PropTypes.bool,
+	}
+
+	const [checkState, setCheckState] = useState('all');
+
+	function onSiteChanged (e) {
+		setCheckState({
+			checked: e.target.value,
+		});
+		console.log(e.target.value);
+	}
 
 	return (
 
@@ -81,61 +125,22 @@ const Search = (children) => {
 							role="group"
 							aria-label="날짜 선택"
 						>
-							<label data-kt-button="true" htmlFor="selRangeDay0">
-								<input
-									className="btn-check selDay"
-									type="radio"
-									name="selRangeDay"
-									id="selRangeDay0"
-									value="0"
-								/>
-								<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">오늘</span>
-							</label>
-
-							<label data-kt-button="true" htmlFor="selRangeDay7">
-								<input
-									className="btn-check selDay"
-									type="radio"
-									name="selRangeDay"
-									id="selRangeDay7"
-									value="7"
-								/>
-								<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">7일</span>
-							</label>
-
-							<label data-kt-button="true" htmlFor="selRangeDay15">
-								<input
-									className="btn-check selDay"
-									type="radio"
-									name="selRangeDay"
-									id="selRangeDay15"
-									value="15"
-								/>
-								<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">15일</span>
-							</label>
-
-							<label data-kt-button="true" htmlFor="selRangeDay1m">
-								<input
-									className="btn-check selDay"
-									type="radio"
-									name="selRangeDay"
-									id="selRangeDay1m"
-									value="1m"
-								/>
-								<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">1개월</span>
-							</label>
-
-							<label data-kt-button="true" htmlFor="selRangeDayall">
-								<input
-									className="btn-check selDay"
-									type="radio"
-									name="selRangeDay"
-									id="selRangeDayall"
-									value="all"
-									defaultChecked={true}
-								/>
-								<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">전체</span>
-							</label>
+							{searchConfig.map((conf, i) => (
+								<label key={i}>
+									<input
+										className="btn-check selDay"
+										type="radio"
+										name="selRangeDay"
+										id={conf.id}
+										value={conf.value}
+										checked={
+											conf.value == checkState ? true : checkState.checked === conf.value
+										}
+										onChange={onSiteChanged}
+									/>
+									<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">{conf.label}</span>
+								</label>
+							))}
 						</Col>
 
 						<Col className="d-flex position-relative align-items-center col-lg-2">
