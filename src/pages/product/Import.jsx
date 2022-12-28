@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Col, Row} from "react-bootstrap";
 import SelectShop from "../../components/Product/Import/SelectShop";
 import MatchShop from "../../components/Product/Import/MatchShop";
+import MatchingList from "../../components/Product/Import/MatchingList";
 
 const Import = () => {
   const shops = [
@@ -46,7 +47,7 @@ const Import = () => {
   const [importType, setImportType] = useState("load");
   console.log(mallSelect)
   return (
-    <div>
+    <div className="app-container container-fluid">
       <div className="border-0">
         <ul className="nav nav-tabs nav-wrap nav-line-tabs nav-line-tabs-2x nav-stretch border-0">
           <li className="nav-item">
@@ -98,10 +99,14 @@ const Import = () => {
         shops={shops}
       />
       :
-      <MatchShop
-        shops={shops}
-      />
+      <>
+        <MatchShop
+          shops={shops}
+        />
+        <MatchingList/>
+      </>
       }
+
     </>
 
     </div>
