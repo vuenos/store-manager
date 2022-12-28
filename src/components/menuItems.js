@@ -25,8 +25,8 @@ const menuItems = [
       },
       {
         title: "상품 관리",
-        eventKey: "/product/manage/goods",
-        path: "/product/manage/goods"
+        eventKey: "/product/management",
+        path: "/product/management"
       },
       {
         title: "템플릿 등록",

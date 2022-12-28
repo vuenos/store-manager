@@ -106,12 +106,21 @@ const Aside = () => {
   console.log(key);
 
   let isPath = isLocation.pathname;
+  /**
+   * isLocation 과 메뉴의 eventKey 값을 비교하여 activeKey 에 할당함.
+   */
   const getActiveKey = () => {
     switch (isPath) {
       case '/dashboard':
         setKey(isPath);
         break;
       case '/product/register':
+        setKey(isPath);
+        break;
+      case '/product/import':
+        setKey(isPath);
+        break;
+      case '/product/management':
         setKey(isPath);
         break;
       case '/order/list':

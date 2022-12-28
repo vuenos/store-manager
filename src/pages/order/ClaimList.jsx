@@ -1,8 +1,8 @@
 import React from "react";
-import Tabs2 from "components/Tabs2";
-import Tabs3 from "components/Tabs3";
-import Search from "components/Search/Search";
-import CardList from "components/CardList";
+import StateTab from "components/Order/StateTab";
+import StateDetailTab from "components/Order/StateDetailTab";
+import Search from "components/Order/Search";
+import CardList from "components/Order/CardList";
 
 const ClaimList = () => {
 
@@ -61,13 +61,12 @@ const ClaimList = () => {
 
     return (
         <div>
-            <h1>ClaimList</h1>
 
-            <Tabs2 
+            <StateTab 
                 data={data}
             />
 
-            <Tabs3 
+            <StateDetailTab 
                 data2={data2} 
             />
 
