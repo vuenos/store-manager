@@ -22,7 +22,7 @@ const menuItems = [
       },
       {
         title: "상품 관리",
-        path: "/product/manage/goods",
+        path: "/product/management",
         desc: "상품별, 쇼핑몰별로 상품을 조회하고 관리할 수 있어요"
       },
       {
