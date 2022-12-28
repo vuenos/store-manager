@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import {Table, Button, Card, Row, Col, Form, Badge, OverlayTrigger, Tooltip } from "react-bootstrap";
-import noImage from '../../assets/images/none-image.svg';
-import Paginate from "../../components/Paginate";
+import noImage from '../../../assets/images/none-image.svg';
+import Paginate from "../../Paginate";
 import {useParams} from "react-router-dom";
 import PropTypes from 'prop-types';
 

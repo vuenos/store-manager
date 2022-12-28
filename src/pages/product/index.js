@@ -1,7 +1,8 @@
 import Register from "./Register";
-import ManageGoods from "./ManageGoods";
-
+import Import from "./Import";
+import Management from "./Management";
 export {
   Register,
-  ManageGoods
+  Import,
+  Management
 }
