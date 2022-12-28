@@ -1,4 +1,4 @@
-import Search from 'components/Search/Search';
+import Search from 'components/Order/Search';
 import React from 'react';
 import { Card, Row, Col } from "react-bootstrap";
 
