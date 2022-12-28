@@ -8,11 +8,13 @@ import {
 } from './pages';
 import {
   Register,
-  Import,
-} from './pages/product'
-import { OrderList } from './pages/order';
-import { ClaimList } from './pages/order/claim';
-import { AllList } from 'pages/order/all';
+  Import
+} from './pages/product';
+import { 
+  OrderList,
+  ClaimList, 
+  AllList
+} from './pages/order';
 import { QnaList } from './pages/qna';
 import { Schedule } from './pages/schedule'
 import Layout from "./Layout";
@@ -31,14 +33,7 @@ const AppRoutes = () => {
         { path: "/mypage", element: <MyPage /> },
         { path: "/product/register", element: <Register /> },
         { path: "/product/import", element: <Import/> },
-        { path: "/product/management", element: <Management/> },
-        // { path: "/product/manage/goods", element: <ManageGoods pathname="/product/manage/goods" /> },
-        // { path: "/product/manage/goods/keyword=:keyword&page=:pageNumber", element: <ManageGoods pathname="/product/manage/goods" /> },
-        // { path: "/product/manage/goods/keyword=:keyword", element: <ManageGoods pathname="/product/manage/goods" /> },
-        // { path: "/product/manage/goods/page=:pageNumber", element: <ManageGoods pathname="/product/manage/goods" /> },
-        { path: "/order/list", element: <OrderList /> },
-        { path: "/order/claim", element: <ClaimList /> },
-        { path: "/order/all", element: <AllList /> },
+        { path: "/product/management", element: <Management/> },       
         // { path: "/product/manage/goods", element: <ManageGoods pathname="/product/manage/goods" /> },
         // { path: "/product/manage/goods/keyword=:keyword&page=:pageNumber", element: <ManageGoods pathname="/product/manage/goods" /> },
         // { path: "/product/manage/goods/keyword=:keyword", element: <ManageGoods pathname="/product/manage/goods" /> },

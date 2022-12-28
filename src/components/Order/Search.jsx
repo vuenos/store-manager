@@ -1,5 +1,6 @@
 import React , { useEffect, useState } from 'react';
 import {Card, Col, Row} from "react-bootstrap";
+import PropTypes from 'prop-types';
 //import apiClient from '../../services/api';
 
 const Search = (children) => {
@@ -10,20 +11,88 @@ const Search = (children) => {
 		console.log(searchOptionToggle);
 	},[searchOptionToggle]);
 
-
 	const changeToggle = () => {
 		setToggle(!searchOptionToggle);
 	}
 
 	const {search} = children;
 
-	// try{
-	//     // const { data, status } = apiClient.get("/sellers/mall-accounts");
-	//     const { data, status } = apiClient.post("/sellers/login", {id:"6666666666",pwd:"0000"})
-	//     console.log(data, status);
-	// }catch(error) {
-	//     console.log(error);
-	// }
+	const searchConfig = [
+		{
+			id: "selRangeDay0",
+			value: "1day",
+			label: "오늘"
+		},
+		{
+			id: "selRangeDay7",
+			value: "7",
+			label: "7일"
+		},
+		{
+			id: "selRangeDay15",
+			value: "15",
+			label: "15일"
+		},
+		{
+			id: "selRangeDay1m",
+			value: "1m",
+			label: "1개월"
+		},
+		{
+			id: "selRangeDayAll",
+			value: "all",
+			label: "전체"
+		}
+	]
+
+	const searchState = [
+		{
+			id: "answered_all",
+			value: "0",
+			label: "전체"
+		},{
+			id: "answered_0",
+			value: "1",
+			label: "미답변"
+		},{
+			id: "answered_1",
+			value: "2",
+			label: "답변완료"
+		},{
+			id: "answered_2",
+			value: "3",
+			label: "전송완료"
+		}
+	]
+
+	searchConfig.propTypes = {
+		id: PropTypes.string,
+		value: PropTypes.string,
+		checked: PropTypes.bool,
+	}
+
+	searchState.propTypes = {
+		id: PropTypes.string,
+		value: PropTypes.string,
+		checked: PropTypes.bool,
+	}
+
+	const [checkState, setCheckState] = useState('all');
+	const [processState, setProcessState] = useState("0");
+
+	function onSiteChanged (e) {
+		setCheckState({
+			checked: e.target.value,
+		});
+		console.log(e.target.value);
+	}
+
+	function processChanged (e) {
+		setProcessState({
+			checked: e.target.value,
+		});
+		console.log(e.target.value);
+	}
 
 	return (
 
@@ -37,7 +106,7 @@ const Search = (children) => {
 						<div className="fs-6 fw-boldest mt-3 mb-3">검색어</div>
 					</Col>
 
-					<Col className="col-lg-11 d-flex align-items-center position-relative my-1 ps-5">
+					<Col className="col-lg-11 d-flex align-items-center position-relative my-1 ps-2">
 						<input
 							className="form-control form-control-sm w-lg-50 ps-3"
 							type="text"
@@ -81,61 +150,22 @@ const Search = (children) => {
 							role="group"
 							aria-label="날짜 선택"
 						>
-							<label data-kt-button="true" htmlFor="selRangeDay0">
-								<input
-									className="btn-check selDay"
-									type="radio"
-									name="selRangeDay"
-									id="selRangeDay0"
-									value="0"
-								/>
-								<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">오늘</span>
-							</label>
-
-							<label data-kt-button="true" htmlFor="selRangeDay7">
-								<input
-									className="btn-check selDay"
-									type="radio"
-									name="selRangeDay"
-									id="selRangeDay7"
-									value="7"
-								/>
-								<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">7일</span>
-							</label>
-
-							<label data-kt-button="true" htmlFor="selRangeDay15">
-								<input
-									className="btn-check selDay"
-									type="radio"
-									name="selRangeDay"
-									id="selRangeDay15"
-									value="15"
-								/>
-								<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">15일</span>
-							</label>
-
-							<label data-kt-button="true" htmlFor="selRangeDay1m">
-								<input
-									className="btn-check selDay"
-									type="radio"
-									name="selRangeDay"
-									id="selRangeDay1m"
-									value="1m"
-								/>
-								<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">1개월</span>
-							</label>
-
-							<label data-kt-button="true" htmlFor="selRangeDayall">
-								<input
-									className="btn-check selDay"
-									type="radio"
-									name="selRangeDay"
-									id="selRangeDayall"
-									value="all"
-									defaultChecked={true}
-								/>
-								<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">전체</span>
-							</label>
+							{searchConfig.map((conf, i) => (
+								<label key={i}>
+									<input
+										className="btn-check selDay"
+										type="radio"
+										name="selRangeDay"
+										id={conf.id}
+										value={conf.value}
+										checked={
+											conf.value == checkState ? true : checkState.checked === conf.value
+										}
+										onChange={onSiteChanged}
+									/>
+									<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">{conf.label}</span>
+								</label>
+							))}
 						</Col>
 
 						<Col className="d-flex position-relative align-items-center col-lg-2">
@@ -181,17 +211,136 @@ const Search = (children) => {
 							<div className="fs-6 fw-boldest mt-3 mb-3">{search[1].title}</div>
 						</Col>
 
-						<Col className="col-lg-3">
-							<select
-								id="status"
-								name="status"
-								className="form-select-sm form-select"
-							>
-								<option value="ex">예시</option>
-							</select>
+						<Col className="col-lg-11 ps-1">
+							<div className="navbar justify-content-start p-0">
+								<div className="form-check-inline form-check-solid mb-2 me-2">
+										<input type="checkbox" className="btn-check" name="linkageKey[]" id="linkageKey38" value="38" />
+										<label htmlFor="linkageKey38" className="btn btn-outline fw-normal btn-outline-white btn-active-secondary p-2 d-flex align-items-center btn-sm h-34px">
+												<img src="/assets/media/icons/smartstore.png" alt="" className="" width="24" />
+												<span className="mx-2">ncp_1nvgzv_01</span>
+										</label>
+								</div>
+								<div className="form-check-inline form-check-solid mb-2 me-2">
+										<input type="checkbox" className="btn-check" name="linkageKey[]" id="linkageKey454" value="454" />
+										<label htmlFor="linkageKey454" className="btn btn-outline fw-normal btn-outline-white btn-active-secondary p-2 d-flex align-items-center btn-sm h-34px">
+												<img src="/assets/media/icons/coupang.png" alt="" className="" width="24" />
+												<span className="mx-2">sechannel</span>
+										</label>
+								</div>							
+								<div className="form-check-inline form-check-solid mb-2 me-2">
+										<input type="checkbox" className="btn-check" name="linkageKey[]" id="linkageKey737" value="737" />
+										<label htmlFor="linkageKey737" className="btn btn-outline fw-normal btn-outline-white btn-active-secondary p-2 d-flex align-items-center btn-sm h-34px">
+												<img src="/assets/media/icons/gmarket.png" alt="" className="" width="24" />
+												<span className="mx-2">tpffjgjqm6</span>
+										</label>
+								</div>
+								<div className="form-check-inline form-check-solid mb-2 me-2">
+										<input type="checkbox" className="btn-check" name="linkageKey[]" id="linkageKey735" value="735" />
+										<label htmlFor="linkageKey735" className="btn btn-outline fw-normal btn-outline-white btn-active-secondary p-2 d-flex align-items-center btn-sm h-34px">
+												<img src="/assets/media/icons/auction.png" alt="" className="" width="24" />
+												<span className="mx-2">sellerhub06</span>
+										</label>
+								</div>
+								<div className="form-check-inline form-check-solid mb-2 me-2">
+										<input type="checkbox" className="btn-check" name="linkageKey[]" id="linkageKey553" value="553" />
+										<label htmlFor="linkageKey553" className="btn btn-outline fw-normal btn-outline-white btn-active-secondary p-2 d-flex align-items-center btn-sm h-34px">
+												<img src="/assets/media/icons/st11.png" alt="" className="" width="24" />
+												<span className="mx-2">sechannel</span>
+										</label>
+								</div>
+								<div className="form-check-inline form-check-solid mb-2 me-2">
+										<input type="checkbox" className="btn-check" name="linkageKey[]" id="linkageKey8" value="8" />
+										<label htmlFor="linkageKey8" className="btn btn-outline fw-normal btn-outline-white btn-active-secondary p-2 d-flex align-items-center btn-sm h-34px">
+												<img src="/assets/media/icons/talkstore.png" alt="" className="" width="24" />
+												<span className="mx-2">test</span>
+										</label>
+								</div>							
+								<div className="form-check-inline form-check-solid mb-2 me-2">
+										<input type="checkbox" className="btn-check" name="linkageKey[]" id="linkageKey849" value="849" />
+										<label htmlFor="linkageKey849" className="btn btn-outline fw-normal btn-outline-white btn-active-secondary p-2 d-flex align-items-center btn-sm h-34px">
+												<img src="/assets/media/icons/sho.png" alt="" className="" width="24" />
+												<span className="mx-2">6666666666</span>
+										</label>
+								</div>
+							</div>
 						</Col>
 
 					</Row>
+
+					{search[2] 
+						? <Row className="row align-items-center">
+
+								<Col className="col-xl-1">
+									<div className="fs-6 fw-boldest mt-3 mb-3">{search[2].title}</div>
+								</Col>
+
+								
+									<Col
+										className="d-flex btn-group col-xl-5 nav-group nav-group-fluid my-1"
+										role="group"										
+									>
+										{searchState.map((conf, i)=> (
+											<label key={i} htmlFor={conf.id}>
+												<input
+													className="btn-check"
+													type="radio"
+													name="answered"
+													id={conf.id}
+													value={conf.value}
+													checked={
+														conf.value == processState ? true : processState.checked === conf.value
+													}
+													onChange={processChanged}
+												/>
+												<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">{conf.label}</span>
+											</label>
+										))}
+
+										{/* <label data-kt-button="true" htmlFor="answered_all">
+											<input
+												className="btn-check"
+												type="radio"
+												name="answered"
+												id="answered_all"			
+												defaultChecked={true}									
+											/>
+											<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">전체</span>
+										</label>
+
+										<label data-kt-button="true" htmlFor="answered_0">
+											<input
+												className="btn-check"
+												type="radio"
+												name="answered"
+												id="answered_0"											
+											/>
+											<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">미답변</span>
+										</label>
+
+										<label data-kt-button="true" htmlFor="answered_1">
+											<input
+												className="btn-check"
+												type="radio"
+												name="answered"
+												id="answered_1"												
+											/>
+											<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">답변완료</span>
+										</label>
+
+										<label data-kt-button="true" htmlFor="answered_2">
+											<input
+												className="btn-check"
+												type="radio"
+												name="answered"
+												id="answered_2"														
+											/>
+											<span className="btn btn-sm btn-active btn-active-secondary fw-bolder px-3 border rounded-0 h-34px">전송완료</span>
+										</label> */}
+									</Col>								
+
+							</Row> 
+						: '' 
+					}
 
 				</Card.Body>
 
