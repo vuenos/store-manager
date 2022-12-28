@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {useTranslation} from "react-i18next";
 import SidebarMenu from 'react-bootstrap-sidebar-menu';
 import PropTypes from 'prop-types';
@@ -13,11 +13,11 @@ import { Link } from "react-router-dom";
  * @returns {JSX.Element} : 반환되는 element
  * @constructor
  */
-const SubMenuItems = ({ title, path , parentPath}) => {
+const SubMenuItems = ({ title, path , eventKey}) => {
   let isLocation = useLocation();
   return (
     <SidebarMenu.Nav>
-      <SidebarMenu.Nav.Link as={Link} to={path} parent={parentPath} bsPrefix={(isLocation.pathname === path)  ? 'active' : null}>
+      <SidebarMenu.Nav.Link as={Link} to={path} eventKey={eventKey}>
         <SidebarMenu.Nav.Icon>
           {/* Submenu item icon */}
         </SidebarMenu.Nav.Icon>
@@ -33,17 +33,15 @@ const SubMenuItems = ({ title, path , parentPath}) => {
  * 사이드메뉴를 구성하는 기본 Item, submenu 가 존재하면 서브메뉴 컴포넌트 SubMenuItem 가 포함된 element block 을 return 한다.
  * @param title : 메뉴제목
  * @param path : 경로
- * @param parentPath : 부모경로
+ * @param eventKey : 이벤트키
  * @param subMenu : 서브메뉴
  * @param id : 서브메뉴아이디
  * @param isAdmin : 메인계정
  * @returns {JSX.Element} : 단일메뉴 element or 서브메뉴 element 가 포함된 element block 반환
  * @constructor
  */
-const MenuItem = ({ title, path, parentPath, subMenu, id, isAdmin }) => {
+const MenuItem = ({ title, path, eventKey, subMenu, id, isAdmin }) => {
   let isLocation = useLocation();
-  const [parent, setParent] = useState('');
-  console.log(parentPath)
   if (subMenu) {
     return (
       <SidebarMenu.Sub id={`hasSubMenu-${id}`}>
@@ -65,7 +63,7 @@ const MenuItem = ({ title, path, parentPath, subMenu, id, isAdmin }) => {
 
   return (
     <SidebarMenu.Nav>
-      <SidebarMenu.Nav.Link as={Link} to={path} parent={parentPath} bsPrefix={(isLocation.pathname === path) ? 'active' : null}>
+      <SidebarMenu.Nav.Link as={Link} to={path} eventKey={eventKey}>
         <SidebarMenu.Nav.Icon>
           {/* Menu item icon */}
         </SidebarMenu.Nav.Icon>
@@ -84,7 +82,7 @@ const MenuItem = ({ title, path, parentPath, subMenu, id, isAdmin }) => {
 MenuItem.propTypes = {
   title: PropTypes.string,
   path: PropTypes.string,
-  parentPath: PropTypes.string,
+  eventKey: PropTypes.string,
   subMenu: PropTypes.any,
   id: PropTypes.any,
   isAdmin: PropTypes.string,
@@ -97,11 +95,54 @@ MenuItem.propTypes = {
 SubMenuItems.propTypes = {
   title: PropTypes.string,
   path: PropTypes.string,
-  parentPath: PropTypes.string,
+  eventKey: PropTypes.string,
 }
 
 const Aside = () => {
   const {t} =useTranslation();
+  let isLocation = useLocation();
+
+  const [key, setKey] = useState('');
+  console.log(key);
+
+  let isPath = isLocation.pathname;
+  const getActiveKey = () => {
+    switch (isPath) {
+      case '/dashboard':
+        setKey(isPath);
+        break;
+      case '/product/register':
+        setKey(isPath);
+        break;
+      case '/order/list':
+        setKey(isPath);
+        break;
+      case '/order/claim':
+        setKey(isPath);
+        break;
+      case '/order/all':
+        setKey(isPath);
+        break;
+      case '/cs/qnaList':
+        setKey(isPath);
+        break;
+      case '/schedule':
+        setKey(isPath);
+        break;
+      default:
+        break;
+    }
+  }
+
+  const handleSelect = (key) => {
+    console.log(`selected ${key}`);
+    setKey(key);
+  };
+
+  useEffect(() => {
+    getActiveKey();
+    console.log('ACTIVE_KEY', key)
+  }, []);
 
   return (
     <div
@@ -132,10 +173,10 @@ const Aside = () => {
         data-kt-scroll-offset="0"
       >
 
-        <SidebarMenu>
+        <SidebarMenu activeKey={key} onSelect={handleSelect}>
           <SidebarMenu.Body>
             {menuItems.map((item, index) => (
-              <MenuItem {...item} key={index} />
+              <MenuItem {...item} key={index} eventKey={item.path} />
             ))}
           </SidebarMenu.Body>
         </SidebarMenu>
@@ -256,4 +297,5 @@ const Aside = () => {
     </div>
   )
 }
+
 export default Aside;

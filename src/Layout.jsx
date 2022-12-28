@@ -1,12 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet } from "react-router-dom";
 import {
   Aside,
   Gnb,
   Footer
 } from "./components";
+import { useLocation } from "react-router-dom";
 
 const Layout = () => {
+  // const [activePath, setActivePath] = useState('');
+  // let isLocation = useLocation();
+  //
+  // const getActivePath = () => {
+  //   if(isLocation.pathname == '/order/all') {
+  //     setActivePath('order-1');
+  //   } else {
+  //     setActivePath('dashboard')
+  //   }
+  // }
+  //
+  // useEffect(() => {
+  //   getActivePath();
+  //   console.log('ACTIVE_KEY', activePath)
+  // }, [activePath]);
+
+
   return (
     <div id="wrapper">
       <Aside />
