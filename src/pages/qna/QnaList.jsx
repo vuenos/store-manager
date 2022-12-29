@@ -3,7 +3,7 @@ import { Card, Row, Col, Table, Spinner, Button } from "react-bootstrap";
 import { getQnaList } from "../../api";
 // import apiClient from "../../services/api";
 import { useQuery } from "react-query";
-import Search from "components/Search/Search"
+import Search from "../../components/Order/Search"
 
 const QnaList = () => {
   // const [qnas, setQnas] = useState([]);
@@ -61,12 +61,17 @@ const QnaList = () => {
   const search = [
     {
       index: 1,
-      title: '기간검색'
+      title: '문의접수일'
     },
     {
       index: 2,
       title: '연동몰/계정'
+    },
+    {
+      index: 3,
+      title: '처리상태'
     }
+
   ];
 
 
@@ -132,4 +137,5 @@ const QnaList = () => {
     </>
   )
 }
+
 export default QnaList;

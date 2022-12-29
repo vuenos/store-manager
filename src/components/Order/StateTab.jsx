@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import TabChild from "./Tab/TabChild";
+import TabChild from "./TabChild";
 
-const Tabs2 = (children) => {
+const StateTab = (children) => {
 
     const [selectedIndex, setSelectedIndex] = useState(1);
     
@@ -34,4 +34,4 @@ const Tabs2 = (children) => {
     
 };
 
-export default Tabs2;
+export default StateTab;

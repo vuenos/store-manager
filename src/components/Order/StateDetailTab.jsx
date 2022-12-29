@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Tabs3 = (children) => {
+const StateDetailTab = (children) => {
 
     const {data2} = children;
 
@@ -26,4 +26,4 @@ const Tabs3 = (children) => {
     )
 }
 
-export default Tabs3;
+export default StateDetailTab;
