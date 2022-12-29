@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Row, Col, Table, Spinner, Button } from "react-bootstrap";
+import { Card, Row, Col, Table, Spinner, Button, Pagination } from "react-bootstrap";
 import { getQnaList } from "../../api";
 // import apiClient from "../../services/api";
 import { useQuery, useQueryClient } from "react-query";
 import Search from "../../components/Order/Search";
 
-const maxPostPage = 10;
+// const maxPostPage = 10;
 
 const QnaList = () => {
   // const [qnas, setQnas] = useState([]);
@@ -32,16 +32,16 @@ const QnaList = () => {
   //   getQnaList();
   // }, []);
 
+  const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
-  const [selectedPost, setSelectedPost] = useState(null);
+  // const [selectedPost, setSelectedPost] = useState(null);
+  const [postsPerPage] = useState(10);
 
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    if(page < maxPostPage) {
-      const nextPage = page + 1;
-      queryClient.prefetchQuery(['getQnaList', nextPage], () => getQnaList(nextPage)); // 다음 페이지의 데이터를 미리 fetch
-    }
+    const nextPage = page + 1;
+    queryClient.prefetchQuery(['getQnaList', nextPage], () => getQnaList(nextPage)); // 다음 페이지의 데이터를 미리 fetch
   }, [page, queryClient]);
 
 
@@ -64,6 +64,7 @@ const QnaList = () => {
     staleTime: 2000,
     keepPreviousData : true,
     onSuccess: data => {
+      setPosts(data)
       console.log(data.length);
     },
     onError: e => {
@@ -71,6 +72,20 @@ const QnaList = () => {
       console.log(e.message);
     }
   });
+
+  // Get current posts
+  const indexOfLastPost = page * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Change page
+  const paginate = pageNumber => setPage(pageNumber);
+
+  const pageNumbers = [];
+  const totalPosts = posts.length;
+  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+    pageNumbers.push(i);
+  }
 
   const search = [
     {
@@ -114,7 +129,7 @@ const QnaList = () => {
               {isLoading && <tr><td colSpan="2"><Spinner animation="border" /></td></tr>}
               {isError && <tr><td colSpan="2">{error.message}</td></tr>}
 
-              {qnas && qnas.map((qna) => (
+              {currentPosts && currentPosts.map((qna) => (
                 <tr key={qna.id}>
                   <td></td>
                   <td>{qna.title}</td>
@@ -134,9 +149,16 @@ const QnaList = () => {
             >
               Prev
             </Button>
+            <Pagination>
+              {pageNumbers.map(number => (
+                <Pagination.Item key={number} onClick={() => paginate(number)} className={page == number ? "active" : ""}>
+                    {number}
+                </Pagination.Item>
+              ))}
+            </Pagination>
             <Button
               onClick={() => setPage((previousValue) => previousValue + 1)}
-              disabled={page >= maxPostPage}
+              disabled={page >= totalPosts}
             >
               Next
             </Button>

@@ -1,4 +1,5 @@
 import apiClient from "../services/api";
+import axios from "axios";
 
 const token = localStorage.getItem("access_token");
 const config = {
@@ -7,11 +8,11 @@ const config = {
   }
 }
 
-export const getQnaList = async (pageNum) => {
+export const getQnaList = async () => {
   // const { data } = await apiClient.get(`/sellers/products?page=${pageNum}`, config);
   // console.log('QNA_DATA:::', data.data);
   // return data.data;
 
-  const response = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit10&_page=${pageNum}`);
-  return response.json();
+  const res = await axios.get(`https://jsonplaceholder.typicode.com/posts`);
+  return res.data;
 }
