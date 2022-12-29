@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Row, Col, Table, Spinner, Button } from "react-bootstrap";
 import { getQnaList } from "../../api";
 // import apiClient from "../../services/api";
-import { useQuery } from "react-query";
-import Search from "../../components/Order/Search"
+import { useQuery, useQueryClient } from "react-query";
+import Search from "../../components/Order/Search";
+
+const maxPostPage = 10;
 
 const QnaList = () => {
   // const [qnas, setQnas] = useState([]);
@@ -30,12 +32,23 @@ const QnaList = () => {
   //   getQnaList();
   // }, []);
 
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
+  const [selectedPost, setSelectedPost] = useState(null);
+
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    if(page < maxPostPage) {
+      const nextPage = page + 1;
+      queryClient.prefetchQuery(['getQnaList', nextPage], () => getQnaList(nextPage)); // 다음 페이지의 데이터를 미리 fetch
+    }
+  }, [page, queryClient]);
+
 
   /**
    * useQuery 파라미터
    * @param {array|string} queryKey : queryKey 가 변경되면 useQuery 에서 data 가 업데이트됨
-   * @param {function} queryFn : 데이터 호출 함수 받음.
+   * @param {function} queryFn : 현재 페이지에 어떤 페이지든 간에 데이터 호출 함수 실행.
    * @param {boolean} keepPreviousData : 데이터가 refetch 될때 이전 데이터 유지 여부 (true, false)
    */
   const {
@@ -48,9 +61,10 @@ const QnaList = () => {
   } = useQuery(  {
     queryKey: ['getQnaList', page],
     queryFn: () => getQnaList(page),
+    staleTime: 2000,
     keepPreviousData : true,
     onSuccess: data => {
-      console.log(data);
+      console.log(data.length);
     },
     onError: e => {
       // API 연결이 실패한 경우에 호출됨
@@ -101,9 +115,9 @@ const QnaList = () => {
               {isError && <tr><td colSpan="2">{error.message}</td></tr>}
 
               {qnas && qnas.map((qna) => (
-                <tr key={qna.uuid}>
+                <tr key={qna.id}>
                   <td></td>
-                  <td>{qna.uuid}</td>
+                  <td>{qna.title}</td>
                 </tr>
               ))
               }
@@ -113,24 +127,20 @@ const QnaList = () => {
         </Card.Body>
         <Card.Footer>
           <div>
-            <span>Current Page: {page + 1}</span>
+            <span>Current Page: {page}</span>
             <Button
-              onClick={() => setPage(old => Math.max(old - 1, 0))}
-              disabled={page === 0}
+              onClick={() => setPage((previousValue) => previousValue -1)}
+              disabled={page <= 1}
             >
               Prev
-            </Button>{' '}
+            </Button>
             <Button
-              onClick={() => {
-                if (!isPreviousData && qnas.hashMore) {
-                  setPage(old => old + 1)
-                }
-              }}
-              disabled={isPreviousData || !qnas?.hasMore}
+              onClick={() => setPage((previousValue) => previousValue + 1)}
+              disabled={page >= maxPostPage}
             >
               Next
             </Button>
-            {isFetching ? <Spinner animation="border" /> : null}{' '}
+            {isFetching ? <Spinner animation="border" /> : null}
           </div>
         </Card.Footer>
       </Card>
