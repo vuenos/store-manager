@@ -690,3 +690,21 @@ aside.sidebar-menu {
 .card-wrap .accordion-button:not(.collapsed)::after {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23211F1C'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
 }
+
+//Table shadow, status badge
+th.fixHeader.checkBox::after, td.fixHeader.checkBox::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 8px;
+    height: 100%;
+    background: linear-gradient(90deg, #211F1C 0%, rgba(33, 31, 28, 0) 100%);
+    opacity: 0.04;
+}
+
+td.status span.badge {height:26px; font-weight:700;}
+td.status span.badge.st0 {background: #FAE6EA; color: #E52E4D;}
+td.status span.badge.st1 {background: #EBECF0; color: #292C33;}
+td.status span.badge.st2 {background: #E5EEFF; color: #3355ff;}
