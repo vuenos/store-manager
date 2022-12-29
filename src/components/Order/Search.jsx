@@ -1,7 +1,6 @@
 import React , { useEffect, useState } from 'react';
 import {Card, Col, Row} from "react-bootstrap";
 import PropTypes from 'prop-types';
-//import apiClient from '../../services/api';
 
 const Search = (children) => {
 
