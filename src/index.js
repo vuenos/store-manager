@@ -8,18 +8,29 @@ import reportWebVitals from './reportWebVitals';
 import {RecoilRoot} from "recoil";
 import './i18n';
 
-const queryClient = new QueryClient();
+const twentyFourHoursInMs = 1000 * 60 * 60 * 24;
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      refetchOnmount: false,
+      refetchOnReconnect: false,
+      retry: 2,
+      staleTime: twentyFourHoursInMs,
+    },
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <RecoilRoot>
-    <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}>
         <BrowserRouter>
             <App />
             <ReactQueryDevtools initialIsOpen={false} />
         </BrowserRouter>
-    </QueryClientProvider>
+      </QueryClientProvider>
     </RecoilRoot>
   </React.StrictMode>
 );

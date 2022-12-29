@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {useTranslation} from "react-i18next";
 import SidebarMenu from 'react-bootstrap-sidebar-menu';
 import PropTypes from 'prop-types';
 import {menuItems} from "./menuItems";
+import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 /**
  * 서브메뉴 Item element
  * @param title : 메뉴제목
@@ -10,10 +13,11 @@ import {menuItems} from "./menuItems";
  * @returns {JSX.Element} : 반환되는 element
  * @constructor
  */
-const SubMenuItems = ({ title, path }) => {
+const SubMenuItems = ({ title, path , eventKey}) => {
+  let isLocation = useLocation();
   return (
     <SidebarMenu.Nav>
-      <SidebarMenu.Nav.Link href={path}>
+      <SidebarMenu.Nav.Link as={Link} to={path} eventKey={eventKey}>
         <SidebarMenu.Nav.Icon>
           {/* Submenu item icon */}
         </SidebarMenu.Nav.Icon>
@@ -29,16 +33,18 @@ const SubMenuItems = ({ title, path }) => {
  * 사이드메뉴를 구성하는 기본 Item, submenu 가 존재하면 서브메뉴 컴포넌트 SubMenuItem 가 포함된 element block 을 return 한다.
  * @param title : 메뉴제목
  * @param path : 경로
+ * @param eventKey : 이벤트키
  * @param subMenu : 서브메뉴
  * @param id : 서브메뉴아이디
  * @param isAdmin : 메인계정
  * @returns {JSX.Element} : 단일메뉴 element or 서브메뉴 element 가 포함된 element block 반환
  * @constructor
  */
-const MenuItem = ({ title, path, subMenu, id, isAdmin }) => {
+const MenuItem = ({ title, path, eventKey, subMenu, id, isAdmin }) => {
+  let isLocation = useLocation();
   if (subMenu) {
     return (
-      <SidebarMenu.Sub id={`subMenu-${id}`}>
+      <SidebarMenu.Sub id={`hasSubMenu-${id}`}>
         <SidebarMenu.Sub.Toggle>
           <SidebarMenu.Nav.Icon />
           <SidebarMenu.Nav.Title>
@@ -46,7 +52,7 @@ const MenuItem = ({ title, path, subMenu, id, isAdmin }) => {
           </SidebarMenu.Nav.Title>
         </SidebarMenu.Sub.Toggle>
 
-        <SidebarMenu.Sub.Collapse>
+        <SidebarMenu.Sub.Collapse id={`subMenu-${id}`} bsPrefix="bg-gray-200">
           {subMenu.map((item, index) => (
             <SubMenuItems {...item} key={index} />
           ))}
@@ -57,7 +63,7 @@ const MenuItem = ({ title, path, subMenu, id, isAdmin }) => {
 
   return (
     <SidebarMenu.Nav>
-      <SidebarMenu.Nav.Link href={path}>
+      <SidebarMenu.Nav.Link as={Link} to={path} eventKey={eventKey}>
         <SidebarMenu.Nav.Icon>
           {/* Menu item icon */}
         </SidebarMenu.Nav.Icon>
@@ -76,6 +82,7 @@ const MenuItem = ({ title, path, subMenu, id, isAdmin }) => {
 MenuItem.propTypes = {
   title: PropTypes.string,
   path: PropTypes.string,
+  eventKey: PropTypes.string,
   subMenu: PropTypes.any,
   id: PropTypes.any,
   isAdmin: PropTypes.string,
@@ -88,10 +95,63 @@ MenuItem.propTypes = {
 SubMenuItems.propTypes = {
   title: PropTypes.string,
   path: PropTypes.string,
+  eventKey: PropTypes.string,
 }
 
 const Aside = () => {
   const {t} =useTranslation();
+  let isLocation = useLocation();
+
+  const [key, setKey] = useState('');
+  console.log(key);
+
+  let isPath = isLocation.pathname;
+  /**
+   * isLocation 과 메뉴의 eventKey 값을 비교하여 activeKey 에 할당함.
+   */
+  const getActiveKey = () => {
+    switch (isPath) {
+      case '/dashboard':
+        setKey(isPath);
+        break;
+      case '/product/register':
+        setKey(isPath);
+        break;
+      case '/product/import':
+        setKey(isPath);
+        break;
+      case '/product/management':
+        setKey(isPath);
+        break;
+      case '/order/list':
+        setKey(isPath);
+        break;
+      case '/order/claim':
+        setKey(isPath);
+        break;
+      case '/order/all':
+        setKey(isPath);
+        break;
+      case '/cs/qnaList':
+        setKey(isPath);
+        break;
+      case '/schedule':
+        setKey(isPath);
+        break;
+      default:
+        break;
+    }
+  }
+
+  const handleSelect = (key) => {
+    console.log(`selected ${key}`);
+    setKey(key);
+  };
+
+  useEffect(() => {
+    getActiveKey();
+    console.log('ACTIVE_KEY', key)
+  }, []);
 
   return (
     <div
@@ -107,9 +167,9 @@ const Aside = () => {
       <div
         className="app-sidebar-logo d-none d-lg-flex flex-stack flex-shrink-0 mt-4 px-8 h-50px"
         id="kt_app_sidebar_logo">
-        <a href="/dashboard">
+        <Link to="/dashboard">
           <img alt="Logo" src="/assets/media/logos/bi-connect.svg" className="h-30px"/>
-        </a>
+        </Link>
       </div>
       <div className="text-center fs-12">{t('common.projectName')}</div>
 
@@ -122,10 +182,10 @@ const Aside = () => {
         data-kt-scroll-offset="0"
       >
 
-        <SidebarMenu>
+        <SidebarMenu activeKey={key} onSelect={handleSelect}>
           <SidebarMenu.Body>
             {menuItems.map((item, index) => (
-              <MenuItem {...item} key={index} />
+              <MenuItem {...item} key={index} eventKey={item.path} />
             ))}
           </SidebarMenu.Body>
         </SidebarMenu>
@@ -246,4 +306,5 @@ const Aside = () => {
     </div>
   )
 }
+
 export default Aside;
