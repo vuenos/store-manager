@@ -70,7 +70,7 @@ const QnaList = () => {
 
         <Card.Body className="p-0">
           <div className="table-responsive h-530px scroll-y border-top">
-            <Table className="table align-middle table-row-bordered fs-6 gy-2 dataTable text-start min-w-1500 ls-065em table-layout-fixed table-hover">
+            <Table className="table align-middle table-row-bordered fs-6 gy-2 dataTable text-start min-w-1500 ls-065em table-layout-fixed table-hover only-checkbox">
               <thead>
                 <tr className="text-gray-400 fw-boldest fs-6 h-50px align-middle text-uppercase gs-0 tr-sticky">
                   <th className="ps-6 fixHeader checkBox">

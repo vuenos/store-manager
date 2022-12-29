@@ -1,6 +1,6 @@
 import React from "react";
 import Search from "components/Order/Search";
-import CardList from "components/Order/CardList";
+
 
 const AllList = () => {
 
@@ -22,7 +22,7 @@ const AllList = () => {
                 search={search}
             />
 
-            <CardList />
+            
             
         </div>
     )

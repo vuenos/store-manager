@@ -692,7 +692,7 @@ aside.sidebar-menu {
 }
 
 //Table shadow, status badge
-th.fixHeader.checkBox::after, td.fixHeader.checkBox::after {
+.only-checkbox th.fixHeader.checkBox::after, .only-checkbox td.fixHeader.checkBox::after {
     content: '';
     display: block;
     position: absolute;
@@ -704,7 +704,35 @@ th.fixHeader.checkBox::after, td.fixHeader.checkBox::after {
     opacity: 0.04;
 }
 
-td.status span.badge {height:26px; font-weight:700;}
-td.status span.badge.st0 {background: #FAE6EA; color: #E52E4D;}
-td.status span.badge.st1 {background: #EBECF0; color: #292C33;}
-td.status span.badge.st2 {background: #E5EEFF; color: #3355ff;}
+th.fixHeader, td.fixHeader {
+    position: sticky; background: #fdfdfc; z-index: 8;
+    &.checkBox {width: 60px; left: 0;}
+    &.orderStatus {width: 110px; left: 60px;}
+    &.mallId {width: 160px; left: 170px;}
+    &.productName {width: 200px; left: 330px;}
+    &.receiverName {width: 100px; left: 530px;}
+    &.receiverName:after {content: ''; display: block; position: absolute; top: 0; right: 0; width: 8px; height: 100%; background: linear-gradient(90deg, #211F1C 0%, rgba(33, 31, 28, 0) 100%); opacity: 0.04;}
+}
+
+td.status {
+    span.badge {height:26px; font-weight:700;}
+    span.badge.st0 {background: #FAE6EA; color: #E52E4D;}
+    span.badge.st1 {background: #EBECF0; color: #292C33;}
+    span.badge.st2 {background: #E5EEFF; color: #3355ff;}
+}
+
+td.fixHeader {
+    .badge.PAYED {background: #E55C73}
+    .badge.DELIVERY_WAITING {background: #29CC96}
+    .badge.DELIVERING {background: #FFB31A}
+    .badge.DELIVERED {background: #4560E5}
+    .badge.PURCHASE_DECIDED {background: #CB45E5}
+    .badge.CLAIM {background: #737780}
+    .badge {height:26px; font-weight:700;}
+    .badge.PAYED {background: #FAE6EA; color: #E50026;}
+    .badge.DELIVERY_WAITING {background: #D7FAEE; color: #00997F;}
+    .badge.DELIVERING {background: #E6EEFF; color: #3355FF;}
+    .badge.DELIVERED {background: #EDE1FA; color: #9933FF;}
+    .badge.PURCHASE_DECIDED {background: #EBECF0; color: #292C33;}
+    .badge.CLAIM {background: #EBECF0; color: #292C33;}
+}

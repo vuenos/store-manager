@@ -2,7 +2,7 @@ import React from "react";
 import StateTab from "components/Order/StateTab";
 import StateDetailTab from "components/Order/StateDetailTab";
 import Search from "components/Order/Search";
-import CardList from "components/Order/CardList";
+
 
 const ClaimList = () => {
 
@@ -74,7 +74,7 @@ const ClaimList = () => {
                 search={search}
             />
 
-            <CardList />
+            
 
         </div>
     )
