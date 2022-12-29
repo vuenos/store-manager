@@ -714,13 +714,6 @@ th.fixHeader, td.fixHeader {
     &.receiverName:after {content: ''; display: block; position: absolute; top: 0; right: 0; width: 8px; height: 100%; background: linear-gradient(90deg, #211F1C 0%, rgba(33, 31, 28, 0) 100%); opacity: 0.04;}
 }
 
-td.status {
-    span.badge {height:26px; font-weight:700;}
-    span.badge.st0 {background: #FAE6EA; color: #E52E4D;}
-    span.badge.st1 {background: #EBECF0; color: #292C33;}
-    span.badge.st2 {background: #E5EEFF; color: #3355ff;}
-}
-
 td.fixHeader {
     .badge.PAYED {background: #E55C73}
     .badge.DELIVERY_WAITING {background: #29CC96}
@@ -735,4 +728,21 @@ td.fixHeader {
     .badge.DELIVERED {background: #EDE1FA; color: #9933FF;}
     .badge.PURCHASE_DECIDED {background: #EBECF0; color: #292C33;}
     .badge.CLAIM {background: #EBECF0; color: #292C33;}
+}
+
+td.status {
+    span.badge {height:26px; font-weight:700;}
+    span.badge.st0 {background: #FAE6EA; color: #E52E4D;}
+    span.badge.st1 {background: #EBECF0; color: #292C33;}
+    span.badge.st2 {background: #E5EEFF; color: #3355ff;}
+}
+
+
+// claim-table fixed
+.claim-table th.fixHeader , .claim-table td.fixHeader {
+    &.claimStatus {width: 110px; left: 60px;}
+    &.mallId {width: 160px; left: 170px;}
+    &.orderId {width: 160px; left: 330px;}
+    &.productName {width: 200px; left: 490px;}
+    &.productName::after {content: ''; display: block; position: absolute; top: 0; right: 0; width: 8px; height: 100%; background: linear-gradient(90deg, #211F1C 0%, rgba(33, 31, 28, 0) 100%); opacity: 0.04;}
 }
