@@ -165,6 +165,7 @@ const QnaList = () => {
             {isFetching ? <Spinner animation="border" /> : null}
           </div>
         </Card.Footer>
+
       </Card>
     </>
   )
