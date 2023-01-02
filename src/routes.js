@@ -10,7 +10,8 @@ import {
   Register,
   Import,
   Management,
-  TemplateRegister
+  TemplateRegister,
+  TemplateManage
 } from './pages/product'
 
 import {
@@ -19,7 +20,8 @@ import {
   AllList
 } from './pages/order';
 import { QnaList } from './pages/qna';
-import { Schedule } from './pages/schedule'
+import { Schedule } from './pages/schedule';
+import { Partner, Consignment } from './pages/manage'
 import Layout from "./Layout";
 
 
@@ -37,6 +39,7 @@ const AppRoutes = () => {
         { path: "/product/import", element: <Import/> },
         { path: "/product/management", element: <Management/> },
         { path: "/product/template/register", element: <TemplateRegister/>},
+        { path: "/product/template/manage", element: <TemplateManage/>},
         // { path: "/product/manage/goods", element: <ManageGoods pathname="/product/manage/goods" /> },
         // { path: "/product/manage/goods/keyword=:keyword&page=:pageNumber", element: <ManageGoods pathname="/product/manage/goods" /> },
         // { path: "/product/manage/goods/keyword=:keyword", element: <ManageGoods pathname="/product/manage/goods" /> },
@@ -48,11 +51,13 @@ const AppRoutes = () => {
         // { path: "/product/manage/goods/keyword=:keyword&page=:pageNumber", element: <ManageGoods pathname="/product/manage/goods" /> },
         // { path: "/product/manage/goods/keyword=:keyword", element: <ManageGoods pathname="/product/manage/goods" /> },
         // { path: "/product/manage/goods/page=:pageNumber", element: <ManageGoods pathname="/product/manage/goods" /> },
-        { path: "/order/list", element: <OrderList pathname="/order/list" /> },
-        { path: "/order/claim", element: <ClaimList pathname="/order/claim" /> },
-        { path: "/order/all", element: <AllList pathname="/order/all" /> },
-        { path: "/cs/qnaList", element: <QnaList pathname="/cs/qnaList" /> },
-        { path: "/schedule", element: <Schedule pathname="/schedule" /> },
+        { path: "/order/list", element: <OrderList /> },
+        { path: "/order/claim", element: <ClaimList /> },
+        { path: "/order/all", element: <AllList /> },
+        { path: "/cs/qnaList", element: <QnaList /> },
+        { path: "/schedule", element: <Schedule /> },
+        { path: "/mange/partner", element: <Partner /> },
+        { path: "/mange/consignment", element: <Consignment /> },
         { path: "*", element: <Notfound /> }
       ],
     }
