@@ -25,6 +25,7 @@ const menuItems = [
       },
       {
         title: "상품 관리",
+        desc: "상품별, 쇼핑몰별로 상품을 조회하고 관리할 수 있어요",
         eventKey: "/product/management",
         path: "/product/management"
       },
