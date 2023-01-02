@@ -1,6 +1,6 @@
 import React from "react";
-import Search from "components/Search/Search";
-import CardList from "components/CardList";
+import Search from "components/Order/Search";
+import CardList from "components/Order/CardList";
 
 const AllList = () => {
 

@@ -10,9 +10,11 @@ import {
   Register,
   Import,
 } from './pages/product'
-import { OrderList } from './pages/order';
-import { ClaimList } from './pages/order/claim';
-import { AllList } from 'pages/order/all';
+import {
+  OrderList,
+  ClaimList,
+  AllList
+} from './pages/order';
 import { QnaList } from './pages/qna';
 import { Schedule } from './pages/schedule'
 import Layout from "./Layout";
