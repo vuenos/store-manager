@@ -19,7 +19,7 @@ const menuItems = [
     getItem(<Link to="/product/import">상품 가져오기</Link>, 'product:2'),
     getItem(<Link to="/product/management">상품 관리</Link>, 'product:3'),
     getItem(<Link to="/product/template/register">템플릿 등록</Link>, 'product:4'),
-    getItem(<Link to="/product/template/manege">템플릿 관리</Link>, 'product:5'),
+    getItem(<Link to="/product/template/manage">템플릿 관리</Link>, 'product:5'),
   ]),
   getItem('주문', 'order:0', <FileTextFilled />, [
     getItem(<Link to="/order/list">주문 관리</Link>, 'order:1'),

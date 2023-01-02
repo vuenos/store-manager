@@ -10,7 +10,8 @@ import {
   Register,
   Import,
   Management,
-  TemplateRegister
+  TemplateRegister,
+  TemplateManage
 } from './pages/product'
 
 import {
@@ -38,6 +39,7 @@ const AppRoutes = () => {
         { path: "/product/import", element: <Import/> },
         { path: "/product/management", element: <Management/> },
         { path: "/product/template/register", element: <TemplateRegister/>},
+        { path: "/product/template/manage", element: <TemplateManage/>},
         // { path: "/product/manage/goods", element: <ManageGoods pathname="/product/manage/goods" /> },
         // { path: "/product/manage/goods/keyword=:keyword&page=:pageNumber", element: <ManageGoods pathname="/product/manage/goods" /> },
         // { path: "/product/manage/goods/keyword=:keyword", element: <ManageGoods pathname="/product/manage/goods" /> },
