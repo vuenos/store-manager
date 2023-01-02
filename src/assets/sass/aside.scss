@@ -1,0 +1,65 @@
+/* Aside styles */
+aside.sidebar-menu {
+  flex-direction: column;
+  width: 100%;
+  font-weight: 700 !important;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  --scrollbar-space: 0.5rem;
+}
+.sidebar-menu-body > div {
+  display: block;
+  padding: 0.15rem 0;
+
+  a {
+    display: block;
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+    padding: 0.75rem 0;
+    padding-right: 1.5rem !important;
+    padding-left: 1.5rem !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    .sidebar-menu-nav-title {
+      color: #8A9299;
+      font-size: 12px !important;
+      font-weight: 800;
+    }
+  }
+
+  a:hover .sidebar-menu-nav-title {
+    color: #3355FF;
+  }
+  a.active .sidebar-menu-nav-title {
+    color: #3355FF;
+  }
+
+  button {
+    display: block;
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+    padding: 0.75rem 0;
+    width: 100%;
+    text-align: left;
+    border: 0;
+    background-color: #fff;
+    padding: 0.15rem 0;
+    padding-right: 1.5rem !important;
+    padding-left: 1.5rem !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    .sidebar-menu-nav-title {
+      color: #8A9299;
+      font-size: 12px !important;
+      font-weight: 800;
+    }
+  }
+
+  button:hover .sidebar-menu-nav-title {
+    color: #3355FF;
+  }
+}
