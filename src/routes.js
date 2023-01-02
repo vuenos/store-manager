@@ -16,7 +16,8 @@ import {
   AllList
 } from './pages/order';
 import { QnaList } from './pages/qna';
-import { Schedule } from './pages/schedule'
+import { Schedule } from './pages/schedule';
+import { Partner, Consignment } from './pages/manage'
 import Layout from "./Layout";
 import Management from "./pages/product/Management";
 
@@ -38,11 +39,13 @@ const AppRoutes = () => {
         // { path: "/product/manage/goods/keyword=:keyword&page=:pageNumber", element: <ManageGoods pathname="/product/manage/goods" /> },
         // { path: "/product/manage/goods/keyword=:keyword", element: <ManageGoods pathname="/product/manage/goods" /> },
         // { path: "/product/manage/goods/page=:pageNumber", element: <ManageGoods pathname="/product/manage/goods" /> },
-        { path: "/order/list", element: <OrderList pathname="/order/list" /> },
-        { path: "/order/claim", element: <ClaimList pathname="/order/claim" /> },
-        { path: "/order/all", element: <AllList pathname="/order/all" /> },
-        { path: "/cs/qnaList", element: <QnaList pathname="/cs/qnaList" /> },
-        { path: "/schedule", element: <Schedule pathname="/schedule" /> },
+        { path: "/order/list", element: <OrderList /> },
+        { path: "/order/claim", element: <ClaimList /> },
+        { path: "/order/all", element: <AllList /> },
+        { path: "/cs/qnaList", element: <QnaList /> },
+        { path: "/schedule", element: <Schedule /> },
+        { path: "/mange/partner", element: <Partner /> },
+        { path: "/mange/consignment", element: <Consignment /> },
         { path: "*", element: <Notfound /> }
       ],
     }
