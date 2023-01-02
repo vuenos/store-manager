@@ -9,7 +9,10 @@ import {
 import {
   Register,
   Import,
+  Management,
+  TemplateRegister
 } from './pages/product'
+
 import {
   OrderList,
   ClaimList,
@@ -18,7 +21,6 @@ import {
 import { QnaList } from './pages/qna';
 import { Schedule } from './pages/schedule'
 import Layout from "./Layout";
-import Management from "./pages/product/Management";
 
 
 const AppRoutes = () => {
@@ -34,6 +36,7 @@ const AppRoutes = () => {
         { path: "/product/register", element: <Register /> },
         { path: "/product/import", element: <Import/> },
         { path: "/product/management", element: <Management/> },
+        { path: "/product/template/register", element: <TemplateRegister/>},
         // { path: "/product/manage/goods", element: <ManageGoods pathname="/product/manage/goods" /> },
         // { path: "/product/manage/goods/keyword=:keyword&page=:pageNumber", element: <ManageGoods pathname="/product/manage/goods" /> },
         // { path: "/product/manage/goods/keyword=:keyword", element: <ManageGoods pathname="/product/manage/goods" /> },
