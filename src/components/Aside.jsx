@@ -19,8 +19,7 @@ const Aside = () => {
   const onOpenChange = (keys) => {
     const latestOpenKeys = keys.find((key) => openKeys.indexOf(key) === -1);
     if (rootSubmenuKeys.indexOf(latestOpenKeys) === -1) {
-      setOpenKeys(keys);
-    } else {
+      setOpenKeys(keys);    } else {
       setOpenKeys(latestOpenKeys ? [latestOpenKeys] : [])
     }
   }
@@ -96,7 +95,6 @@ const Aside = () => {
     getOpenKeys();
     console.log('%c OPENKEYS_PATH', 'color: yellow', isLocation.pathname);
   }, [isLocation.pathname]);
-
 
   return (
     <div id="kt_app_sidebar" className="app-sidebar flex-column bg-white border-end">
