@@ -5,6 +5,8 @@ import { useAuthState } from "../atoms/auth";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../services/api";
 // import { useUserActions } from "../api/userApi";
+import { Spin } from "antd"
+import {LoadingOutlined} from "@ant-design/icons";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,12 +17,17 @@ const Login = () => {
   // const getUserData = getUserInfo();
   // const userActions = useUserActions();
   const [validated, setValidated] = useState(false);
-  const [submitDisabled, setSubmitDisabled] = useState(false)
+  const [submitDisabled, setSubmitDisabled] = useState(false);
+
+  const [authUrl, setAuthUrl] = useState("");
+  const [getCodeParam, setGetCodeParam] = useState("");
 
   const [id, setId] = useState("");
   const [pwd, setPwd] = useState("");
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
+
+  const spinIcon = <LoadingOutlined style={{ fontSize: 18 }} spin />
 
   const loginHandler = async (e) => {
     e.preventDefault();
@@ -102,6 +109,20 @@ const Login = () => {
     // }
   }
 
+  /**
+   * SSO 로그인을 위한 authorization url 을 수집
+   * @returns {Promise<void>}
+   */
+  const ssoLoginHandler = async () => {
+    try {
+      const res = await apiClient.get('/sellers/authorization-url');
+      console.log('AUTHORIZATION_URL::', res.data.data.authorization_url);
+      setAuthUrl(res.data.data.authorization_url);
+    } catch(error) {
+      //
+    }
+  }
+
   useEffect(() => {
     if (id && pwd) {
       setSubmitDisabled(false)
@@ -110,6 +131,37 @@ const Login = () => {
     }
   }, [id, pwd, submitDisabled]);
 
+  useEffect(() => {
+    ssoLoginHandler();
+  }, []);
+
+
+
+  const checkReturnCode = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    setGetCodeParam(urlParams.get('code'));
+    console.log('%c GETCODEVALUE:::', 'color: yellow', urlParams.get('code'));
+  }
+
+  useEffect(() => {
+    checkReturnCode();
+  }, []);
+
+
+  const getAccessToken = async () => {
+    try {
+      const { data, status } = await apiClient.post(`/sellers/authorization?code=${getCodeParam}`);
+      if (status === 200) {
+        setAuthState({loggedIn: true, ...data});
+        console.log(data)
+        localStorage.setItem("access_token", data.data.access_token);
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      //
+      alert(error)
+    }
+  }
 
   return (
     <div>
@@ -163,6 +215,21 @@ const Login = () => {
                 </Form>
                 {authError ? <Alert variant="danger" className="mt-6">인증되지 않은 계정입니다. 관리자에게 문의히여 주십시오.</Alert> : null}
                 {unknownError ? <Alert variant={'danger'} className="mt-6">계정정보를 다시 확인하여 주십시오.</Alert> : null}
+                <br />
+                <Button type="button" variant="dark" className="btn-block btn-login w-100 fw-boldest" onClick={() => (window.location=authUrl)}>
+                  {authUrl && authUrl
+                    ? 'SSO'
+                    : <Spin indicator={spinIcon} />
+                  }
+                </Button>
+                <br /><br />
+                {getCodeParam && getCodeParam
+                  ? <Button type="button" variant="primary" className="btn-block btn-login w-100 fw-boldest" onClick={getAccessToken}>
+                    Get certified
+                  </Button>
+                  : null
+                }
+
               </div>
             </Row>
           </Container>
