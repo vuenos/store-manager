@@ -119,7 +119,7 @@ const Login = () => {
       console.log('AUTHORIZATION_URL::', res.data.data.authorization_url);
       setAuthUrl(res.data.data.authorization_url);
     } catch(error) {
-      //
+      // TODO : 에러상태
     }
   }
 
@@ -136,7 +136,9 @@ const Login = () => {
   }, []);
 
 
-
+  /**
+   * SSO 로그인 후에 redirection 되어 받아 온 code 파라미터 값을 취득함.
+   */
   const checkReturnCode = () => {
     const urlParams = new URLSearchParams(window.location.search);
     setGetCodeParam(urlParams.get('code'));
@@ -148,6 +150,11 @@ const Login = () => {
   }, []);
 
 
+  /**
+   * checkReturnCode 함수로 취득한 code 값을 /sellers/authorization?code= 파라미터로 보내고 키클락을 통해 인증받아 토큰을 response 받음.
+   * response 받은 access_token 을 localStorage 에 저장하고 authState.loggedIn 상태를 true 로 설정
+   * @returns {Promise<void>}
+   */
   const getAccessToken = async () => {
     try {
       const { data, status } = await apiClient.post(`/sellers/authorization?code=${getCodeParam}`);
