@@ -1,19 +1,19 @@
-import React from 'react';
-import {Card, Col} from "react-bootstrap";
-import { CardHeader, CardBody } from "./index";
+import React, {useState} from 'react';
+import { Card, Col } from "antd";
 
 const ClaimCard = () => {
+  const [loading, setLoading] = useState(true);
+
   return (
-    <Col className="col-xl-3 col-md-6 mb-4">
-      <Card className="card-flush h-100">
-        <CardHeader
-          title="클레임"
-        />
-        <CardBody>
+    <Col span={6} xs={24} md={12} lg={6}>
+      <Card
+        title="클레임"
+        extra={<span className="text-gray-600">전체 기간</span>}
+        loading={loading}
+      >
           <ul>
             <li></li>
           </ul>
-        </CardBody>
       </Card>
     </Col>
   )

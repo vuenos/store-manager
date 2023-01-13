@@ -118,6 +118,7 @@ const Aside = () => {
           onOpenChange={onOpenChange}
           style={{
             width: 209,
+            borderRight: 0
           }}
           items={menuItems}
         />

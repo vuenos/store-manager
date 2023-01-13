@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row } from 'react-bootstrap';
+import { Row } from 'antd';
 import { OrderDeliveryCard, ClaimCard, InquiryCard, SalesStatusCard, OrderStat, PayAmtTotalCard } from '../components/Dashboard'
 import PropTypes from 'prop-types';
 
@@ -12,14 +12,14 @@ const Dashboard = () => {
 
   return (
     <>
-      <Row>
+      <Row gutter={[24, 24]}>
         <OrderDeliveryCard />
         <ClaimCard />
         <InquiryCard />
         <SalesStatusCard />
       </Row>
 
-      <Row className="mt-3">
+      <Row gutter={[24, 24]} className="mt-8">
         <OrderStat />
         <PayAmtTotalCard />
       </Row>

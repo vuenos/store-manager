@@ -1,19 +1,19 @@
-import React from 'react';
-import { Col, Card } from "react-bootstrap";
-import { CardHeader, CardBody } from "./index";
+import React, { useState } from 'react';
+import { Col, Card, Spin } from "antd";
 
 const OrderDeliveryCard = () => {
+  const [loading, setLoading] = useState(true);
+
   return (
-    <Col className="col-xl-3 col-md-6 mb-4">
-      <Card className="card-flush h-100">
-        <CardHeader
+    <Col span={6} xs={24} md={12} lg={6}>
+      <Card
           title="주문/배송"
-        />
-        <CardBody>
+          extra={<span className="text-gray-600">최근 1개월</span>}
+          loading={loading}
+        >
           <ul>
             <li></li>
           </ul>
-        </CardBody>
       </Card>
     </Col>
   )
