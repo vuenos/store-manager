@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Row, Col, Table, Spinner, Button, Pagination } from "react-bootstrap";
+import { Card, Row, Col, Spinner, Button, Pagination } from "react-bootstrap";
+import { Table } from "antd"
 import { getQnaList } from "../../api";
 // import apiClient from "../../services/api";
 import { useQuery, useQueryClient } from "react-query";
@@ -37,6 +38,8 @@ const QnaList = () => {
   // const [selectedPost, setSelectedPost] = useState(null);
   const [postsPerPage] = useState(10);
 
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -55,7 +58,7 @@ const QnaList = () => {
     isLoading,
     isError,
     error,
-    data: qnas,
+    data,
     isFetching,
     isPreviousData,
   } = useQuery(  {
@@ -103,6 +106,26 @@ const QnaList = () => {
 
   ];
 
+  const columns = [
+    {
+      title: '문의제목',
+      dataIndex: 'meta.path',
+    },
+    {
+      title: '접수일',
+      dataIndex: 'inquiry_created_at',
+    }
+  ]
+
+  const onSelectChange = (newSelectedRowKeys) => {
+    console.log('selectedRowKeys changed: ', newSelectedRowKeys);
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
+
 
   return (
     <>
@@ -117,52 +140,33 @@ const QnaList = () => {
           </Row>
         </Card.Header>
         <Card.Body className="p-0">
-          <div className="table-responsive  h-530px scroll-y px-0 border-top">
-            <Table className="align-middle table-row-bordered fs-6 gy-2 dataTable text-sm-center min-w-1000px ls-065em table-hover">
-              <thead>
-              <tr>
-                <th></th>
-                <th>번호</th>
-              </tr>
-              </thead>
-              <tbody>
-              {isLoading && <tr><td colSpan="2"><Spinner animation="border" /></td></tr>}
-              {isError && <tr><td colSpan="2">{error.message}</td></tr>}
-
-              {currentPosts && currentPosts.map((qna) => (
-                <tr key={qna.id}>
-                  <td></td>
-                  <td>{qna.title}</td>
-                </tr>
-              ))
-              }
-              </tbody>
-            </Table>
+          <div className="table-responsive h-530px scroll-y px-0 border-top">
+            <Table rowSelection={rowSelection} columns={columns} dataSource={posts} />
           </div>
         </Card.Body>
         <Card.Footer>
           <div>
             <span>Current Page: {page}</span>
-            <Button
-              onClick={() => setPage((previousValue) => previousValue -1)}
-              disabled={page <= 1}
-            >
-              Prev
-            </Button>
-            <Pagination>
-              {pageNumbers.map(number => (
-                <Pagination.Item key={number} onClick={() => paginate(number)} className={page == number ? "active" : ""}>
-                    {number}
-                </Pagination.Item>
-              ))}
-            </Pagination>
-            <Button
-              onClick={() => setPage((previousValue) => previousValue + 1)}
-              disabled={page >= totalPosts}
-            >
-              Next
-            </Button>
-            {isFetching ? <Spinner animation="border" /> : null}
+            {/*<Button*/}
+            {/*  onClick={() => setPage((previousValue) => previousValue -1)}*/}
+            {/*  disabled={page <= 1}*/}
+            {/*>*/}
+            {/*  Prev*/}
+            {/*</Button>*/}
+            {/*<Pagination>*/}
+            {/*  {pageNumbers.map(number => (*/}
+            {/*    <Pagination.Item key={number} onClick={() => paginate(number)} className={page == number ? "active" : ""}>*/}
+            {/*        {number}*/}
+            {/*    </Pagination.Item>*/}
+            {/*  ))}*/}
+            {/*</Pagination>*/}
+            {/*<Button*/}
+            {/*  onClick={() => setPage((previousValue) => previousValue + 1)}*/}
+            {/*  disabled={page >= totalPosts}*/}
+            {/*>*/}
+            {/*  Next*/}
+            {/*</Button>*/}
+            {/*{isFetching ? <Spinner animation="border" /> : null}*/}
           </div>
         </Card.Footer>
 
