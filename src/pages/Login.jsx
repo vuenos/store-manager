@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import {Button, Container, Form, Row, Alert } from "react-bootstrap";
+import { Button, Form, Row, Col, message, Spin, Input, Typography } from "antd"
 import { useAuthState } from "../atoms/auth";
 // import { useUsersState } from "../atoms/users";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../services/api";
 // import { useUserActions } from "../api/userApi";
-import { Spin } from "antd"
-import {LoadingOutlined} from "@ant-design/icons";
+import { LockOutlined, UserOutlined, LoadingOutlined } from "@ant-design/icons";
+import PropTypes from "prop-types";
+
+const { Text, Paragraph } = Typography;
 
 const Login = () => {
+  Login.propTypes = {
+    submit: PropTypes.func,
+    spin: PropTypes.bool,
+  }
+
   const navigate = useNavigate();
   const [authState, setAuthState] = useAuthState();
   // const [userState, setUserState] = useUsersState();
   const [authError, setAuthError] = useState(false);
   const [unknownError, setUnknownError] = useState(false);
+  const [spin, setSpin] = useState(false);
   // const getUserData = getUserInfo();
   // const userActions = useUserActions();
   const [validated, setValidated] = useState(false);
@@ -27,24 +35,33 @@ const Login = () => {
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
 
-  const spinIcon = <LoadingOutlined style={{ fontSize: 18 }} spin />
+  const [form] = Form.useForm();
+  const [, forceUpdate] = useState({});
 
-  const loginHandler = async (e) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    if (form.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    setValidated(true);
+  const [forms, setForms] = useState({
+    id: "",
+    pwd: "",
+  });
 
-    // 사용자입력값
-    const userInput = {
-      id,
-      pwd,
-      // email,
-      // password
-    }
+  const handleChangeId = (e) => {
+    console.log(e.target.value)
+    setForms({
+      id: e.target.value,
+    })
+  }
+
+  const handleChangePass = (e) => {
+    setForms({
+      pwd: e.target.value
+    })
+  }
+
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const spinIcon = <LoadingOutlined style={{ fontSize: 22 }} spin />
+
+  const loginHandler = async (form) => {
+    // e.preventDefault();
 
     // apiClient.post('/sellers/login', userInput)
     //   .then(({data}) => {
@@ -61,16 +78,30 @@ const Login = () => {
     // }).catch(e => {
     //   // todo: login failed.
     // })
-
+    setSpin(true);
+    setSubmitDisabled(true);
     // 네트워킹
     try {
-      const {data} = await apiClient.post('/sellers/login', userInput);
+      const {data} = await apiClient.post('/sellers/login', JSON.stringify(form));
       // data token 로컬스토리지(브라우저) 저장
       setAuthState({loggedIn: true, ...data});
       localStorage.setItem("access_token", data.data.access_token);
       navigate("/dashboard");
-    } catch (e) {
+    } catch (error) {
+      setSpin(false);
       // todo: login 실패 에러 처리
+      if (error.response && error.response.status === 422) {
+        setAuthError(true);
+        setSpin(false);
+        setSubmitDisabled(false);
+        console.log(error.message);
+      } else {
+        setUnknownError(true);
+        invalidMsg('계정정보를 다시 확인하여 주십시오.')
+        setSpin(false);
+        setSubmitDisabled(false);
+        console.error(error);
+      }
     }
 
     // try {
@@ -109,6 +140,17 @@ const Login = () => {
     // }
   }
 
+  useEffect(() => {
+    forceUpdate({});
+  }, []);
+  const onFinish = (values) => {
+    loginHandler(values);
+    console.log('Success:', values);
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo);
+  };
+
   /**
    * SSO 로그인을 위한 authorization url 을 수집
    * @returns {Promise<void>}
@@ -124,17 +166,8 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if (id && pwd) {
-      setSubmitDisabled(false)
-    } else {
-      setSubmitDisabled(true)
-    }
-  }, [id, pwd, submitDisabled]);
-
-  useEffect(() => {
     ssoLoginHandler();
   }, []);
-
 
   /**
    * SSO 로그인 후에 redirection 되어 받아 온 code 파라미터 값을 취득함.
@@ -156,6 +189,7 @@ const Login = () => {
    * @returns {Promise<void>}
    */
   const getAccessToken = async () => {
+    setSubmitDisabled(true);
     try {
       const { data, status } = await apiClient.post(`/sellers/authorization?code=${getCodeParam}`);
       if (status === 200) {
@@ -166,83 +200,157 @@ const Login = () => {
       }
     } catch (error) {
       //
-      alert(error)
+      setSubmitDisabled(false);
+      alert(error);
     }
   }
 
+  const invalidMsg = (msg) => {
+    messageApi.open({
+      type: 'error',
+      content: msg,
+      duration: 1,
+      className: 'custom-class',
+      style: {
+        marginTop: '47vh',
+      },
+    });
+  };
+
   return (
-    <div>
+    <>
       {authState.loggedIn
         ?
-        <div>You are logged in</div>
+        <Row>You are logged in</Row>
         :
-        <>
-          <Container>
-            <Row className="d-flex justify-content-center align-items-center vh-100">
-              <div className="w-320px p-5">
+        <Row className="Login" justify="space-around" align="middle" style={{ height: '100vh' }}>
+          <Col span={8}>
 
-                <h1 className="h4 mb-10 text-center">
-                  <img src="/assets/media/svg/general/bi-connect.svg" alt="Sellerhub Connect"/>
-                </h1>
+            <h1 className="h4 mb-10 text-center">
+              <img src="/assets/media/svg/general/bi-connect.svg" alt="Sellerhub Connect"/>
+            </h1>
 
-                <h2 className="text-dark display-6 pt-10 mb-10 text-center fw-boldest">로그인</h2>
+            <h2 className="text-dark display-6 pt-10 mb-10 text-center fw-boldest">로그인</h2>
 
-                <Form noValidate validated={validated} onSubmit={loginHandler}>
-                  <Form.Group controlId={`shc-${id}`}>
-                    <Form.Control
-                      type="text"
-                      name="shcID"
-                      placeholder="Enter ID"
-                      value={id}
-                      autoComplete="on"
-                      onChange={(e) => setId(e.target.value)}
-                      required
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      아이디를 입력해 주십시오.
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                  <br/>
-                  <Form.Group controlId={"password"}>
-                    <Form.Control
-                      type="password"
-                      name="shcPwd"
-                      placeholder="Enter password"
-                      value={pwd}
-                      autoComplete="current-password"
-                      onChange={(e) => setPwd(e.target.value)}
-                      required
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      비밀번호를 입력해 주십시오.
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                  <br/>
-                  <Button type="submit" id="formSubmit" variant="primary" disabled={submitDisabled} className="btn-block btn-login w-100 fw-boldest">Sign in</Button>
-                </Form>
-                {authError ? <Alert variant="danger" className="mt-6">인증되지 않은 계정입니다. 관리자에게 문의히여 주십시오.</Alert> : null}
-                {unknownError ? <Alert variant={'danger'} className="mt-6">계정정보를 다시 확인하여 주십시오.</Alert> : null}
-                <br />
-                <Button type="button" variant="dark" className="btn-block btn-login w-100 fw-boldest" onClick={() => (window.location=authUrl)}>
-                  {authUrl && authUrl
-                    ? 'SSO'
-                    : <Spin indicator={spinIcon} />
-                  }
-                </Button>
-                <br /><br />
-                {getCodeParam && getCodeParam
-                  ? <Button type="button" variant="primary" className="btn-block btn-login w-100 fw-boldest" onClick={getAccessToken}>
-                    Get certified
+            <Form
+              form={form}
+              name="normal_login"
+              className="login-form"
+              labelCol={{ span: 0, }}
+              wrapperCol={{ span: 24, }}
+              initialValues={{
+                remember: true,
+              }}
+              onFinish={onFinish}
+              onFinishFailed={onFinishFailed}
+            >
+              <Form.Item
+                name="id"
+                id="id"
+                value={form.id}
+                onChange={handleChangeId}
+                rules={[
+                  {
+                    required: true,
+                    message: '사업자번호를 입력해 주세요!',
+                  },
+                ]}
+              >
+                <Input size="large" prefix={<UserOutlined className="site-form-item-icon" />} placeholder="아이디는 사업자번호를 입력해 주세요." />
+              </Form.Item>
+
+              <Form.Item
+                name="pwd"
+                id="pwd"
+                value={form.pwd}
+                onChange={handleChangePass}
+                rules={[
+                  {
+                    required: true,
+                    message: '비밀번호를 입력해 주세요!',
+                  },
+                ]}
+              >
+                <Input.Password size="large" prefix={<LockOutlined className="site-form-item-icon" />} placeholder="비밀번호를 입력해 주세요." />
+              </Form.Item>
+              <Form.Item
+                shouldUpdate
+                wrapperCol={{
+                  offset: 0,
+                  span: 24,
+                }}
+              >
+                {spin && spin
+                  ? <Button
+                    size="large"
+                    block
+                    type="default"
+                    disabled
+                  >
+                    <Spin indicator={spinIcon} />
                   </Button>
-                  : null
+                  :
+                  <Button
+                    size="large"
+                    block
+                    type="primary"
+                    htmlType="submit"
+                    className="login-form-button"
+                    disabled={
+                      !form.isFieldsTouched(true) ||
+                      !!form.getFieldsError().filter(({ errors }) => errors.length).length
+                    }
+                  >
+                    Login
+                  </Button>
                 }
+              </Form.Item>
+              <Form.Item style={{ textAlign: 'right' }}>
+                <a className="login-form-forgot" href="#">
+                  Forgot password
+                </a>
+              </Form.Item>
+            </Form>
+            {contextHolder}
+            {authError
+              ?
+              <Paragraph
+                type="danger"
+                style={{ marginTop: '-16px', textAlign: 'center', fontSize: '12px' }}
+              >
+                인증되지 않은 계정입니다. 관리자에게 문의히여 주십시오.
+              </Paragraph>
+              : null
+            }
+            {unknownError
+              ?
+              <Paragraph
+                type="danger"
+                style={{ marginTop: '-16px', textAlign: 'center', fontSize: '12px' }}>
+                계정정보를 다시 확인하여 주십시오.
+              </Paragraph>
+              : null
+            }
 
-              </div>
-            </Row>
-          </Container>
-        </>
+            <Button block size="large" disabled={submitDisabled} onClick={() => (window.location=authUrl)}>
+              {authUrl && authUrl
+                ? '통합 로그인'
+                : <Spin indicator={spinIcon} />
+              }
+            </Button>
+            <br /><br />
+            {getCodeParam && getCodeParam
+              ?
+              <Button type="primary" block size="large" onClick={getAccessToken}>
+                Get certified
+              </Button>
+              : null
+            }
+
+          </Col>
+        </Row>
       }
-    </div>
+    </>
   )
 }
 
