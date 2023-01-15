@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Form, Row, Col, message, Spin, Input, Typography } from "antd"
+import { Button, Form, Row, Col, message, Spin, Input, Typography, Divider } from "antd"
 import { useAuthState } from "../atoms/auth";
 // import { useUsersState } from "../atoms/users";
 import { useNavigate } from "react-router-dom";
@@ -24,14 +24,14 @@ const Login = () => {
   const [spin, setSpin] = useState(false);
   // const getUserData = getUserInfo();
   // const userActions = useUserActions();
-  const [validated, setValidated] = useState(false);
+  // const [validated, setValidated] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(false);
 
   const [authUrl, setAuthUrl] = useState("");
   const [getCodeParam, setGetCodeParam] = useState("");
 
-  const [id, setId] = useState("");
-  const [pwd, setPwd] = useState("");
+  // const [id, setId] = useState("");
+  // const [pwd, setPwd] = useState("");
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
 
@@ -331,8 +331,9 @@ const Login = () => {
               </Paragraph>
               : null
             }
+            <Divider plain>Or</Divider>
 
-            <Button block size="large" disabled={submitDisabled} onClick={() => (window.location=authUrl)}>
+            <Button type="primary" block size="large" disabled={submitDisabled} onClick={() => (window.location=authUrl)}>
               {authUrl && authUrl
                 ? '통합 로그인'
                 : <Spin indicator={spinIcon} />
@@ -346,7 +347,6 @@ const Login = () => {
               </Button>
               : null
             }
-
           </Col>
         </Row>
       }
