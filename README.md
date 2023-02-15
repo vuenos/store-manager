@@ -5,77 +5,22 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Getting Started
 
 ```bash
-git clone https://gitlab.com/latelykorea/shc-front.git
+git clone https://github.com/vuenos/store-manager.git
 
 git init
-git remote add origin https://gitlab.com/latelykorea/shc-front.git
+git remote add origin https://github.com/vuenos/store-manager.git
 git pull origin develop
 git branch -M feature/your-branch
 ```
 
-## Available Scripts
 
-In the project directory, you can run:
+## SSO 인증 Flow
 
-### `npm start`
+1. 서비스 URL 로 접속
+2. 브라우저 storage 에 인증키(access_key) 여부 확인
+3. 2 가 없으면 SSO 인증을 받을 (계정 로그인) URL 로 이동 (해당 URL 은 API 로 호출)
+4. 3 의 경우 직접 Redirection 시키는 경우와 이동 링크를 제공하는 버튼을 노출시키는 경우가 있다.
+5. 계정 로그인 시도
+6. 5 성공시 특정 code parameter 를 받아서 1 번으로 Redirection 한다. (이 과정에서 키클락(인증 서버) 등으로 code 값 유효성 체크 후 인증받음.)
+7. 인증된 code 값으로 브라우저 storage 에 access_key 값을 저장하여 로그인 성공.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
